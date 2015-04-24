@@ -1,33 +1,14 @@
+import java.util.ArrayList;
 
-/**
- * Escreva a descrição da classe MicroCache aqui.
- * 
- * @author (seu nome) 
- * @version (número de versão ou data)
- */
+
 public class MicroCache
 {
-    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    private int x;
-
-    /**
-     * COnstrutor para objetos da classe MicroCache
-     */
-    public MicroCache()
-    {
-        // inicializa variáveis de instância
-        x = 0;
+    private int n_registos;
+    private double latitude, longitude;
+    private char pontocardeal;
+    ArrayList<String> registos;
+   
+    public MicroCache(){
     }
 
-    /**
-     * Exemplo de método - substitua este comentário pelo seu próprio
-     * 
-     * @param  y   exemplo de um parâmetro de método
-     * @return     a soma de x com y 
-     */
-    public int sampleMethod(int y)
-    {
-        // ponha seu código aqui
-        return x + y;
-    }
 }
