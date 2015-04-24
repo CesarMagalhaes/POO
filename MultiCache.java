@@ -1,12 +1,17 @@
 import java.util.ArrayList;
 
 
-public class MultiCache extends Cache {
+public class MultiCache extends MicroCache {
 	
-    private int n_registos;
-    private double latitude, longitude;
-    private char pontocardeal;
-    ArrayList<String> registos;
+	
+	// Variàveis de instaância ------------------------ - -- - - - -- - -  -
+	
+	private Cache multi;
+	private int totalCaches;
+	private ArrayList<???> listaCaches;
+	private boolean activa;
+	
+	
    
  
 }

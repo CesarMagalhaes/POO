@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 /**
  * Escreva a descrição da classe CacheEvento aqui.
@@ -6,5 +8,7 @@
  * @version (número de versão ou data)
  */
 public class CacheEvento extends Cache {
+	
+	// Vari�veis de inst�ncia -------------------- -- - - - - - - - -
   
 }

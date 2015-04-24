@@ -6,5 +6,7 @@
  * @version (n√∫mero de vers√£o ou data)
  */
 public class CacheMisterio extends Cache {
+	
+	// Vari·veis de inst‚ncia ----------------------- - - -- - - - - 
 
 }
