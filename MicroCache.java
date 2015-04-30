@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class MicroCache extends Cache {
+public class MicroCache{
 	
 	// Variáveis de instância --------------------------- - -- - - - - - - - - - -
 	

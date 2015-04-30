@@ -7,6 +7,11 @@
  */
 public class CacheMisterio extends Cache {
 	
-	// Variáveis de instância ----------------------- - - -- - - - - 
+	// Variáveis de instância ----------------------------------------------------
+	private Cache misterio;
+	private
+	
+	
+	//Construtores----------------------------------------------------------------
 
 }

@@ -8,10 +8,10 @@ import java.util.ArrayList;
  * @version (n√∫mero de vers√£o ou data)
  */
 
-public class Cache {
+public class Cache extends MicroCache{
 	
 	
-	// Vari·veis de inst‚ncia -------------------------- - - -- - -- - - - -- - -
+	// Vari·veis de inst‚ncia -----------------------------------------------------------
 	
 	private int n_registos;
 	private int latitude, longitude;
@@ -21,7 +21,40 @@ public class Cache {
 	private String criador;
 	
 	
-	// Geters e Seteres ---------------------------------- -- - - - - - - --  -
+	//Construtores----------------------------------------------------------------------
+	
+	public Cache(Cache c){
+		int numregisto=c.getN_registos();
+		int lat=c.getLatitude();
+		int longi=c.getLongitude();
+		char pcard=c.getPontocardeal();
+		ArrayList<String> reg=c.getRegistos();
+		int score=c.getScoreCache();
+		String criad=c.getCriador();
+	}
+	
+	
+	public Cache(int numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad){
+		this.n_registos=numregisto;
+		this.latitude=lat;
+		this.longitude=longi;
+		this.pontocardeal=pcard;
+		this.registos=reg;
+		this.scoreCache=score;
+		this.criador=criad;
+	}
+	
+	public Cache(){
+		this.n_registos=0;
+		this.latitude=0;
+		this.longitude=0;
+		this.pontocardeal=' ';
+		this.registos=null;
+		this.scoreCache=0;
+		this.criador="";
+	}
+	
+	// Geters e Seteres ----------------------------------------------------------------
 	
 	public int getN_registos() {
 		return n_registos;
