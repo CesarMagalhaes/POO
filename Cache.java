@@ -1,12 +1,14 @@
+/**
+ * Classe Cache, que para além de conter a informação que a MicroCache tem, vai conte informação adicional.
+ * Esta classe vai servir para descrever as caches no geral.
+ * 
+ * @author César Magalhães, Susana Mendes e Tiago Pereira  
+ * @version Maio 2015
+ */
+
+
 import java.util.ArrayList;
 
-
-/**
- * Escreva a descriÃ§Ã£o da classe Cache aqui.
- * 
- * @author (seu nome) 
- * @version (nÃºmero de versÃ£o ou data)
- */
 
 public class Cache extends MicroCache{
 	
@@ -28,7 +30,7 @@ public class Cache extends MicroCache{
 		int lat=c.getLatitude();
 		int longi=c.getLongitude();
 		char pcard=c.getPontocardeal();
-		ArrayList<String> reg=c.getRegistos();
+	//	ArrayList<String> reg=c.getRegistos();
 		int score=c.getScoreCache();
 		String criad=c.getCriador();
 	}
@@ -39,7 +41,7 @@ public class Cache extends MicroCache{
 		this.latitude=lat;
 		this.longitude=longi;
 		this.pontocardeal=pcard;
-		this.registos=reg;
+	//	this.registos=reg;
 		this.scoreCache=score;
 		this.criador=criad;
 	}
@@ -49,55 +51,28 @@ public class Cache extends MicroCache{
 		this.latitude=0;
 		this.longitude=0;
 		this.pontocardeal=' ';
-		this.registos=null;
+	//	this.registos=new ArrayList<String>();
 		this.scoreCache=0;
-		this.criador="";
+		this.criador=new String();
 	}
 	
 	// Geters e Seteres ----------------------------------------------------------------
 	
-	public int getN_registos() {
-		return n_registos;
-	}
-	public void setN_registos(int n_registos) {
-		this.n_registos = n_registos;
-	}
-	public int getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(int latitude) {
-		this.latitude = latitude;
-	}
-	public int getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(int longitude) {
-		this.longitude = longitude;
-	}
-	public char getPontocardeal() {
-		return pontocardeal;
-	}
-	public void setPontocardeal(char pontocardeal) {
-		this.pontocardeal = pontocardeal;
-	}
-	public ArrayList<String> getRegistos() {
-		return registos;
-	}
-	public void setRegistos(ArrayList<String> registos) {
-		this.registos = registos;
-	}
-	public int getScoreCache() {
-		return scoreCache;
-	}
-	public void setScoreCache(int scoreCache) {
-		this.scoreCache = scoreCache;
-	}
-	public String getCriador() {
-		return criador;
-	}
-	public void setCriador(String criador) {
-		this.criador = criador;
-	} 
+	public int getN_registos() { return n_registos; }
+	public int getLatitude() { return latitude;	}
+	public int getLongitude() { return longitude; }
+	public char getPontocardeal() { return pontocardeal; }
+	//public ArrayList<String> getRegistos() { return registos; }
+	public int getScoreCache() { return scoreCache; }
+	public String getCriador() { return criador; }
+	
+	public void setN_registos(int n_registos) { this.n_registos = n_registos; }
+	public void setLatitude(int latitude) { this.latitude = latitude; }	
+	public void setLongitude(int longitude) { this.longitude = longitude; }	
+	public void setPontocardeal(char pontocardeal) { this.pontocardeal = pontocardeal; }	
+	//public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
+	public void setScoreCache(int scoreCache) { this.scoreCache = scoreCache; }	
+	public void setCriador(String criador) { this.criador = criador; } 
 
 	
 	

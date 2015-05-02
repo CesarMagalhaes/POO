@@ -1,9 +1,8 @@
-
 /**
- * Escreva a descrição da classe CacheMisterio aqui.
+ * Classe 
  * 
- * @author (seu nome) 
- * @version (número de versão ou data)
+ * @author C�sar Magalh�es, Susana Mendes e Tiago Pereira  
+ * @version Maio 2015
  */
 public class CacheMisterio extends Cache {
 	
