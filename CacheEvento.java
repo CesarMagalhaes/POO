@@ -1,14 +1,15 @@
+/**
+ * Classe 
+ * 
+ * @author CÈsar Magalh„es, Susana Mendes e Tiago Pereira  
+ * @version Maio 2015
+ */
+
 import java.util.ArrayList;
 
 
-/**
- * Escreva a descri√ß√£o da classe CacheEvento aqui.
- * 
- * @author (seu nome) 
- * @version (n√∫mero de vers√£o ou data)
- */
 public class CacheEvento extends Cache {
 	
-	// Vari·veis de inst‚ncia -------------------- -- - - - - - - - -
+	// Vari·veis de inst‚ncia ---------------------------------------s
   
 }

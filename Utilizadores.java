@@ -14,9 +14,10 @@ public class Utilizadores extends Cache{
 	// Variáveis de instância -----------------------------------------------------------
 	
 	private char genero;
-    private String nome, email, password, morada;
+    private String nome, email, password, morada; //email é a chave do utilizador
     private GregorianCalendar dataNascimento;
-    private ArrayList<Cache> actividades;
+    private ArrayList<Cache> actividades; // a lista de caches que o utilizador descobriu
+    private ArrayList<Cache> cachesInseridas; // a lista das caches que o utilizador inseriu
 	private ArrayList<Utilizadores> redeAmigos;
 	
 	
@@ -30,11 +31,12 @@ public class Utilizadores extends Cache{
 		String morada=u.getMorada();
 		GregorianCalendar dataNasc=u.getDataNascimento();
 		ArrayList<Cache> actividades=u.getActividades();
+		ArrayList<Cache> cachesInseridasArrayList=u.getCachesInseridas();
 		ArrayList<Utilizadores> redeAmigos=u.getRedeAmigos();
 	}
 	
 	
-	public Utilizadores(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc, ArrayList<Cache> actividades, ArrayList<Utilizadores> redeAmigos){
+	public Utilizadores(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc, ArrayList<Cache> actividades, ArrayList<Cache> cachesInseridas, ArrayList<Utilizadores> redeAmigos){
 		this.genero= genero;
 		this.nome= nome;
 		this.email= email;
@@ -42,6 +44,7 @@ public class Utilizadores extends Cache{
 		this.morada= morada;
 		this.dataNascimento= dataNasc;
 		this.actividades= actividades;
+		this.cachesInseridas=cachesInseridas;
 		this.redeAmigos= redeAmigos;
 	}
 		
@@ -54,6 +57,7 @@ public class Utilizadores extends Cache{
 		this.morada= new String();
 		this.dataNascimento= new GregorianCalendar();
 		this.actividades= new ArrayList<Cache>();
+		this.cachesInseridas= new ArrayList<Cache>();
 		this.redeAmigos= new ArrayList<Utilizadores>();
 	}
 	
@@ -66,6 +70,7 @@ public class Utilizadores extends Cache{
 	public String getMorada() { return morada; }
 	public GregorianCalendar getDataNascimento() { return dataNascimento; }
 	public ArrayList<Cache> getActividades() { return actividades; }
+	public ArrayList<Cache> getCachesInseridas(){ return cachesInseridas; }
 	public ArrayList<Utilizadores> getRedeAmigos() { return redeAmigos; }
 	
 	public void setGenero(char genero) { this.genero = genero; }
@@ -74,7 +79,8 @@ public class Utilizadores extends Cache{
 	public void setPassword(String password) { this.password = password; }	
 	public void setMorada(String morada) { this.morada = morada; }	
 	public void setDataNascimento(GregorianCalendar dataNascimento) { this.dataNascimento = dataNascimento; }	
-	public void setActividades(ArrayList<Cache> actividades) { this.actividades = actividades; }	
+	public void setActividades(ArrayList<Cache> actividades) { this.actividades = actividades; }
+	public void setCachesInseridas(ArrayList<Cache> cachesInseridas) { this.cachesInseridas=cachesInseridas; }
 	public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos) { this.redeAmigos = redeAmigos; }
 	
 	

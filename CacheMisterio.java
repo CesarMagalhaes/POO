@@ -8,7 +8,7 @@ public class CacheMisterio extends Cache {
 	
 	// Variáveis de instância ----------------------------------------------------
 	private Cache misterio;
-	private
+	private String puzzle;
 	
 	
 	//Construtores----------------------------------------------------------------

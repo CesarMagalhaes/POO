@@ -13,13 +13,12 @@ import java.util.ArrayList;
 public class MultiCache extends Cache {
 	
 	
-	// Variàveis de instaância -----------------------------------------------------
+	// Variàveis de instância -----------------------------------------------------
 	
 	private Cache multi;
 	private int totalCaches;
 	private ArrayList<Cache> listaCaches;
-	private MicroCache micro;
-	private boolean isActiva;
+	//private MicroCache micro; ->temos que pensar como aceder à micro (problemas de herança)
 	
 	
 	//Construtores-------------------------------------------------------------------
@@ -28,17 +27,15 @@ public class MultiCache extends Cache {
 		Cache multi=mc.getMulti();
 		int totalCaches=mc.getTotalCaches();
 		ArrayList<Cache> listaCaches=mc.getListaCaches();
-		MicroCache micro=mc.getMicro();
-		boolean isActica=mc.getIsActiva();
+		//MicroCache micro=mc.getMicro();
 	}
 	
 	
-	public MultiCache(Cache multi, int totalCaches, ArrayList<Cache> listaCaches, MicroCache micro, boolean isActiva){
+	public MultiCache(Cache multi, int totalCaches, ArrayList<Cache> listaCaches, MicroCache micro){
 		this.multi= multi;
 		this.totalCaches= totalCaches;
 		this.listaCaches= listaCaches;
-		this.micro= micro;
-		this.isActiva= isActiva;
+		//this.micro= micro;
 	}
 	
 	
@@ -46,8 +43,7 @@ public class MultiCache extends Cache {
 		this.multi= new Cache();
 		this.totalCaches= 0;
 		this.listaCaches= new ArrayList<Cache>();
-		this.micro= new MicroCache();
-		this.isActiva= false;
+		//this.micro= new MicroCache();
 	}
 	
 	//Geteres e Seteres---------------------------------------------------------------
@@ -55,15 +51,14 @@ public class MultiCache extends Cache {
 	public int getTotalCaches() { return totalCaches; }
 	public ArrayList<Cache> getListaCaches() { return listaCaches; }
 	//ver este get!!!!!!!!!!!!!
-	public MicroCache getMicro() { return micro; }
-	public boolean getIsActiva() { return isActiva; }
+	//public MicroCache getMicro() { return micro; }
 	
 	
 	public void setMulti(Cache multi) { this.multi = multi; }
 	public void setTotalCaches(int totalCaches) { this.totalCaches = totalCaches; }	
 	public void setListaCaches(ArrayList<Cache> listaCaches) { this.listaCaches = listaCaches; }	
-	public void setMicro(MicroCache micro) { this.micro = micro; }	
-	public void setIsActiva(boolean isActiva) { this.isActiva = isActiva; }
+	//public void setMicro(MicroCache micro) { this.micro = micro; }	
+
 	
 	
    

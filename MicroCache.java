@@ -8,43 +8,37 @@
 import java.util.ArrayList;
 
 
-public class MicroCache{
+public class MicroCache extends Cache{
 	
 	// Variáveis de instância -----------------------------------------------------
 	
-	private ArrayList<String> registos;
-	private boolean isActiva;
+	private Cache micro;
 
 	
 	//Construtores------------------------------------------------------------------
 	
 	public MicroCache(MicroCache mc){
-		ArrayList<String> reg=mc.getRegistos();
-		boolean isActiva=mc.getIsActiva();
+		Cache micro=mc.getMicro();
 	}
 	
 	
-	public MicroCache(ArrayList<String> reg, boolean isActiva){
-		this.registos=reg;
-		this.isActiva=isActiva;
+	public MicroCache(Cache micro){
+		this.micro=micro;
 	}
 	
 	
 	public MicroCache(){
-		this.registos=new ArrayList<String>();
-		this.isActiva= false;
+		this.micro=new Cache();
 	}
-	
+
+
 	
 	// Geters e Seteres ------------------------------------------------------------
-	
-	public ArrayList<String> getRegistos() { return registos; }
-	public boolean getIsActiva() { return isActiva; }
 
-	public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
-	public void setIsActiva(boolean isActiva) { this.isActiva = isActiva; }
+	public Cache getMicro() { return micro; }
+
+	public void setMicro(Cache micro) {	this.micro = micro;	}
 	
-   
 
 
 }

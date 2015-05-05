@@ -10,7 +10,7 @@
 import java.util.ArrayList;
 
 
-public class Cache extends MicroCache{
+public class Cache{
 	
 	
 	// Variáveis de instância -----------------------------------------------------------
@@ -21,6 +21,7 @@ public class Cache extends MicroCache{
 	private ArrayList<String> registos;
 	private int scoreCache;
 	private String criador;
+	private boolean isActiva;
 	
 	
 	//Construtores----------------------------------------------------------------------
@@ -30,20 +31,22 @@ public class Cache extends MicroCache{
 		int lat=c.getLatitude();
 		int longi=c.getLongitude();
 		char pcard=c.getPontocardeal();
-	//	ArrayList<String> reg=c.getRegistos();
+		ArrayList<String> reg=c.getRegistos();
 		int score=c.getScoreCache();
 		String criad=c.getCriador();
+		boolean isActiva=c.getIsActiva();
 	}
 	
 	
-	public Cache(int numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad){
+	public Cache(int numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad, boolean isActiva){
 		this.n_registos=numregisto;
 		this.latitude=lat;
 		this.longitude=longi;
 		this.pontocardeal=pcard;
-	//	this.registos=reg;
+		this.registos=reg;
 		this.scoreCache=score;
 		this.criador=criad;
+		this.isActiva=isActiva;
 	}
 	
 	public Cache(){
@@ -51,9 +54,10 @@ public class Cache extends MicroCache{
 		this.latitude=0;
 		this.longitude=0;
 		this.pontocardeal=' ';
-	//	this.registos=new ArrayList<String>();
+		this.registos=new ArrayList<String>();
 		this.scoreCache=0;
 		this.criador=new String();
+		this.isActiva=false;
 	}
 	
 	// Geters e Seteres ----------------------------------------------------------------
@@ -62,17 +66,19 @@ public class Cache extends MicroCache{
 	public int getLatitude() { return latitude;	}
 	public int getLongitude() { return longitude; }
 	public char getPontocardeal() { return pontocardeal; }
-	//public ArrayList<String> getRegistos() { return registos; }
+	public ArrayList<String> getRegistos() { return registos; }
 	public int getScoreCache() { return scoreCache; }
 	public String getCriador() { return criador; }
+	public boolean getIsActiva(){ return isActiva; }
 	
 	public void setN_registos(int n_registos) { this.n_registos = n_registos; }
 	public void setLatitude(int latitude) { this.latitude = latitude; }	
 	public void setLongitude(int longitude) { this.longitude = longitude; }	
 	public void setPontocardeal(char pontocardeal) { this.pontocardeal = pontocardeal; }	
-	//public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
+	public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
 	public void setScoreCache(int scoreCache) { this.scoreCache = scoreCache; }	
 	public void setCriador(String criador) { this.criador = criador; } 
+	public void setIsActiva(boolean isActiva) { this.isActiva=isActiva; }
 
 	
 	
