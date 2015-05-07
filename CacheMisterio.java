@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Classe 
  * 
@@ -9,8 +11,40 @@ public class CacheMisterio extends Cache {
 	// Variáveis de instância ----------------------------------------------------
 	private Cache misterio;
 	private String puzzle;
+	private String conteudo;
 	
 	
 	//Construtores----------------------------------------------------------------
 
+	public CacheMisterio(CacheMisterio cm){
+		Cache misterio=cm.getMisterio();
+		String puzzle=cm.getPuzzle();
+		String conteudo=cm.getConteudo();
+	}
+	
+	public CacheMisterio(Cache m, String puzzel, String conteudo){
+		this.misterio=m;
+		this.puzzle=puzzle;
+		this.conteudo=conteudo;
+	}
+	
+	public CacheMisterio(){
+		this.misterio=new Cache();
+		this.puzzle=new String();
+		this.conteudo=new String();
+	}
+	
+	
+	//Geters e Seters------------------------------------------------------------
+
+	public Cache getMisterio() { return misterio; }
+	public String getPuzzle() { return puzzle; }
+	public String getConteudo() { return conteudo; }
+	
+	
+	public void setMisterio(Cache misterio) { this.misterio = misterio;	}
+	public void setPuzzle(String puzzle) { this.puzzle = puzzle; }	
+	public void setConteudo(String conteudo) { this.conteudo = conteudo; }
+	
+	
 }

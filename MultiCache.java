@@ -18,6 +18,7 @@ public class MultiCache extends Cache {
 	private Cache multi;
 	private int totalCaches;
 	private ArrayList<Cache> listaCaches;
+	private String conteudo;
 	//private MicroCache micro; ->temos que pensar como aceder à micro (problemas de herança)
 	
 	
@@ -27,14 +28,17 @@ public class MultiCache extends Cache {
 		Cache multi=mc.getMulti();
 		int totalCaches=mc.getTotalCaches();
 		ArrayList<Cache> listaCaches=mc.getListaCaches();
+		String conteudo=mc.getConteudo();
 		//MicroCache micro=mc.getMicro();
 	}
 	
 	
-	public MultiCache(Cache multi, int totalCaches, ArrayList<Cache> listaCaches, MicroCache micro){
+	public MultiCache(Cache multi, int totalCaches, ArrayList<Cache> listaCaches, MicroCache micro, ArrayList<String> reg, String conteudo){
 		this.multi= multi;
 		this.totalCaches= totalCaches;
 		this.listaCaches= listaCaches;
+		this.conteudo=conteudo;
+		
 		//this.micro= micro;
 	}
 	
@@ -43,6 +47,7 @@ public class MultiCache extends Cache {
 		this.multi= new Cache();
 		this.totalCaches= 0;
 		this.listaCaches= new ArrayList<Cache>();
+		this.conteudo= new String();
 		//this.micro= new MicroCache();
 	}
 	
@@ -50,13 +55,15 @@ public class MultiCache extends Cache {
 	public Cache getMulti() { return multi;	}
 	public int getTotalCaches() { return totalCaches; }
 	public ArrayList<Cache> getListaCaches() { return listaCaches; }
+	public String getConteudo() { return conteudo; }
 	//ver este get!!!!!!!!!!!!!
 	//public MicroCache getMicro() { return micro; }
 	
 	
 	public void setMulti(Cache multi) { this.multi = multi; }
 	public void setTotalCaches(int totalCaches) { this.totalCaches = totalCaches; }	
-	public void setListaCaches(ArrayList<Cache> listaCaches) { this.listaCaches = listaCaches; }	
+	public void setListaCaches(ArrayList<Cache> listaCaches) { this.listaCaches = listaCaches; }
+	public void setConteudo(String conteudo) { this.conteudo=conteudo; }
 	//public void setMicro(MicroCache micro) { this.micro = micro; }	
 
 	
