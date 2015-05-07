@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 /**
  * Classe Utilizadores vai conter toda a informação sobre os utilizadores.
  * 
@@ -9,6 +12,10 @@
 public class Evento extends Utilizadores{
 
 	//Variàveis de instância------------------------------------------------------
+	private ArrayList<Utilizadores> participantes;
+	private int maxParticipantes;
+	private GregorianCalendar data;
+	
 	
 	
 }

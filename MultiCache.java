@@ -2,6 +2,8 @@
  *Classe MultiCache vai ter toda a informação relativa a uma multi-cache. É definida à custa de uma cache (uma vez que possui toda a informação de uma cache),
  *de uma lista de caches (ArrayList<Caches> - caches necessárias para determinar a cache final, podem ser caches de todos os tipos) e de uma micro-cache (a última
  *cache tem de ser necessáriamente uma micro-cache).
+ *
+ *Uma multicache só foi vista, quando todas as caches da sua lista tiverem sido visitadas.
  * 
  * @author César Magalhães, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
