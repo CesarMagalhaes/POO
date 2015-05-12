@@ -14,7 +14,8 @@ public class Evento extends Utilizadores{
 	//Variàveis de instância------------------------------------------------------
 	private ArrayList<Utilizadores> participantes;
 	private int maxParticipantes;
-	private GregorianCalendar data;
+	private GregorianCalendar terminoInscricoes;
+	
 	
 	
 	

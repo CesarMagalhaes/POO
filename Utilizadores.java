@@ -84,7 +84,103 @@ public class Utilizadores extends Cache{
 	public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos) { this.redeAmigos = redeAmigos; }
 	
 	
+	//Clone e toString---------------------------------------------------------------------------------
+	
+	public Utilizadores clone(){
+		return new Utilizadores(this);
+	}
 
+
+	public String toString() {
+		return	"Utilizadores [genero=" + genero + ", nome=" + nome + ", email="
+				+ email + ", password=" + password + ", morada=" + morada
+				+ ", dataNascimento=" + dataNascimento + ", actividades="
+				+ actividades + ", cachesInseridas=" + cachesInseridas
+				+ ", redeAmigos=" + redeAmigos + "]";
+	}
+
+
+	//Equals e hascode--------------------------------------------------------------------------------
+	
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((actividades == null) ? 0 : actividades.hashCode());
+		result = prime * result
+				+ ((cachesInseridas == null) ? 0 : cachesInseridas.hashCode());
+		result = prime * result
+				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + genero;
+		result = prime * result + ((morada == null) ? 0 : morada.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((redeAmigos == null) ? 0 : redeAmigos.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utilizadores other = (Utilizadores) obj;
+		if (actividades == null) {
+			if (other.actividades != null)
+				return false;
+		} else if (!actividades.equals(other.actividades))
+			return false;
+		if (cachesInseridas == null) {
+			if (other.cachesInseridas != null)
+				return false;
+		} else if (!cachesInseridas.equals(other.cachesInseridas))
+			return false;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
+				return false;
+		} else if (!dataNascimento.equals(other.dataNascimento))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (genero != other.genero)
+			return false;
+		if (morada == null) {
+			if (other.morada != null)
+				return false;
+		} else if (!morada.equals(other.morada))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (redeAmigos == null) {
+			if (other.redeAmigos != null)
+				return false;
+		} else if (!redeAmigos.equals(other.redeAmigos))
+			return false;
+		return true;
+	}
+	
+	
+	
+	
+	
 	
 	
 
