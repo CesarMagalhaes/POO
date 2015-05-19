@@ -7,12 +7,15 @@
 
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Utilizadores extends Cache{
    
 	// Variáveis de instância -----------------------------------------------------------
 	
+	
+	//notas: se as cache stem score, o utilizador havia de totar tipo uma pontuação total!!!
 	private char genero;
     private String nome, email, password, morada; //email é a chave do utilizador
     private GregorianCalendar dataNascimento;
@@ -69,9 +72,41 @@ public class Utilizadores extends Cache{
 	public String getPassword() { return password; }
 	public String getMorada() { return morada; }
 	public GregorianCalendar getDataNascimento() { return dataNascimento; }
-	public ArrayList<Cache> getActividades() { return actividades; }
-	public ArrayList<Cache> getCachesInseridas(){ return cachesInseridas; }
-	public ArrayList<Utilizadores> getRedeAmigos() { return redeAmigos; }
+	//Devolva todas as caches descobertas pelo utilizador
+	public ArrayList<Cache> getActividades(){
+		ArrayList<Cache> copia= new ArrayList<Cache>();
+		Iterator<Cache> i=this.actividades.iterator();
+		while(i.hasNext()){
+			Cache aux=i.next();
+			copia.add(aux.clone());
+		}
+		return copia;
+	}
+	//public ArrayList<Cache> getActividades() { return actividades; }
+	
+	//Devolve todas as caches inseridas pelo utilizador
+	public ArrayList<Cache> getCachesInseridas(){
+		ArrayList<Cache> copia= new ArrayList<Cache>();
+		Iterator<Cache> i=this.cachesInseridas.iterator();
+		while(i.hasNext()){
+			Cache aux=i.next();
+			copia.add(aux.clone());
+		}
+		return copia;
+	}
+	//public ArrayList<Cache> getCachesInseridas(){ return cachesInseridas; }
+	
+	//Devolve todos os amigos do utilizador -rede de amigos
+	public ArrayList<Utilizadores> getRedeAmigos(){
+		ArrayList<Utilizadores> copia=new ArrayList<Utilizadores>();
+		Iterator<Utilizadores> i= this.redeAmigos.iterator();
+		while(i.hasNext()){
+			Utilizadores aux=i.next();
+			copia.add(aux.clone());
+		}
+		return copia;
+	}
+	//public ArrayList<Utilizadores> getRedeAmigos() { return redeAmigos; }
 	
 	public void setGenero(char genero) { this.genero = genero; }
 	public void setNome(String nome) { this.nome = nome; }	
@@ -88,15 +123,29 @@ public class Utilizadores extends Cache{
 	
 	//Métodos de intância-----------------------------------------------------------------------------
 	
+	//Métodp que vai inserir à lista de caches criadas pelo utilizador uma noca cache caso esta não tenha sido já criada
+	//ver como se compara se a cache já tinha sido inserida
 	public void addCache(Cache c){
-		
+		if(!this.cachesInseridas.contains(c)){
+			this.cachesInseridas.add(c.clone());
+		}
 	}
 	
-	public void addAmigo(Utilizador amigo){
-		
+	
+	//Método que vai adicionar um amigo à rede de amigos, caso este não se encontre já na rede de amigos
+	public void addAmigo(Utilizadores amigo){
+		if(!this.redeAmigos.contains(amigo)){
+			this.redeAmigos.add(amigo.clone());
+			amigo.addAmigo(this); //o utilizdor adicionou um amigo à sua rede, logo este é adicionado è rede desse amigo
+		}
 	}
 	
+	//Método que vai inserir na lista de caches descobertas mais uma cache, caso esta ainda não tenha sido descoberta pelo utilizador
+	//ver como se compara se a cache já tinha sido inserida
 	public void addCacheDescoberta(Cache c){
+		if(!this.actividades.contains(c)){
+			this.actividades.add(c.clone());
+		}
 		
 	}
 	
@@ -117,6 +166,7 @@ public class Utilizadores extends Cache{
 
 
 	//Equals e hascode--------------------------------------------------------------------------------
+	//Este é o gerado automáticamente!!! alterer!!!!
 	
 	public int hashCode() {
 		final int prime = 31;
