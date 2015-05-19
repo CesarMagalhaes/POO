@@ -51,6 +51,11 @@ public class Utilizadores extends Cache{
 		this.redeAmigos= redeAmigos;
 	}
 		
+	public Utilizadores(String nome, String email, String morada){;
+		this.nome= nome;
+		this.email= email;
+		this.morada= morada;
+	}
 	
 	public Utilizadores(){
 		this.genero= ' ';
@@ -114,14 +119,42 @@ public class Utilizadores extends Cache{
 	public void setPassword(String password) { this.password = password; }	
 	public void setMorada(String morada) { this.morada = morada; }	
 	public void setDataNascimento(GregorianCalendar dataNascimento) { this.dataNascimento = dataNascimento; }	
-	public void setActividades(ArrayList<Cache> actividades) { this.actividades = actividades; }
-	public void setCachesInseridas(ArrayList<Cache> cachesInseridas) { this.cachesInseridas=cachesInseridas; }
-	public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos) { this.redeAmigos = redeAmigos; }
+	
+	public void setActividades(ArrayList<Cache> actividades){
+		this.actividades= new ArrayList<Cache>();
+		Iterator<Cache> i= actividades.iterator();
+		while(i.hasNext()){
+			Cache copia= i.next();
+			this.actividades.add(copia.clone());
+		}
+	}
+	//public void setActividades(ArrayList<Cache> actividades) { this.actividades = actividades; }
+	
+	public void setCachesInseridas(ArrayList<Cache> cachesInseridas){
+		this.cachesInseridas=new ArrayList<Cache>();
+		Iterator<Cache> i= cachesInseridas.iterator();
+		while(i.hasNext()){
+			Cache copia= i.next();
+			this.cachesInseridas.add(copia.clone());
+		}
+	}
+	//public void setCachesInseridas(ArrayList<Cache> cachesInseridas) { this.cachesInseridas=cachesInseridas; }
+	
+	public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos){
+		this.redeAmigos= new ArrayList<Utilizadores>();
+		Iterator<Utilizadores> i= redeAmigos.iterator();
+		while(i.hasNext()){
+			Utilizadores copia= i.next();
+			this.redeAmigos.add(copia.clone());
+		}
+	}
+	//public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos) { this.redeAmigos = redeAmigos; }
+	
+
 	
 	
-	
-	
-	//Métodos de intância-----------------------------------------------------------------------------
+	//---------------------------------------------------------------------Métodos de intância----------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//Métodp que vai inserir à lista de caches criadas pelo utilizador uma noca cache caso esta não tenha sido já criada
 	//ver como se compara se a cache já tinha sido inserida
@@ -148,6 +181,14 @@ public class Utilizadores extends Cache{
 		}
 		
 	}
+	
+	
+	
+	//Método que vai permitir ao utilizador consultar o histórico (Estatísticas)
+	public String consultaHistorico(){
+		
+	}
+	
 	
 	//Clone e toString---------------------------------------------------------------------------------
 	

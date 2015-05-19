@@ -8,6 +8,7 @@
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Cache{
@@ -70,7 +71,16 @@ public class Cache{
 	public int getLatitude() { return latitude;	}
 	public int getLongitude() { return longitude; }
 	public char getPontocardeal() { return pontocardeal; }
-	public ArrayList<String> getRegistos() { return registos; }
+	public ArrayList<String> getRegistos(){
+		ArrayList<String> copia= new ArrayList<String>();
+		Iterator<String> i=this.registos.iterator();
+		while(i.hasNext()){
+			String aux=i.next();
+			copia.add(aux.clone());
+		}
+		return copia;
+    }
+	//public ArrayList<String> getRegistos() { return registos; }
 	public int getScoreCache() { return scoreCache; }
 	public String getCriador() { return criador; }
 	public boolean getIsActiva(){ return isActiva; }
@@ -80,7 +90,16 @@ public class Cache{
 	public void setLatitude(int latitude) { this.latitude = latitude; }	
 	public void setLongitude(int longitude) { this.longitude = longitude; }	
 	public void setPontocardeal(char pontocardeal) { this.pontocardeal = pontocardeal; }	
-	public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
+	
+	public void setRegistos(ArrayList<String> registos){
+		this.actividades= new ArrayList<Cache>();
+		Iterator<Cache> i= actividades.iterator();
+		while(i.hasNext()){
+			Cache copia= i.next();
+			this.actividades.add(copia.clone());
+		}
+	}
+	//public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
 	public void setScoreCache(int scoreCache) { this.scoreCache = scoreCache; }	
 	public void setCriador(String criador) { this.criador = criador; } 
 	public void setIsActiva(boolean isActiva) { this.isActiva=isActiva; }
