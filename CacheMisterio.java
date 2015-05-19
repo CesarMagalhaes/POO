@@ -47,4 +47,18 @@ public class CacheMisterio extends Cache {
 	public void setConteudo(String conteudo) { this.conteudo = conteudo; }
 	
 	
+	//Clone e toString-----------------------------------------------------------
+	
+	public CacheMisterio clone(){
+		return new CacheMisterio(this);
+	}
+
+
+	public String toString() {
+		return "CacheMisterio [misterio=" + misterio + ", puzzle=" + puzzle
+				+ ", conteudo=" + conteudo + "]";
+	}
+	
+	
+	
 }

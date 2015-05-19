@@ -86,6 +86,20 @@ public class Cache{
 	public void setIsActiva(boolean isActiva) { this.isActiva=isActiva; }
 	public void setDificuldade(String dificuldade) { this.dificuldade=dificuldade; }
 
+
+	
+	//Clone e toString-------------------------------------------------------------------------
+	
+	public Cache clone(){
+		return new Cache(this);
+	}
 	
 	
+	public String toString() {
+		return "Cache [n_registo=" + n_registo + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", pontocardeal=" + pontocardeal
+				+ ", registos=" + registos + ", scoreCache=" + scoreCache
+				+ ", criador=" + criador + ", isActiva=" + isActiva
+				+ ", dificuldade=" + dificuldade + "]";
+	}
 }

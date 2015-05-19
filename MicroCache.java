@@ -41,4 +41,16 @@ public class MicroCache extends Cache{
 	
 
 
+	//Clone e toString-------------------------------------------------------------
+	
+	public MicroCache clone(){
+		return new MicroCache(this);
+	}
+
+
+	public String toString() {
+		return "MicroCache [micro=" + micro + "]";
+	}
+	
+	
 }

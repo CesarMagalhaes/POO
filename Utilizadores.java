@@ -84,6 +84,22 @@ public class Utilizadores extends Cache{
 	public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos) { this.redeAmigos = redeAmigos; }
 	
 	
+	
+	
+	//Métodos de intância-----------------------------------------------------------------------------
+	
+	public void addCache(Cache c){
+		
+	}
+	
+	public void addAmigo(Utilizador amigo){
+		
+	}
+	
+	public void addCacheDescoberta(Cache c){
+		
+	}
+	
 	//Clone e toString---------------------------------------------------------------------------------
 	
 	public Utilizadores clone(){
@@ -123,7 +139,6 @@ public class Utilizadores extends Cache{
 	}
 
 
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

@@ -69,6 +69,19 @@ public class MultiCache extends Cache {
 	//public void setMicro(MicroCache micro) { this.micro = micro; }	
 
 	
+	//Clone e toString------------------------------------------------------------------
+	
+	public MultiCache clone(){
+		return new MultiCache(this);
+	}
+
+
+	public String toString() {
+		return "MultiCache [multi=" + multi + ", totalCaches=" + totalCaches
+				+ ", listaCaches=" + listaCaches + ", conteudo=" + conteudo
+				+ "]";
+	}
+	
 	
    
  
