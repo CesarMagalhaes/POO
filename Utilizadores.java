@@ -1,5 +1,6 @@
 /**
- * Classe Utilizadores vai conter toda a informação sobre os utilizadores.
+ * Classe Utilizadores vai conter toda a informação sobre os utilizadores. Assim como os métodos que permitem ao utilizador adicionar, remover e actualizar amigos da rede de amigos,
+ * criar caches ou desativar caches (as caches só podem ser desativadas pelo criador), bem como descobrir caches, adicionando estas à sua lista de caches descobertas.
  * 
  * @author César Magalhães, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
@@ -165,6 +166,14 @@ public class Utilizadores extends Cache{
 	}
 	
 	
+	//Método que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache não foi criada pelo utilizador este não a poderá eliminar!
+	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a variável isActiva para falso. 
+	public void desativaCache(Cache c){
+		if(this.cachesInseridas.contains(c)){
+			c.setIsActiva(false);
+		}
+	}
+	
 	//Método que vai adicionar um amigo à rede de amigos, caso este não se encontre já na rede de amigos
 	public void addAmigo(Utilizadores amigo){
 		if(!this.redeAmigos.contains(amigo)){
@@ -183,14 +192,42 @@ public class Utilizadores extends Cache{
 	}
 	
 	
+	//Método que vai actualizar a rede e amigos, isto é, se ouver alguma alteração na informação de um amigo, na rede (ArrayList), a info deste será substituida pela nova
+	public void ActualizarRedeAmigos(Utilizadores amigo) {
+		Utilizadores aux = new Utilizadores();
+		boolean found = false;
+		for (Utilizadores user : this.redeAmigos) {
+			if (user.getEmail().equals(amigo.getEmail())) {
+				aux = user;
+				found = true;
+			}
+		}
+		if (found) {
+			this.redeAmigos.remove(aux);
+			this.redeAmigos.add(amigo);
+
+		}
+	}
+
 	
-	//Método que vai permitir ao utilizador consultar o histórico (Estatísticas)
-	public String consultaHistorico(){
-		
+	//Método que vai remover um amigo da rede de amigos
+	public void removeAmigo(Utilizadores amigo){
+		if(this.redeAmigos.contains(amigo)){
+			this.redeAmigos.remove(amigo);
+		}
 	}
 	
 	
-	//Clone e toString---------------------------------------------------------------------------------
+	//Método que vai permitir ao utilizador consultar o histórico (Estatísticas)
+	//public String consultaHistorico(){
+		
+	//}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//Clone e toString e compareTo------------------------------------------------------------------------
 	
 	public Utilizadores clone(){
 		return new Utilizadores(this);
@@ -198,14 +235,23 @@ public class Utilizadores extends Cache{
 
 
 	public String toString() {
-		return	"Utilizadores [genero=" + genero + ", nome=" + nome + ", email="
-				+ email + ", password=" + password + ", morada=" + morada
-				+ ", dataNascimento=" + dataNascimento + ", actividades="
-				+ actividades + ", cachesInseridas=" + cachesInseridas
-				+ ", redeAmigos=" + redeAmigos + "]";
+		StringBuilder s= new StringBuilder();
+		s.append("----------------Utilizador-----------------------");
+		s.append("Nome: "+this.nome+ "\n");
+		s.append("Email: "+ this.email+ "\n");
+		s.append("Genero: "+this.genero+ "\n");
+		s.append("Data de Nascimento: "+this.dataNascimento+"\n");
+		s.append("Morada: "+this.morada+"\n");
+		return s.toString();
+	}	
+		
+	
+	//Como comparação estamos a considererar o email
+	public int compareTo(Utilizadores u) {
+		return u.getEmail().compareTo(this.getEmail());
 	}
-
-
+	
+	
 	//Equals e hascode--------------------------------------------------------------------------------
 	//Este é o gerado automáticamente!!! alterer!!!!
 	
@@ -230,64 +276,23 @@ public class Utilizadores extends Cache{
 	}
 
 
+	
+
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if ((obj == null)|| (this.getClass() != obj.getClass()))
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Utilizadores other = (Utilizadores) obj;
-		if (actividades == null) {
-			if (other.actividades != null)
-				return false;
-		} else if (!actividades.equals(other.actividades))
-			return false;
-		if (cachesInseridas == null) {
-			if (other.cachesInseridas != null)
-				return false;
-		} else if (!cachesInseridas.equals(other.cachesInseridas))
-			return false;
-		if (dataNascimento == null) {
-			if (other.dataNascimento != null)
-				return false;
-		} else if (!dataNascimento.equals(other.dataNascimento))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (genero != other.genero)
-			return false;
-		if (morada == null) {
-			if (other.morada != null)
-				return false;
-		} else if (!morada.equals(other.morada))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (redeAmigos == null) {
-			if (other.redeAmigos != null)
-				return false;
-		} else if (!redeAmigos.equals(other.redeAmigos))
-			return false;
-		return true;
+		else{
+			Utilizadores other = (Utilizadores) obj;
+			return (this.dataNascimento.equals(other.getDataNascimento()) 
+					&& this.email.equals(other.getEmail())
+					&& this.genero==(other.getGenero())
+					&& this.morada.equals(other.getMorada())
+					&& this.nome.equals(other.getNome())
+					&& this.password.equals(other.getPassword()));
+		}
 	}
-	
-	
-	
-	
-	
-	
 	
 
     
