@@ -1,8 +1,8 @@
 /**
- * Classe Utilizadores vai conter toda a informaÁ„o sobre os utilizadores. Assim como os mÈtodos que permitem ao utilizador adicionar, remover e actualizar amigos da rede de amigos,
- * criar caches ou desativar caches (as caches sÛ podem ser desativadas pelo criador), bem como descobrir caches, adicionando estas ‡ sua lista de caches descobertas.
+ * Classe Utilizadores vai conter toda a informa√ß√£oo sobre os utilizadores. Assim como os m√©todos que permitem ao utilizador adicionar, remover e actualizar amigos da rede de amigos,
+ * criar caches ou desativar caches (as caches s√≥ podem ser desativadas pelo criador), bem como descobrir caches, adicionando estas √† sua lista de caches descobertas.
  * 
- * @author CÈsar Magalh„es, Susana Mendes e Tiago Pereira  
+ * @author C√©sar Magalh√£es, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
  */
 
@@ -13,12 +13,11 @@ import java.util.Iterator;
 
 public class Utilizadores extends Cache{
    
-	// Vari·veis de inst‚ncia -----------------------------------------------------------
+	// VariÔøΩveis de inst√¢ncia -----------------------------------------------------------
 	
-	
-	//notas: se as cache stem score, o utilizador havia de totar tipo uma pontuaÁ„o total!!!
+	//notas: se as cache tem score, o utilizador havia de totar tipo uma pontuaÔøΩÔøΩo total!!!
 	private char genero;
-    private String nome, email, password, morada; //email È a chave do utilizador
+    private String nome, email, password, morada; //email ÔøΩ a chave do utilizador
     private GregorianCalendar dataNascimento;
     private ArrayList<Cache> actividades; // a lista de caches que o utilizador descobriu
     private ArrayList<Cache> cachesInseridas; // a lista das caches que o utilizador inseriu
@@ -40,18 +39,23 @@ public class Utilizadores extends Cache{
 	}
 	
 	
-	public Utilizadores(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc, ArrayList<Cache> actividades, ArrayList<Cache> cachesInseridas, ArrayList<Utilizadores> redeAmigos){
+	public Utilizadores(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc){
 		this.genero= genero;
 		this.nome= nome;
 		this.email= email;
 		this.password= pass;
 		this.morada= morada;
 		this.dataNascimento= dataNasc;
-		this.actividades= actividades;
-		this.cachesInseridas=cachesInseridas;
-		this.redeAmigos= redeAmigos;
 	}
 		
+	
+	public Utilizadores(char genero, String nome, String email, String pass){
+		this.genero= genero;
+		this.nome= nome;
+		this.email= email;
+		this.password= pass;
+	}
+	
 	public Utilizadores(String nome, String email, String morada){;
 		this.nome= nome;
 		this.email= email;
@@ -114,6 +118,7 @@ public class Utilizadores extends Cache{
 	}
 	//public ArrayList<Utilizadores> getRedeAmigos() { return redeAmigos; }
 	
+	
 	public void setGenero(char genero) { this.genero = genero; }
 	public void setNome(String nome) { this.nome = nome; }	
 	public void setEmail(String email) { this.email = email; }	
@@ -154,11 +159,11 @@ public class Utilizadores extends Cache{
 
 	
 	
-	//---------------------------------------------------------------------MÈtodos de int‚ncia----------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------M√©todos de int√¢ncia----------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//MÈtodp que vai inserir ‡ lista de caches criadas pelo utilizador uma noca cache caso esta n„o tenha sido j· criada
-	//ver como se compara se a cache j· tinha sido inserida
+	//M√©todo que vai inserir √† lista de caches criadas pelo utilizador uma nova cache caso esta n√£o tenha sido j√° criada
+	//ver como se compara se a cache j√° tinha sido inserida
 	public void addCache(Cache c){
 		if(!this.cachesInseridas.contains(c)){
 			this.cachesInseridas.add(c.clone());
@@ -166,24 +171,24 @@ public class Utilizadores extends Cache{
 	}
 	
 	
-	//MÈtodo que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache n„o foi criada pelo utilizador este n„o a poder· eliminar!
-	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a vari·vel isActiva para falso. 
+	//M√©todo que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache n√£o foi criada pelo utilizador este nÔøΩ√£o a poder√° eliminar!
+	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a vari√°vel isActiva para falso. 
 	public void desativaCache(Cache c){
 		if(this.cachesInseridas.contains(c)){
 			c.setIsActiva(false);
 		}
 	}
 	
-	//MÈtodo que vai adicionar um amigo ‡ rede de amigos, caso este n„o se encontre j· na rede de amigos
+	//M√°todo que vai adicionar um amigo √† rede de amigos, caso este n√£o se encontre j√° na rede de amigos
 	public void addAmigo(Utilizadores amigo){
 		if(!this.redeAmigos.contains(amigo)){
 			this.redeAmigos.add(amigo.clone());
-			amigo.addAmigo(this); //o utilizdor adicionou um amigo ‡ sua rede, logo este È adicionado Ë rede desse amigo
+			amigo.addAmigo(this); //o utilizdor adicionou um amigo √† sua rede, logo este √© adicionado √† rede desse amigo
 		}
 	}
 	
-	//MÈtodo que vai inserir na lista de caches descobertas mais uma cache, caso esta ainda n„o tenha sido descoberta pelo utilizador
-	//ver como se compara se a cache j· tinha sido inserida
+	//M√©todo que vai inserir na lista de caches descobertas mais uma cache, caso esta ainda n√£o tenha sido descoberta pelo utilizador
+	//ver como se compara se a cache j√° tinha sido inserida
 	public void addCacheDescoberta(Cache c){
 		if(!this.actividades.contains(c)){
 			this.actividades.add(c.clone());
@@ -192,7 +197,7 @@ public class Utilizadores extends Cache{
 	}
 	
 	
-	//MÈtodo que vai actualizar a rede e amigos, isto È, se ouver alguma alteraÁ„o na informaÁ„o de um amigo, na rede (ArrayList), a info deste ser· substituida pela nova
+	//M√©todo que vai actualizar a rede e amigos, isto √©, se ouver alguma altera√ß√£o na informa√ß√£o de um amigo, na rede (ArrayList), a info deste ser√° substituida pela nova
 	public void ActualizarRedeAmigos(Utilizadores amigo) {
 		Utilizadores aux = new Utilizadores();
 		boolean found = false;
@@ -210,7 +215,7 @@ public class Utilizadores extends Cache{
 	}
 
 	
-	//MÈtodo que vai remover um amigo da rede de amigos
+	//M√©todo que vai remover um amigo da rede de amigos
 	public void removeAmigo(Utilizadores amigo){
 		if(this.redeAmigos.contains(amigo)){
 			this.redeAmigos.remove(amigo);
@@ -218,7 +223,7 @@ public class Utilizadores extends Cache{
 	}
 	
 	
-	//MÈtodo que vai permitir ao utilizador consultar o histÛrico (EstatÌsticas)
+	//M√©todo que vai permitir ao utilizador consultar o hist√≥rico (Estat√≠sticas)
 	//public String consultaHistorico(){
 		
 	//}
@@ -246,14 +251,14 @@ public class Utilizadores extends Cache{
 	}	
 		
 	
-	//Como comparaÁ„o estamos a considererar o email
+	//Como compara√ß√£o estamos a considererar o email
 	public int compareTo(Utilizadores u) {
 		return u.getEmail().compareTo(this.getEmail());
 	}
 	
 	
 	//Equals e hascode--------------------------------------------------------------------------------
-	//Este È o gerado autom·ticamente!!! alterer!!!!
+	//Este √© o gerado autom√°ticamente!!! alterer!!!!
 	
 	public int hashCode() {
 		final int prime = 31;

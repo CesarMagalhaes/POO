@@ -61,7 +61,7 @@ public class Cache{
 		this.registos=new ArrayList<String>();
 		this.scoreCache=0;
 		this.criador=new String();
-		this.isActiva=false;
+		this.isActiva=true;
 		this.dificuldade=new String();
 	}
 	
