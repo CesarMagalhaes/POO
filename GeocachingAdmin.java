@@ -100,7 +100,7 @@ public class GeocachingAdmin implements Serializable{
 		for(Utilizadores amigo: uti.getRedeAmigos()){
 			amigo.actualizaRedeAmigos(uti);
 		}
-		//actualizar no hasmap as novas informações
+		//actualizar no hashmap as novas informações
 		this.listaDeUtilizadores.put(uti.getEmail(), uti);
 	}
 
@@ -119,7 +119,20 @@ public class GeocachingAdmin implements Serializable{
 	}
 
 	
+	//Método que devolve a lista de caches descobertas pelo utilizador
+	public ArrayList<Cache> getListaCaches(String email){
+		Utilizadores user=this.listaDeUtilizadores.get(email);
+		return user.getActividades();
+	}
+	
 
+	//Método que devolve a lista de caches inseridas por um utilizador
+	public ArrayList<Cache> getListaCachesInseridas(String email){
+		Utilizadores user= this.listaDeUtilizadores.get(email);
+		return user.getActividades();
+	}
+	
+	
 
 	
 }

@@ -198,21 +198,20 @@ public class Utilizadores extends Cache{
 	
 	
 	//Método que vai actualizar a rede e amigos, isto é, se ouver alguma alteração na informação de um amigo, na rede (ArrayList), a info deste será substituida pela nova
-	public void ActualizarRedeAmigos(Utilizadores amigo) {
-		Utilizadores aux = new Utilizadores();
-		boolean found = false;
-		for (Utilizadores user : this.redeAmigos) {
-			if (user.getEmail().equals(amigo.getEmail())) {
-				aux = user;
-				found = true;
+		public void actualizaRedeAmigos(Utilizadores user){
+			Utilizadores uti=new Utilizadores();
+			boolean found=false;
+			for(Utilizadores utilizador: this.redeAmigos){
+				if(utilizador.getEmail().equals(user.getEmail())){
+					uti=utilizador;
+					found=true;
+				}
+			}
+			if(found){
+				this.redeAmigos.remove(uti);
+				this.redeAmigos.add(user);
 			}
 		}
-		if (found) {
-			this.redeAmigos.remove(aux);
-			this.redeAmigos.add(amigo);
-
-		}
-	}
 
 	
 	//Método que vai remover um amigo da rede de amigos
@@ -233,21 +232,7 @@ public class Utilizadores extends Cache{
 		this.dataNascimento=dataNasc;
 	}
 	
-	//M�todo que actualiza a rede de amigos
-	public void actualizaRedeAmigos(Utilizadores user){
-		Utilizadores uti=new Utilizadores();
-		boolean found=false;
-		for(Utilizadores utilizador: this.redeAmigos){
-			if(utilizador.getEmail().equals(user.getEmail())){
-				uti=utilizador;
-				found=true;
-			}
-		}
-		if(found){
-			this.redeAmigos.remove(uti);
-			this.redeAmigos.add(user);
-		}
-	}
+	
 	
 
 	
