@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 
-public class Teste {
+public class Teste implements Serializable{
 	
 	public void main(String[] args){
 		

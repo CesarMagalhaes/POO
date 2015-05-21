@@ -1,6 +1,8 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 
@@ -45,6 +47,7 @@ public class GeocachingAdmin implements Serializable{
 	//------------------------------------------------------------------------Métodos de Instância-------------------------------------------------------------------------------------
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
+	//NOTA: não sei se é preciso administrador!!!!!!
 	
 	//Método que insere na lista de utilizadores o administrador
 	public void addAdminLista(){
@@ -61,20 +64,62 @@ public class GeocachingAdmin implements Serializable{
 	}
 
 	//Método que verifica se existe utilizador
-	private boolean existeUtilizador(String email, String password){
-		boolean found= false;
-		for(Utilizadores user: this.listaDeUtilizadores){
-			if((user.getEmail()==email) && (user.getPassword()==password)) found=true;				
-		}
-		return false;
+	private boolean existeUtilizadorNome(String username){
+		if (this.listaDeUtilizadores.containsKey(username)){
+			return true;
+		}else return false;
 	}
-	
+
+	private boolean existeUtilizadorEmail(String email){
+		if (this.listaDeUtilizadores.containsKey(email)){
+			return true;
+		}else return false;
+	}
 	
 	//Método em que se existir o utilizador valida ou não o login
-	public boolean loginUtilizador(String user, String password){
-		return existeUtilizador(user, password);
+	public boolean loginUtilizador(String username, String password){
+		return existeUtilizadorNome(username);
 
 	}
+	
+	//Método que adiciona utilizador
+	public void addUtilizador(Utilizadores user){
+		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
+			this.listaDeUtilizadores.put(user.getEmail(), user.clone()); //para adicionar a um HasMap é com put
+		}
+	}
+	
+	
+	//Método que actualiza a informação de um utilizador
+	public void actualizaUtilizador(Utilizadores user, char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc){
+		Utilizadores uti= this.listaDeUtilizadores.get(user.getEmail());
+		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
+			uti.modificaUtilizador(genero, nome, email, pass, morada, dataNasc);
+		}
+		//actualizar lista de amigos
+		for(Utilizadores amigo: uti.getRedeAmigos()){
+			amigo.actualizaRedeAmigos(uti);
+		}
+		//actualizar no hasmap as novas informações
+		this.listaDeUtilizadores.put(uti.getEmail(), uti);
+	}
+
+	
+	//Método que remove um utilizador
+	public void removeUtilizador(String email){
+		if(this.listaDeUtilizadores.containsKey(email)){
+			Utilizadores user= this.listaDeUtilizadores.get(email);
+			//vai remover da rede de amigos o utilizador
+			for(Utilizadores uti: user.getRedeAmigos()){
+				uti.getRedeAmigos().remove(user);
+			}
+		}
+		//vai remover o utilizador da lista de utilizadores
+		this.listaDeUtilizadores.remove(email);
+	}
+
+	
+
 
 	
 }

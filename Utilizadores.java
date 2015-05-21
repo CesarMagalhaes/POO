@@ -223,6 +223,34 @@ public class Utilizadores extends Cache{
 	}
 	
 	
+	//MÈtodo que actualiza a informaÁ„o do utilizador
+	public void modificaUtilizador(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc) {
+		this.genero=genero;
+		this.nome=nome;
+		this.email=email;
+		this.password=pass;
+		this.morada=morada;
+		this.dataNascimento=dataNasc;
+	}
+	
+	//MÈtodo que actualiza a rede de amigos
+	public void actualizaRedeAmigos(Utilizadores user){
+		Utilizadores uti=new Utilizadores();
+		boolean found=false;
+		for(Utilizadores utilizador: this.redeAmigos){
+			if(utilizador.getEmail().equals(user.getEmail())){
+				uti=utilizador;
+				found=true;
+			}
+		}
+		if(found){
+			this.redeAmigos.remove(uti);
+			this.redeAmigos.add(user);
+		}
+	}
+	
+
+	
 	//M√©todo que vai permitir ao utilizador consultar o hist√≥rico (Estat√≠sticas)
 	//public String consultaHistorico(){
 		
