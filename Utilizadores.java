@@ -19,9 +19,9 @@ public class Utilizadores extends Cache{
 	private char genero;
     private String nome, email, password, morada; //email � a chave do utilizador
     private GregorianCalendar dataNascimento;
-    private ArrayList<Cache> actividades; // a lista de caches que o utilizador descobriu
-    private ArrayList<Cache> cachesInseridas; // a lista das caches que o utilizador inseriu
-	private ArrayList<Utilizadores> redeAmigos;
+    private ArrayList<String> actividades; // a lista de com a refer�nciacaches das caches que o utilizador descobriu
+    private ArrayList<String> cachesInseridas; // a lista com a refer�ncia das caches que o utilizador inseriu
+	private ArrayList<String> redeAmigos; //a lista com o nome dos amigos
 	
 	
 	//Construtores-----------------------------------------------------------------------
@@ -33,9 +33,9 @@ public class Utilizadores extends Cache{
 		String pass=u.getPassword();
 		String morada=u.getMorada();
 		GregorianCalendar dataNasc=u.getDataNascimento();
-		ArrayList<Cache> actividades=u.getActividades();
-		ArrayList<Cache> cachesInseridasArrayList=u.getCachesInseridas();
-		ArrayList<Utilizadores> redeAmigos=u.getRedeAmigos();
+		ArrayList<String> actividades=u.getActividades();
+		ArrayList<String> cachesInseridas=u.getCachesInseridas();
+		ArrayList<String> redeAmigos=u.getRedeAmigos();
 	}
 	
 	
@@ -69,9 +69,9 @@ public class Utilizadores extends Cache{
 		this.password= new String();
 		this.morada= new String();
 		this.dataNascimento= new GregorianCalendar();
-		this.actividades= new ArrayList<Cache>();
-		this.cachesInseridas= new ArrayList<Cache>();
-		this.redeAmigos= new ArrayList<Utilizadores>();
+		this.actividades= new ArrayList<String>();
+		this.cachesInseridas= new ArrayList<String>();
+		this.redeAmigos= new ArrayList<String>();
 	}
 	
 	// Geters e Seters ------------------------------------------------------------------
@@ -82,41 +82,42 @@ public class Utilizadores extends Cache{
 	public String getPassword() { return password; }
 	public String getMorada() { return morada; }
 	public GregorianCalendar getDataNascimento() { return dataNascimento; }
-	//Devolva todas as caches descobertas pelo utilizador
-	public ArrayList<Cache> getActividades(){
-		ArrayList<Cache> copia= new ArrayList<Cache>();
-		Iterator<Cache> i=this.actividades.iterator();
+	
+	//Devolva todas as refer�ncias caches descobertas pelo utilizador
+	public ArrayList<String> getActividades(){
+		ArrayList<String> copia= new ArrayList<String>();
+		Iterator<String> i=this.actividades.iterator();
 		while(i.hasNext()){
-			Cache aux=i.next();
-			copia.add(aux.clone());
+			String aux=i.next();
+			copia.add(aux);
 		}
 		return copia;
 	}
-	//public ArrayList<Cache> getActividades() { return actividades; }
+	
 	
 	//Devolve todas as caches inseridas pelo utilizador
-	public ArrayList<Cache> getCachesInseridas(){
-		ArrayList<Cache> copia= new ArrayList<Cache>();
-		Iterator<Cache> i=this.cachesInseridas.iterator();
+	public ArrayList<String> getCachesInseridas(){
+		ArrayList<String> copia= new ArrayList<String>();
+		Iterator<String> i=this.cachesInseridas.iterator();
 		while(i.hasNext()){
-			Cache aux=i.next();
-			copia.add(aux.clone());
+			String aux=i.next();
+			copia.add(aux);
 		}
 		return copia;
 	}
-	//public ArrayList<Cache> getCachesInseridas(){ return cachesInseridas; }
+
 	
 	//Devolve todos os amigos do utilizador -rede de amigos
-	public ArrayList<Utilizadores> getRedeAmigos(){
-		ArrayList<Utilizadores> copia=new ArrayList<Utilizadores>();
-		Iterator<Utilizadores> i= this.redeAmigos.iterator();
+	public ArrayList<String> getRedeAmigos(){
+		ArrayList<String> copia=new ArrayList<String>();
+		Iterator<String> i= this.redeAmigos.iterator();
 		while(i.hasNext()){
-			Utilizadores aux=i.next();
-			copia.add(aux.clone());
+			String aux=i.next();
+			copia.add(aux);
 		}
 		return copia;
 	}
-	//public ArrayList<Utilizadores> getRedeAmigos() { return redeAmigos; }
+	
 	
 	
 	public void setGenero(char genero) { this.genero = genero; }
@@ -126,47 +127,44 @@ public class Utilizadores extends Cache{
 	public void setMorada(String morada) { this.morada = morada; }	
 	public void setDataNascimento(GregorianCalendar dataNascimento) { this.dataNascimento = dataNascimento; }	
 	
-	public void setActividades(ArrayList<Cache> actividades){
-		this.actividades= new ArrayList<Cache>();
-		Iterator<Cache> i= actividades.iterator();
+	public void setActividades(ArrayList<String> actividades){
+		this.actividades= new ArrayList<String>();
+		Iterator<String> i= actividades.iterator();
 		while(i.hasNext()){
-			Cache copia= i.next();
-			this.actividades.add(copia.clone());
+			String copia= i.next();
+			this.actividades.add(copia);
 		}
 	}
-	//public void setActividades(ArrayList<Cache> actividades) { this.actividades = actividades; }
 	
-	public void setCachesInseridas(ArrayList<Cache> cachesInseridas){
-		this.cachesInseridas=new ArrayList<Cache>();
-		Iterator<Cache> i= cachesInseridas.iterator();
+	public void setCachesInseridas(ArrayList<String> cachesInseridas){
+		this.cachesInseridas=new ArrayList<String>();
+		Iterator<String> i= cachesInseridas.iterator();
 		while(i.hasNext()){
-			Cache copia= i.next();
-			this.cachesInseridas.add(copia.clone());
+			String copia= i.next();
+			this.cachesInseridas.add(copia);
 		}
 	}
-	//public void setCachesInseridas(ArrayList<Cache> cachesInseridas) { this.cachesInseridas=cachesInseridas; }
 	
-	public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos){
-		this.redeAmigos= new ArrayList<Utilizadores>();
-		Iterator<Utilizadores> i= redeAmigos.iterator();
+	public void setRedeAmigos(ArrayList<String> redeAmigos){
+		this.redeAmigos= new ArrayList<String>();
+		Iterator<String> i= redeAmigos.iterator();
 		while(i.hasNext()){
-			Utilizadores copia= i.next();
-			this.redeAmigos.add(copia.clone());
+			String copia= i.next();
+			this.redeAmigos.add(copia);
 		}
 	}
-	//public void setRedeAmigos(ArrayList<Utilizadores> redeAmigos) { this.redeAmigos = redeAmigos; }
-	
-
 	
 	
 	//---------------------------------------------------------------------Métodos de intância----------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//Método que vai inserir à lista de caches criadas pelo utilizador uma nova cache caso esta não tenha sido já criada
-	//ver como se compara se a cache já tinha sido inserida
+	
+	//Notas:
+	//Método que vai inserir à lista de caches criadas pelo utilizador a refer�ncia da nova cache criada 
+	//ver como se compara se a cache já tinha sido inserida => trata-se com uma excep��o
 	public void addCache(Cache c){
-		if(!this.cachesInseridas.contains(c)){
-			this.cachesInseridas.add(c.clone());
+		if(!this.cachesInseridas.contains(c.getN_registo())){
+			this.cachesInseridas.add(c.getN_registo());
 		}
 	}
 	
@@ -179,24 +177,25 @@ public class Utilizadores extends Cache{
 		}
 	}
 	
-	//Mátodo que vai adicionar um amigo à rede de amigos, caso este não se encontre já na rede de amigos
+	//Mátodo que vai adicionar um amigo (Nome deste) à rede de amigos
 	public void addAmigo(Utilizadores amigo){
-		if(!this.redeAmigos.contains(amigo)){
-			this.redeAmigos.add(amigo.clone());
+		if(!this.redeAmigos.contains(amigo.getNome())){
+			this.redeAmigos.add(amigo.getNome());
 			amigo.addAmigo(this); //o utilizdor adicionou um amigo à sua rede, logo este é adicionado à rede desse amigo
 		}
 	}
 	
-	//Método que vai inserir na lista de caches descobertas mais uma cache, caso esta ainda não tenha sido descoberta pelo utilizador
-	//ver como se compara se a cache já tinha sido inserida
+	//Método que vai inserir na lista de caches descobertas mais uma refer�ncia de uma cache
+	//ver como se compara se a cache já tinha sido inserida=> Trata-se com excep��es
 	public void addCacheDescoberta(Cache c){
-		if(!this.actividades.contains(c)){
-			this.actividades.add(c.clone());
+		if(!this.actividades.contains(c.getN_registo())){
+			this.actividades.add(c.getN_registo());
 		}
 		
 	}
 	
 	
+	/*
 	//Método que vai actualizar a rede e amigos, isto é, se ouver alguma alteração na informação de um amigo, na rede (ArrayList), a info deste será substituida pela nova
 		public void actualizaRedeAmigos(Utilizadores user){
 			Utilizadores uti=new Utilizadores();
@@ -212,12 +211,12 @@ public class Utilizadores extends Cache{
 				this.redeAmigos.add(user);
 			}
 		}
-
+	*/
 	
-	//Método que vai remover um amigo da rede de amigos
+	//Método que vai remover um amigo da rede de amigos ->Procura pelo nome do amigo que quer remover
 	public void removeAmigo(Utilizadores amigo){
-		if(this.redeAmigos.contains(amigo)){
-			this.redeAmigos.remove(amigo);
+		if(this.redeAmigos.contains(amigo.getNome())){
+			this.redeAmigos.remove(amigo.getNome());
 		}
 	}
 	

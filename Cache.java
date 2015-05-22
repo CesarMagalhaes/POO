@@ -1,8 +1,8 @@
 /**
- * Classe Cache, que para além de conter a informação que a MicroCache tem, vai conte informação adicional.
+ * Classe Cache, que para alï¿½m de conter a informaï¿½ï¿½o que a MicroCache tem, vai conte informaï¿½ï¿½o adicional.
  * Esta classe vai servir para descrever as caches no geral.
  * 
- * @author César Magalhães, Susana Mendes e Tiago Pereira  
+ * @author Cï¿½sar Magalhï¿½es, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
  */
 
@@ -14,9 +14,9 @@ import java.util.Iterator;
 public class Cache{
 	
 	
-	// Variáveis de instância -----------------------------------------------------------
+	// Variï¿½veis de instï¿½ncia -----------------------------------------------------------
 	
-	private int n_registo;
+	private String n_registo;
 	private int latitude, longitude;
 	private char pontocardeal;
 	private ArrayList<String> registos;
@@ -29,7 +29,7 @@ public class Cache{
 	//Construtores----------------------------------------------------------------------
 	
 	public Cache(Cache c){
-		int numregisto=c.getN_registo();
+		String numregisto=c.getN_registo();
 		int lat=c.getLatitude();
 		int longi=c.getLongitude();
 		char pcard=c.getPontocardeal();
@@ -41,7 +41,7 @@ public class Cache{
 	}
 	
 	
-	public Cache(int numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad, boolean isActiva, String dificuldade){
+	public Cache(String numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad, boolean isActiva, String dificuldade){
 		this.n_registo=numregisto;
 		this.latitude=lat;
 		this.longitude=longi;
@@ -54,7 +54,7 @@ public class Cache{
 	}
 	
 	public Cache(){
-		this.n_registo=0;
+		this.n_registo=" ";
 		this.latitude=0;
 		this.longitude=0;
 		this.pontocardeal=' ';
@@ -67,7 +67,7 @@ public class Cache{
 	
 	// Geters e Seteres ----------------------------------------------------------------
 	
-	public int getN_registo() { return n_registo; }
+	public String getN_registo() { return n_registo; }
 	public int getLatitude() { return latitude;	}
 	public int getLongitude() { return longitude; }
 	public char getPontocardeal() { return pontocardeal; }
@@ -86,7 +86,7 @@ public class Cache{
 	public boolean getIsActiva(){ return isActiva; }
 	public String getDificuldade() { return dificuldade; }
 	
-	public void setN_registo(int n_registo) { this.n_registo = n_registo; }
+	public void setN_registo(String n_registo) { this.n_registo = n_registo; }
 	public void setLatitude(int latitude) { this.latitude = latitude; }	
 	public void setLongitude(int longitude) { this.longitude = longitude; }	
 	public void setPontocardeal(char pontocardeal) { this.pontocardeal = pontocardeal; }	
@@ -105,6 +105,32 @@ public class Cache{
 	public void setIsActiva(boolean isActiva) { this.isActiva=isActiva; }
 	public void setDificuldade(String dificuldade) { this.dificuldade=dificuldade; }
 
+
+	
+	
+	
+	//---------------------------------------------------------------------Mï¿½todos de instï¿½ncia---------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	//Mï¿½todo que vai buscar uma cache passando-lhe o nï¿½mero de registo
+	//Fazer a excepï¿½ï¿½o para quando a cache nï¿½o existe
+	public Cache getCacheReferencia(String n_registo){
+		Cache cache= new Cache();
+		if(this.getN_registo()==n_registo){
+			cache.setN_registo(this.n_registo);
+			cache.setLatitude(this.latitude);
+			cache.setLongitude(this.longitude);
+			cache.setPontocardeal(this.pontocardeal);
+			cache.setRegistos(this.registos);
+			cache.setScoreCache(this.scoreCache);
+			cache.setCriador(this.criador);
+			cache.setIsActiva(this.isActiva);
+			cache.setDificuldade(this.dificuldade);
+		}
+		return cache;
+	}
+	
 
 	
 	//Clone e toString-------------------------------------------------------------------------

@@ -48,6 +48,7 @@ public class GeocachingAdmin implements Serializable{
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//NOTA: não sei se é preciso administrador!!!!!!
+	//Nota2: adicionar a excepçao de não existir utilizador!!!!!!!!!!!!!!!!
 	
 	//Método que insere na lista de utilizadores o administrador
 	public void addAdminLista(){
@@ -97,9 +98,9 @@ public class GeocachingAdmin implements Serializable{
 			uti.modificaUtilizador(genero, nome, email, pass, morada, dataNasc);
 		}
 		//actualizar lista de amigos
-		for(Utilizadores amigo: uti.getRedeAmigos()){
-			amigo.actualizaRedeAmigos(uti);
-		}
+		//for(Utilizadores amigo: uti.getRedeAmigos()){
+			//amigo.actualizaRedeAmigos(uti);
+		//}
 		//actualizar no hashmap as novas informações
 		this.listaDeUtilizadores.put(uti.getEmail(), uti);
 	}
@@ -110,8 +111,9 @@ public class GeocachingAdmin implements Serializable{
 		if(this.listaDeUtilizadores.containsKey(email)){
 			Utilizadores user= this.listaDeUtilizadores.get(email);
 			//vai remover da rede de amigos o utilizador
-			for(Utilizadores uti: user.getRedeAmigos()){
-				uti.getRedeAmigos().remove(user);
+			for(String usr: user.getRedeAmigos()){
+				Utilizadores uti=this.listaDeUtilizadores.get(usr);
+				uti.getRedeAmigos().remove(user.getNome());
 			}
 		}
 		//vai remover o utilizador da lista de utilizadores
@@ -122,7 +124,13 @@ public class GeocachingAdmin implements Serializable{
 	//Método que devolve a lista de caches descobertas pelo utilizador
 	public ArrayList<Cache> getListaCaches(String email){
 		Utilizadores user=this.listaDeUtilizadores.get(email);
-		return user.getActividades();
+		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
+		for(String cache: user.getActividades()){
+			Cache c = new Cache();
+			listaCaches.add(c.getCacheReferencia(cache));
+		}		
+		return listaCaches;
+		//return user.getActividades();
 	}
 	
 
