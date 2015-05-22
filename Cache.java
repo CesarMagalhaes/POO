@@ -53,6 +53,17 @@ public class Cache{
 		this.dificuldade=dificuldade;
 	}
 	
+	public Cache(String numregisto, int lat, int longi, char pcard, int score, String criad, boolean isActiva, String dificuldade){
+		this.n_registo=numregisto;
+		this.latitude=lat;
+		this.longitude=longi;
+		this.pontocardeal=pcard;
+		this.scoreCache=score;
+		this.criador=criad;
+		this.isActiva=isActiva;
+		this.dificuldade=dificuldade;
+	}
+	
 	public Cache(){
 		this.n_registo=" ";
 		this.latitude=0;
@@ -76,7 +87,7 @@ public class Cache{
 		Iterator<String> i=this.registos.iterator();
 		while(i.hasNext()){
 			String aux=i.next();
-			copia.add(aux.clone());
+			copia.add(aux);
 		}
 		return copia;
     }
@@ -92,11 +103,11 @@ public class Cache{
 	public void setPontocardeal(char pontocardeal) { this.pontocardeal = pontocardeal; }	
 	
 	public void setRegistos(ArrayList<String> registos){
-		this.actividades= new ArrayList<Cache>();
-		Iterator<Cache> i= actividades.iterator();
+		this.registos= new ArrayList<String>();
+		Iterator<String> i= registos.iterator();
 		while(i.hasNext()){
-			Cache copia= i.next();
-			this.actividades.add(copia.clone());
+			String copia= i.next();
+			this.registos.add(copia);
 		}
 	}
 	//public void setRegistos(ArrayList<String> registos) { this.registos = registos; }	
@@ -133,7 +144,7 @@ public class Cache{
 	
 
 	
-	//Clone e toString-------------------------------------------------------------------------
+	//Clone e toString e compareTo -----------------------------------------------------------------
 	
 	public Cache clone(){
 		return new Cache(this);
@@ -142,15 +153,37 @@ public class Cache{
 	
 	public String toString() {
 		StringBuilder s=new StringBuilder();
-		s.appende("----------------Cache--------------------");
-		a.appende("Número de registo: "+this.n_registo+"\n");
-		
+		s.append("----------------Cache--------------------");
+		s.append("Número de registo: " +this.n_registo+ "\n");
+		s.append("Latitude: "+this.latitude+ "\n");
+		s.append("Longitude: "+this.longitude+ "\n");
+		s.append("Ponto Cardeal: " +this.pontocardeal+"\n");
+		s.append("Criador: " +this.criador+ "\n");
+		s.append("Dificuldade: "+this.dificuldade+"\n");
 		return s.toString();
-		return "Cache [n_registo=" + n_registo + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", pontocardeal=" + pontocardeal
-				+ ", registos=" + registos + ", scoreCache=" + scoreCache
-				+ ", criador=" + criador + ", isActiva=" + isActiva
-				+ ", dificuldade=" + dificuldade + "]";
+	}
+
+	
+	public int compareTo(Cache c){
+		return c.getN_registo().compareTo(this.n_registo);
+	}
+	
+	//Equals e hashCode-------------------------------------------------------------------------
+	
+	public boolean equals(Object obj){
+		if(this==obj) return true;
+		if ((obj==null)||(this.getClass()!=obj.getClass())) return false;
+		else{
+			Cache other=(Cache) obj;
+			return(this.n_registo.equals(other.getN_registo())
+					&& this.latitude==(other.getLatitude())
+					&& this.longitude==(other.getLongitude())
+					&& this.pontocardeal==(other.getPontocardeal())
+					&& this.scoreCache==(other.getScoreCache())
+					&& this.criador.equals(other.getCriador())
+					&& this.isActiva==(other.getIsActiva())
+					&& this.dificuldade.equals(other.getDificuldade()));
+		}
 	}
 	
 	

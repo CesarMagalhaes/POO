@@ -5,19 +5,23 @@ import java.util.GregorianCalendar;
 
 public class Teste implements Serializable{
 	
-	public void main(String[] args){
+	public static void main(String[] args){
 		
-		Utilizadores u1, u2, u3;
+		GeocachingAdmin geo= new GeocachingAdmin();
+		Utilizadores user= new Utilizadores();
 		
-		u1= new Utilizadores("Rui", "rui@gmail.com", "rua cenas braga");
-		u2=new Utilizadores();
-		u3= new Utilizadores();
+		Utilizadores u1= new Utilizadores('M', "Rui", "111@gmail.com", "123");
+		Utilizadores u2= new Utilizadores('F', "Ana", "222@gmail.com", "1234");
+		Cache c1= new Cache("a1", 10, 10, 'N', 20, "Rui", true, "cenas");
 		
+			
+		geo.adicionaAmigo("111@gmail.com", "Ana");
+		geo.adicionaAmigo("111@gmail.com", "Ana");
+		u2.addCache(c1);
 		
-		System.out.println("u1: " +u1.getNome());
-		//System.out.println("INformação do utilizador u1: Nome: " +u1.getNome()+ "Morada: " +u1.getMorada()+ "Email: "+u1.getEmail()+ "Rede de Amigos: "+u1.getRedeAmigos());
-		
-
+		System.out.println("lista de caches: " +geo.getListaCaches("222@gmail.com"));
 	}
-
+		
 }
+
+		
