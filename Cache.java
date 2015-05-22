@@ -141,10 +141,27 @@ public class Cache{
 	
 	
 	public String toString() {
+		StringBuilders=new StringBuilder();
+		s.appende("----------------Cache--------------------")
+		a.appende
+		
 		return "Cache [n_registo=" + n_registo + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", pontocardeal=" + pontocardeal
 				+ ", registos=" + registos + ", scoreCache=" + scoreCache
 				+ ", criador=" + criador + ", isActiva=" + isActiva
 				+ ", dificuldade=" + dificuldade + "]";
+	}
+	
+	
+	public String toString() {
+		StringBuilder s= new StringBuilder();
+		s.append("----------------Utilizador-----------------------");
+		s.append("Nome: "+this.nome+ "\n");
+		s.append("Email: "+ this.email+ "\n");
+		s.append("Genero: "+this.genero+ "\n");
+		s.append("Data de Nascimento: "+this.dataNascimento+"\n");
+		s.append("Morada: "+this.morada+"\n");
+		
+		return s.toString();
 	}
 }
