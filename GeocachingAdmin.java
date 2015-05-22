@@ -65,21 +65,23 @@ public class GeocachingAdmin implements Serializable{
 	}
 
 	//Método que verifica se existe utilizador
-	private boolean existeUtilizadorNome(String username){
+	public boolean existeUtilizadorNome(String username){
 		if (this.listaDeUtilizadores.containsKey(username)){
 			return true;
 		}else return false;
 	}
 
-	private boolean existeUtilizadorEmail(String email){
+	public boolean existeUtilizadorEmail(String email){
 		if (this.listaDeUtilizadores.containsKey(email)){
 			return true;
 		}else return false;
 	}
 	
 	//Método em que se existir o utilizador valida ou não o login
-	public boolean loginUtilizador(String username, String password){
-		return existeUtilizadorNome(username);
+	public boolean loginUtilizador(String username, String pass){	
+		Utilizadores aux=this.listaDeUtilizadores.get(username);
+		if((existeUtilizadorNome(username)) && (aux.getPassword()==pass)) return true;
+		else return false;
 
 	}
 	
@@ -137,9 +139,74 @@ public class GeocachingAdmin implements Serializable{
 	//Método que devolve a lista de caches inseridas por um utilizador
 	public ArrayList<Cache> getListaCachesInseridas(String email){
 		Utilizadores user= this.listaDeUtilizadores.get(email);
-		return user.getActividades();
+		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
+		for(String cache: user.getCachesInseridas()){
+			Cache c = new Cache();
+			listaCaches.add(c.getCacheReferencia(cache));
+		}		
+		return listaCaches;
+			
 	}
 	
+	
+	//Método que permite ao administrador desativaruma cache
+	public void desativaCache(Cache c){
+		c.setIsActiva(false);
+	}
+	
+	
+	//Método que devolve a lista de amigos de um utilizador
+	public ArrayList<Utilizadores> getRedeAmigos(String email){
+		Utilizadores user=this.listaDeUtilizadores.get(email);
+		ArrayList<Utilizadores> redeAmigos=new ArrayList<Utilizadores>();
+		for(String amigo: user.getRedeAmigos()){
+			Utilizadores friend= new Utilizadores();
+			redeAmigos.add(friend.getAmigoNome(amigo));
+		}
+		return redeAmigos;
+	}
+	
+	
+	//Método que remove um amigo da lista de amigos do utilizador
+	public void removeAmigo(String email, String nome){ //vai receber o email de utilizador e o nome do amigo que vai remover
+		Utilizadores user=this.listaDeUtilizadores.get(email);
+		for(String amigo: user.getRedeAmigos()){
+			if(amigo==nome) user.removeAmigo(amigo);
+		}
+	}
+	
+	
+	//Método que devolve a lista de amigos pendentes
+	public ArrayList<Utilizadores> getListaAmigosPendentes(String email){
+		Utilizadores user=this.listaDeUtilizadores.get(email);
+		ArrayList<Utilizadores> listaAmigosPendentes= new ArrayList<Utilizadores>();
+		for(String amigoPendente: user.getAmigosPendentes()){
+			Utilizadores aux=new Utilizadores();
+			listaAmigosPendentes.add(aux.getAmigoPendenteNome(amigoPendente));
+		}
+		return listaAmigosPendentes;
+	}
+	
+	//Método que vai remover um utilizador da lista de amigos pendentes
+	public void removeAmigoPendente(String email, String nome){ //vai receber o email de utilizador e o nome do amigo que vai remover
+		Utilizadores user=this.listaDeUtilizadores.get(email);
+		for(String amigo: user.getAmigosPendentes()){
+			if(amigo==nome) user.removeAmigo(amigo);
+		}
+	}
+	
+	//Método que vai aceitar amigo pendente, respectivamente adicioná-lo à rede de amigos e removêlo d alista de amigos pendentes
+	public void adicionaAmigo(String email, String nome){
+		Utilizadores user= this.listaDeUtilizadores.get(email);
+		Utilizadores amigo=new Utilizadores();
+		for(String amigoPendente: user.getAmigosPendentes()){
+			if(amigoPendente==nome){
+				amigo=user.getAmigoPendenteNome(amigoPendente);
+			}
+		}
+		user.addAmigo(amigo);
+		user.removeAmigoPendente(nome);
+	}
 	
 
 	

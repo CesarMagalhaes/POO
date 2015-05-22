@@ -22,6 +22,7 @@ public class Utilizadores extends Cache{
     private ArrayList<String> actividades; // a lista de com a referênciacaches das caches que o utilizador descobriu
     private ArrayList<String> cachesInseridas; // a lista com a referência das caches que o utilizador inseriu
 	private ArrayList<String> redeAmigos; //a lista com o nome dos amigos
+	private ArrayList<String> amigosPendentes; //lista com o nome dos amigos que o utilizador ainda não aceitou na sua rede de amigos
 	
 	
 	//Construtores-----------------------------------------------------------------------
@@ -36,6 +37,7 @@ public class Utilizadores extends Cache{
 		ArrayList<String> actividades=u.getActividades();
 		ArrayList<String> cachesInseridas=u.getCachesInseridas();
 		ArrayList<String> redeAmigos=u.getRedeAmigos();
+		ArrayList<String> amigosPendentes=u.getAmigosPendentes();
 	}
 	
 	
@@ -56,10 +58,10 @@ public class Utilizadores extends Cache{
 		this.password= pass;
 	}
 	
-	public Utilizadores(String nome, String email, String morada){;
+	public Utilizadores(char genero, String nome, ArrayList<String> actividades){;
+		this.genero=genero;
 		this.nome= nome;
-		this.email= email;
-		this.morada= morada;
+		this.actividades=actividades;
 	}
 	
 	public Utilizadores(){
@@ -72,6 +74,7 @@ public class Utilizadores extends Cache{
 		this.actividades= new ArrayList<String>();
 		this.cachesInseridas= new ArrayList<String>();
 		this.redeAmigos= new ArrayList<String>();
+		this.amigosPendentes= new ArrayList<String>();
 	}
 	
 	// Geters e Seters ------------------------------------------------------------------
@@ -83,7 +86,7 @@ public class Utilizadores extends Cache{
 	public String getMorada() { return morada; }
 	public GregorianCalendar getDataNascimento() { return dataNascimento; }
 	
-	//Devolva todas as referências caches descobertas pelo utilizador
+	//Devolva todas as referências das caches descobertas pelo utilizador
 	public ArrayList<String> getActividades(){
 		ArrayList<String> copia= new ArrayList<String>();
 		Iterator<String> i=this.actividades.iterator();
@@ -118,6 +121,16 @@ public class Utilizadores extends Cache{
 		return copia;
 	}
 	
+	//Devolve todos os amigos que ainda não foram adicionados à rede de amigos
+	public ArrayList<String> getAmigosPendentes(){
+		ArrayList<String> copia=new ArrayList<String>();
+		Iterator<String> i=this.amigosPendentes.iterator();
+		while(i.hasNext()){
+			String aux=i.next();
+			copia.add(aux);
+		}
+		return copia;
+	}
 	
 	
 	public void setGenero(char genero) { this.genero = genero; }
@@ -154,6 +167,15 @@ public class Utilizadores extends Cache{
 		}
 	}
 	
+	public void setAmigosPendentes(ArrayList<String> amigosPendentes){
+		this.amigosPendentes=new ArrayList<String>();
+		Iterator<String> i=amigosPendentes.iterator();
+		while(i.hasNext()){
+			String copia=i.next();
+			this.amigosPendentes.add(copia);
+		}
+	}
+	
 	
 	//---------------------------------------------------------------------MÃ©todos de intÃ¢ncia----------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +194,7 @@ public class Utilizadores extends Cache{
 	//MÃ©todo que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache nÃ£o foi criada pelo utilizador este nï¿½Ã£o a poderÃ¡ eliminar!
 	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a variÃ¡vel isActiva para falso. 
 	public void desativaCache(Cache c){
-		if(this.cachesInseridas.contains(c)){
+		if(this.cachesInseridas.contains(c.getN_registo())){
 			c.setIsActiva(false);
 		}
 	}
@@ -213,10 +235,10 @@ public class Utilizadores extends Cache{
 		}
 	*/
 	
-	//MÃ©todo que vai remover um amigo da rede de amigos ->Procura pelo nome do amigo que quer remover
-	public void removeAmigo(Utilizadores amigo){
-		if(this.redeAmigos.contains(amigo.getNome())){
-			this.redeAmigos.remove(amigo.getNome());
+	//MÃ©todo que vai remover um amigo da rede de amigos, dado o nome do amigo que se quer remover
+	public void removeAmigo(String amigo){
+		if(this.redeAmigos.contains(amigo)){
+			this.redeAmigos.remove(amigo);
 		}
 	}
 	
@@ -233,6 +255,40 @@ public class Utilizadores extends Cache{
 	
 	
 	
+	//Método que vai buscar um amigo pelo nome
+	public Utilizadores getAmigoNome(String nome){
+		Utilizadores amigo=new Utilizadores();
+		for(String friend: this.getRedeAmigos()){
+			if(friend==nome){
+				amigo.setGenero(this.genero);
+				amigo.setNome(this.nome);
+				amigo.setActividades(this.actividades);
+
+			}
+		}
+		return amigo;
+	}
+	
+	//Método que vai buscar um amigo pendente pelo nome
+	public Utilizadores getAmigoPendenteNome(String nome){
+		Utilizadores amigo=new Utilizadores();
+		for(String friend: this.getAmigosPendentes()){
+			if(friend==nome){
+				amigo.setGenero(this.genero);
+				amigo.setNome(this.nome);
+				amigo.setActividades(this.actividades);
+
+			}
+		}
+		return amigo;
+	}
+
+	//MÃ©todo que vai remover um amigo da lista de amigos pendentes, dado o nome do amigo que se quer remover
+		public void removeAmigoPendente(String amigo){
+			if(this.amigosPendentes.contains(amigo)){
+				this.amigosPendentes.remove(amigo);
+			}
+		}
 
 	
 	//MÃ©todo que vai permitir ao utilizador consultar o histÃ³rico (EstatÃ­sticas)
