@@ -10,6 +10,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class MultiCache extends Cache {
@@ -19,7 +20,7 @@ public class MultiCache extends Cache {
 	
 	private Cache multi;
 	private int totalCaches;
-	private ArrayList<Cache> listaCaches;
+	private ArrayList<String> listaCaches; //a lista com a referência das caches que constituem a multicache
 	private String conteudo;
 	//private MicroCache micro; ->temos que pensar como aceder à micro (problemas de herança)
 	
@@ -29,26 +30,30 @@ public class MultiCache extends Cache {
 	public MultiCache(MultiCache mc){
 		Cache multi=mc.getMulti();
 		int totalCaches=mc.getTotalCaches();
-		ArrayList<Cache> listaCaches=mc.getListaCaches();
+		ArrayList<String> listaCaches=mc.getListaCaches();
 		String conteudo=mc.getConteudo();
 		//MicroCache micro=mc.getMicro();
 	}
 	
 	
-	public MultiCache(Cache multi, int totalCaches, ArrayList<Cache> listaCaches, MicroCache micro, ArrayList<String> reg, String conteudo){
+	public MultiCache(Cache multi, int totalCaches, ArrayList<String> listaCaches,  String conteudo){
 		this.multi= multi;
 		this.totalCaches= totalCaches;
 		this.listaCaches= listaCaches;
 		this.conteudo=conteudo;
-		
-		//this.micro= micro;
+	}
+	
+	public MultiCache(Cache multi, int totalCaches, String conteudo){
+		this.multi= multi;
+		this.totalCaches= totalCaches;
+		this.conteudo=conteudo;
 	}
 	
 	
 	public MultiCache(){
 		this.multi= new Cache();
 		this.totalCaches= 0;
-		this.listaCaches= new ArrayList<Cache>();
+		this.listaCaches= new ArrayList<String>();
 		this.conteudo= new String();
 		//this.micro= new MicroCache();
 	}
@@ -56,7 +61,15 @@ public class MultiCache extends Cache {
 	//Geteres e Seteres---------------------------------------------------------------
 	public Cache getMulti() { return multi;	}
 	public int getTotalCaches() { return totalCaches; }
-	public ArrayList<Cache> getListaCaches() { return listaCaches; }
+	public ArrayList<String> getListaCaches() { 
+		ArrayList<String> copia=new ArrayList<String>();
+		Iterator<String> i= this.listaCaches.iterator();
+		while(i.hasNext()){
+			String aux=i.next();
+			copia.add(aux);
+		}
+		return copia;
+	}
 	public String getConteudo() { return conteudo; }
 	//ver este get!!!!!!!!!!!!!
 	//public MicroCache getMicro() { return micro; }
@@ -64,12 +77,28 @@ public class MultiCache extends Cache {
 	
 	public void setMulti(Cache multi) { this.multi = multi; }
 	public void setTotalCaches(int totalCaches) { this.totalCaches = totalCaches; }	
-	public void setListaCaches(ArrayList<Cache> listaCaches) { this.listaCaches = listaCaches; }
+	public void setListaCaches(ArrayList<Cache> listaCaches) {
+		this.listaCaches=new ArrayList<String>();
+		Iterator<String> i=this.listaCaches.iterator();
+		while(i.hasNext()){
+			String copia=i.next();
+			this.listaCaches.add(copia);
+		}
+	}
 	public void setConteudo(String conteudo) { this.conteudo=conteudo; }
 	//public void setMicro(MicroCache micro) { this.micro = micro; }	
 
+	//---------------------------------------------------------------------------Métodos de Instância----------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//Clone e toString------------------------------------------------------------------
+	//Método que verifica se o utilizador passou por todas as caches que constituem a multicache =>ACABAR!!!!!!!!!!!!!!!!!!!!!
+	public boolean verificaMulti(Utilizadores user){
+		ArrayList<String> cachesEncontradas= new ArrayList<String>();
+		cachesEncontradas=user.getActividades();
+		
+	}
+	
+	//Clone e toString e compareTo---------------------------------------------------------------
 	
 	public MultiCache clone(){
 		return new MultiCache(this);
@@ -77,12 +106,43 @@ public class MultiCache extends Cache {
 
 
 	public String toString() {
-		return "MultiCache [multi=" + multi + ", totalCaches=" + totalCaches
-				+ ", listaCaches=" + listaCaches + ", conteudo=" + conteudo
-				+ "]";
+		StringBuilder s=new StringBuilder();
+		s.append("------------------Multi-Cache--------------------");
+		s.append("----------------Cache--------------------");
+		s.append("Número de registo: " +this.multi.getN_registo()+ "\n");
+		s.append("Latitude: "+this.multi.getLatitude()+ "\n");
+		s.append("Longitude: "+this.multi.getLongitude()+ "\n");
+		s.append("Ponto Cardeal: " +this.multi.getPontocardeal()+"\n");
+		s.append("Criador: " +this.multi.getCriador()+ "\n");
+		s.append("Dificuldade: "+this.multi.getDificuldade()+"\n");
+		s.append("Número total de caches que fazem parte da multi-cache: "+this.totalCaches+"\n");
+		s.append("Conteúdo: "+this.conteudo+"\n");
+		return s.toString();
+	}
+
+	
+	public int compareTo(MultiCache mc){
+		return mc.getN_registo().compareTo(this.getN_registo());
 	}
 	
+	//Equals e hashCode-------------------------------------------------------------------------
 	
-   
- 
+	public boolean equals(Object obj){
+		if(this==obj) return true;
+		if ((obj==null)||(this.getClass()!=obj.getClass())) return false;
+		else{
+			MultiCache other=(MultiCache) obj;
+			return(this.multi.getN_registo().equals(other.getN_registo())
+					&& this.multi.getLatitude()==(other.getLatitude())
+					&& this.multi.getLongitude()==(other.getLongitude())
+					&& this.multi.getPontocardeal()==(other.getPontocardeal())
+					&& this.multi.getScoreCache()==(other.getScoreCache())
+					&& this.multi.getCriador().equals(other.getCriador())
+					&& this.multi.getIsActiva()==(other.getIsActiva())
+					&& this.multi.getDificuldade().equals(other.getDificuldade())
+					&& this.totalCaches==(other.getTotalCaches())
+					&& this.conteudo.equals(other.getConteudo()));
+		}
+	}
+	
 }

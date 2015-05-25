@@ -196,7 +196,7 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 	//Método que vai aceitar amigo pendente, respectivamente adicioná-lo à rede de amigos e removêlo d alista de amigos pendentes
-	public void adicionaAmigo(String email, String nome){
+	public void adicionaAmigo(String email, String nome) throws UtiçlizadorException{
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		Utilizadores amigo=new Utilizadores();
 		for(String amigoPendente: user.getAmigosPendentes()){

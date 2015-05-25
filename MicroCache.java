@@ -49,8 +49,40 @@ public class MicroCache extends Cache{
 
 
 	public String toString() {
-		return "MicroCache [micro=" + micro + "]";
+		StringBuilder s=new StringBuilder();
+		s.append("---------------Micro Cache--------------------");
+		s.append("Núero de registo: "+this.micro.getN_registo()+"\n");
+		s.append("Latitude: "+this.micro.getLatitude()+"\n");
+		s.append("Longitude: "+this.micro.getLongitude()+"\n");
+		s.append("Ponto Cardeal: "+this.micro.getPontocardeal()+"\n");
+		s.append("Criador: "+this.micro.getCriador()+"\n");
+		s.append("Dificuladade: "+this.micro.getDificuldade()+"\n");
+		return s.toString();
 	}
+	
+	public int compareTo(MicroCache mc){
+		return mc.getN_registo().compareTo(this.getN_registo());
+	}
+
+	
+	//Equals e hashCode-------------------------------------------------------------------------
+	
+	public boolean equals(Object obj){
+		if(this==obj) return true;
+		if ((obj==null)||(this.getClass()!=obj.getClass())) return false;
+		else{
+			MicroCache other=(MicroCache) obj;
+			return(this.micro.getN_registo().equals(other.getN_registo())
+					&& this.micro.getLatitude()==(other.getLatitude())
+					&& this.micro.getLongitude()==(other.getLongitude())
+					&& this.micro.getPontocardeal()==(other.getPontocardeal())
+					&& this.micro.getScoreCache()==(other.getScoreCache())
+					&& this.micro.getCriador().equals(other.getCriador())
+					&& this.micro.getIsActiva()==(other.getIsActiva())
+					&& this.micro.getDificuldade().equals(other.getDificuldade()));
+		}
+	}
+	
 	
 	
 }

@@ -194,13 +194,16 @@ public class Utilizadores extends Cache{
 	//Método que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache não foi criada pelo utilizador este n�ão a poderá eliminar!
 	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a variável isActiva para falso. 
 	public void desativaCache(Cache c){
-		if(this.cachesInseridas.contains(c.getN_registo())){
+		if(this.cachesInseridas.contains(c.getN_registo())){ 
 			c.setIsActiva(false);
 		}
 	}
 	
 	//Mátodo que vai adicionar um amigo (Nome deste) à rede de amigos
-	public void addAmigo(Utilizadores amigo){
+	public void addAmigo(Utilizadores amigo) throws UtilizadorException{
+		if (this.redeAmigos.contains(amigo.getEmail())) { //caso o utilizador queira adicionar um amigo que j� exista
+			throw new UtilizadorException(amigo.getEmail());
+		}
 		if(!this.redeAmigos.contains(amigo.getNome())){
 			this.redeAmigos.add(amigo.getNome());
 			amigo.addAmigo(this); //o utilizdor adicionou um amigo à sua rede, logo este é adicionado à rede desse amigo
@@ -236,7 +239,10 @@ public class Utilizadores extends Cache{
 	*/
 	
 	//Método que vai remover um amigo da rede de amigos, dado o nome do amigo que se quer remover
-	public void removeAmigo(String amigo){
+	public void removeAmigo(String amigo) throws UtilizadorException{
+		if (!this.redeAmigos.contains(amigo)){ //caso o utilizador queira remover um amigo que n�o exista na sua rede
+			throw new UtilizadorException();
+		}
 		if(this.redeAmigos.contains(amigo)){
 			this.redeAmigos.remove(amigo);
 		}
@@ -256,7 +262,10 @@ public class Utilizadores extends Cache{
 	
 	
 	//M�todo que vai buscar um amigo pelo nome
-	public Utilizadores getAmigoNome(String nome){
+	public Utilizadores getAmigoNome(String nome) throws UtilizadorException{
+		if (!this.redeAmigos.contains(nome)) { //caso o utilizador queira consultar um amigo que n�o existe
+			throw new UtilizadorException();
+		}
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getRedeAmigos()){
 			if(friend==nome){
