@@ -47,7 +47,6 @@ public class GeocachingAdmin implements Serializable{
 	//------------------------------------------------------------------------Métodos de Instância-------------------------------------------------------------------------------------
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//NOTA: não sei se é preciso administrador!!!!!!
 	//Nota2: adicionar a excepçao de não existir utilizador!!!!!!!!!!!!!!!!
 	
 	//Método que insere na lista de utilizadores o administrador
@@ -65,20 +64,20 @@ public class GeocachingAdmin implements Serializable{
 	}
 
 	//Método que verifica se existe utilizador
-	public boolean existeUtilizadorNome(String username){
-		if (this.listaDeUtilizadores.containsKey(username)){
+	public boolean existeUtilizadorNome(String username) throws UtilizadorException {
+			if (this.listaDeUtilizadores.containsKey(username)){
 			return true;
 		}else return false;
 	}
 
-	public boolean existeUtilizadorEmail(String email){
+	public boolean existeUtilizadorEmail(String email) throws UtilizadorException{
 		if (this.listaDeUtilizadores.containsKey(email)){
 			return true;
 		}else return false;
 	}
 	
 	//Método em que se existir o utilizador valida ou não o login
-	public boolean loginUtilizador(String username, String pass){	
+	public boolean loginUtilizador(String username, String pass) throws UtilizadorException{	
 		Utilizadores aux=this.listaDeUtilizadores.get(username);
 		if((existeUtilizadorNome(username)) && (aux.getPassword()==pass)) return true;
 		else return false;
@@ -86,7 +85,7 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 	//Método que adiciona utilizador
-	public void addUtilizador(Utilizadores user){
+	public void addUtilizador(Utilizadores user) throws UtilizadorException{
 		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
 			this.listaDeUtilizadores.put(user.getEmail(), user.clone()); //para adicionar a um HasMap é com put
 		}
@@ -94,7 +93,7 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	//Método que actualiza a informação de um utilizador
-	public void actualizaUtilizador(Utilizadores user, char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc){
+	public void actualizaUtilizador(Utilizadores user, char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc) throws UtilizadorException{
 		Utilizadores uti= this.listaDeUtilizadores.get(user.getEmail());
 		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
 			uti.modificaUtilizador(genero, nome, email, pass, morada, dataNasc);
@@ -109,7 +108,7 @@ public class GeocachingAdmin implements Serializable{
 
 	
 	//Método que remove um utilizador
-	public void removeUtilizador(String email){
+	public void removeUtilizador(String email) throws UtilizadorException{
 		if(this.listaDeUtilizadores.containsKey(email)){
 			Utilizadores user= this.listaDeUtilizadores.get(email);
 			//vai remover da rede de amigos o utilizador
@@ -124,7 +123,7 @@ public class GeocachingAdmin implements Serializable{
 
 	
 	//Método que devolve a lista de caches descobertas pelo utilizador
-	public ArrayList<Cache> getListaCaches(String email){
+	public ArrayList<Cache> getListaCaches(String email) throws UtilizadorException{
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getActividades()){
@@ -137,7 +136,7 @@ public class GeocachingAdmin implements Serializable{
 	
 
 	//Método que devolve a lista de caches inseridas por um utilizador
-	public ArrayList<Cache> getListaCachesInseridas(String email){
+	public ArrayList<Cache> getListaCachesInseridas(String email) throws UtilizadorException{
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getCachesInseridas()){
@@ -156,7 +155,8 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	//Método que devolve a lista de amigos de um utilizador
-	public ArrayList<Utilizadores> getRedeAmigos(String email){
+	public ArrayList<Utilizadores> getRedeAmigos(String email) throws UtilizadorException{
+		
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Utilizadores> redeAmigos=new ArrayList<Utilizadores>();
 		for(String amigo: user.getRedeAmigos()){
@@ -168,7 +168,7 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	//Método que remove um amigo da lista de amigos do utilizador
-	public void removeAmigo(String email, String nome){ //vai receber o email de utilizador e o nome do amigo que vai remover
+	public void removeAmigo(String email, String nome) throws UtilizadorException{ //vai receber o email de utilizador e o nome do amigo que vai remover
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		for(String amigo: user.getRedeAmigos()){
 			if(amigo==nome) user.removeAmigo(amigo);
@@ -177,7 +177,7 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	//Método que devolve a lista de amigos pendentes
-	public ArrayList<Utilizadores> getListaAmigosPendentes(String email){
+	public ArrayList<Utilizadores> getListaAmigosPendentes(String email) throws UtilizadorException{
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Utilizadores> listaAmigosPendentes= new ArrayList<Utilizadores>();
 		for(String amigoPendente: user.getAmigosPendentes()){
@@ -188,7 +188,7 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 	//Método que vai remover um utilizador da lista de amigos pendentes
-	public void removeAmigoPendente(String email, String nome){ //vai receber o email de utilizador e o nome do amigo que vai remover
+	public void removeAmigoPendente(String email, String nome) throws UtilizadorException{ //vai receber o email de utilizador e o nome do amigo que vai remover
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		for(String amigo: user.getAmigosPendentes()){
 			if(amigo==nome) user.removeAmigo(amigo);
@@ -196,7 +196,7 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 	//Método que vai aceitar amigo pendente, respectivamente adicioná-lo à rede de amigos e removêlo d alista de amigos pendentes
-	public void adicionaAmigo(String email, String nome) throws UtiçlizadorException{
+	public void adicionaAmigo(String email, String nome) throws UtilizadorException{
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		Utilizadores amigo=new Utilizadores();
 		for(String amigoPendente: user.getAmigosPendentes()){

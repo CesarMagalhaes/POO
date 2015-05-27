@@ -92,10 +92,13 @@ public class MultiCache extends Cache {
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//Método que verifica se o utilizador passou por todas as caches que constituem a multicache =>ACABAR!!!!!!!!!!!!!!!!!!!!!
-	public boolean verificaMulti(Utilizadores user){
+	public boolean verificaMulti(Utilizadores user) throws UtilizadorException{
 		ArrayList<String> cachesEncontradas= new ArrayList<String>();
 		cachesEncontradas=user.getActividades();
-		
+		for(String cache: this.getListaCaches()){
+			if(!cachesEncontradas.contains(cache)) return true;
+		}
+		return false;
 	}
 	
 	//Clone e toString e compareTo---------------------------------------------------------------
@@ -108,7 +111,6 @@ public class MultiCache extends Cache {
 	public String toString() {
 		StringBuilder s=new StringBuilder();
 		s.append("------------------Multi-Cache--------------------");
-		s.append("----------------Cache--------------------");
 		s.append("Número de registo: " +this.multi.getN_registo()+ "\n");
 		s.append("Latitude: "+this.multi.getLatitude()+ "\n");
 		s.append("Longitude: "+this.multi.getLongitude()+ "\n");

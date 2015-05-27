@@ -250,7 +250,7 @@ public class Utilizadores extends Cache{
 	
 	
 	//Método que actualiza a informação do utilizador
-	public void modificaUtilizador(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc) {
+	public void modificaUtilizador(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc){
 		this.genero=genero;
 		this.nome=nome;
 		this.email=email;
@@ -279,7 +279,7 @@ public class Utilizadores extends Cache{
 	}
 	
 	//Método que vai buscar um amigo pendente pelo nome
-	public Utilizadores getAmigoPendenteNome(String nome){
+	public Utilizadores getAmigoPendenteNome(String nome) throws UtilizadorException{
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getAmigosPendentes()){
 			if(friend==nome){
@@ -293,7 +293,7 @@ public class Utilizadores extends Cache{
 	}
 
 	//MÃ©todo que vai remover um amigo da lista de amigos pendentes, dado o nome do amigo que se quer remover
-		public void removeAmigoPendente(String amigo){
+		public void removeAmigoPendente(String amigo) throws UtilizadorException{
 			if(this.amigosPendentes.contains(amigo)){
 				this.amigosPendentes.remove(amigo);
 			}
