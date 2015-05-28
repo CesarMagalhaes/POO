@@ -209,5 +209,17 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 
+	/**
+	 *Falta:
+	 *Método que adiciona evento
+	 *Método que consulta evento
+	 *Método que devolve a lista de eventos
+	 *Método que devolve os utilizadores que participaram num evento
+	 *Método que devolve um evento dada uma data 
+	 *Método que devolve a data em que determinado evento foi realizado
+	 *
+	 *métodos relativos às estatísticas
+	 *
+	 * */
 	
 }

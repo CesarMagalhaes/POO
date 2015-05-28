@@ -19,7 +19,7 @@ public class Estatisticas extends Evento{
 	//Construtores-----------------------------------------------------------
 	
 	public Estatisticas(){
-		this.mes=GregorianCalendar.getMONTH();
+		this.mes=new GregorianCalendar();
 		this.totalCaches=0;
 		this.totalEventos=0;
 		this.totalPontos=0;

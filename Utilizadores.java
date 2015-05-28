@@ -97,7 +97,6 @@ public class Utilizadores extends Cache{
 		return copia;
 	}
 	
-	
 	//Devolve todas as caches inseridas pelo utilizador
 	public ArrayList<String> getCachesInseridas(){
 		ArrayList<String> copia= new ArrayList<String>();
@@ -280,6 +279,9 @@ public class Utilizadores extends Cache{
 	
 	//MÈtodo que vai buscar um amigo pendente pelo nome
 	public Utilizadores getAmigoPendenteNome(String nome) throws UtilizadorException{
+		if(!this.amigosPendentes.contains(nome)){//caso o utilizador queira consultar um amigo pendende que n„o exista
+			throw new UtilizadorException();
+		}
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getAmigosPendentes()){
 			if(friend==nome){
@@ -296,10 +298,23 @@ public class Utilizadores extends Cache{
 		public void removeAmigoPendente(String amigo) throws UtilizadorException{
 			if(this.amigosPendentes.contains(amigo)){
 				this.amigosPendentes.remove(amigo);
+			}else{
+				throw new UtilizadorException();//caso o utilizador queira remover um amigo pendente que n„o exista
 			}
 		}
 
-	
+	//MÈtodo que vai adicionar um amigo ‡ lista de amigos pendentes
+		public void addAmigoPendente(String nome) throws UtilizadorException{
+			if(this.amigosPendentes.contains(nome)){
+				throw new UtilizadorException(nome);//caso queira adicionar um amigo ‡ lista de amigos pendentes que j· exista
+			}else{
+				this.amigosPendentes.add(nome);
+			}
+		}
+		
+
+		
+		
 	//M√©todo que vai permitir ao utilizador consultar o hist√≥rico (Estat√≠sticas)
 	//public String consultaHistorico(){
 		

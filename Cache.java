@@ -7,11 +7,13 @@
  */
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 
-public class Cache{
+public class Cache implements Serializable{
 	
 	
 	// Vari�veis de inst�ncia -----------------------------------------------------------
@@ -24,6 +26,7 @@ public class Cache{
 	private String criador;
 	private boolean isActiva;
 	private String dificuldade;
+	private GregorianCalendar dataCriacao;
 	
 	
 	//Construtores----------------------------------------------------------------------
@@ -38,10 +41,11 @@ public class Cache{
 		String criad=c.getCriador();
 		boolean isActiva=c.getIsActiva();
 		String dificuldade=c.getDificuldade();
+		GregorianCalendar data=c.getDataCriacao();
 	}
 	
 	
-	public Cache(String numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad, boolean isActiva, String dificuldade){
+	public Cache(String numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad, boolean isActiva, String dificuldade, GregorianCalendar data){
 		this.n_registo=numregisto;
 		this.latitude=lat;
 		this.longitude=longi;
@@ -51,17 +55,12 @@ public class Cache{
 		this.criador=criad;
 		this.isActiva=isActiva;
 		this.dificuldade=dificuldade;
+		this.dataCriacao=data;
 	}
 	
-	public Cache(String numregisto, int lat, int longi, char pcard, int score, String criad, boolean isActiva, String dificuldade){
+	public Cache(String numregisto, String criad){
 		this.n_registo=numregisto;
-		this.latitude=lat;
-		this.longitude=longi;
-		this.pontocardeal=pcard;
-		this.scoreCache=score;
 		this.criador=criad;
-		this.isActiva=isActiva;
-		this.dificuldade=dificuldade;
 	}
 	
 	public Cache(){
@@ -74,6 +73,7 @@ public class Cache{
 		this.criador=new String();
 		this.isActiva=true;
 		this.dificuldade=new String();
+		this.dataCriacao=new GregorianCalendar();
 	}
 	
 	// Geters e Seteres ----------------------------------------------------------------
@@ -96,6 +96,7 @@ public class Cache{
 	public String getCriador() { return criador; }
 	public boolean getIsActiva(){ return isActiva; }
 	public String getDificuldade() { return dificuldade; }
+	public GregorianCalendar getDataCriacao(){ return dataCriacao; }
 	
 	public void setN_registo(String n_registo) { this.n_registo = n_registo; }
 	public void setLatitude(int latitude) { this.latitude = latitude; }	
@@ -115,7 +116,7 @@ public class Cache{
 	public void setCriador(String criador) { this.criador = criador; } 
 	public void setIsActiva(boolean isActiva) { this.isActiva=isActiva; }
 	public void setDificuldade(String dificuldade) { this.dificuldade=dificuldade; }
-
+	public void setDataCriacao(GregorianCalendar data) { this.dataCriacao=data; }
 
 	
 	
