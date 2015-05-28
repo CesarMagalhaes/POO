@@ -127,9 +127,12 @@ public class Cache implements Serializable{
 	
 	//M�todo que vai buscar uma cache passando-lhe o n�mero de registo
 	//Fazer a excep��o para quando a cache n�o existe
-	public Cache getCacheReferencia(String n_registo){
+	public Cache getCacheReferencia(String n_registo) throws CacheException{
+		if(!this.getRegistos().contains(n_registo)){
+			throw new CacheException();
+		}
 		Cache cache= new Cache();
-		if(this.getN_registo()==n_registo){
+		if(this.getN_registo().contains(n_registo)){
 			cache.setN_registo(this.n_registo);
 			cache.setLatitude(this.latitude);
 			cache.setLongitude(this.longitude);

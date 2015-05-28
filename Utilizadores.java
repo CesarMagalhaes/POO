@@ -183,7 +183,10 @@ public class Utilizadores extends Cache{
 	//Notas:
 	//MÃ©todo que vai inserir Ã  lista de caches criadas pelo utilizador a referência da nova cache criada 
 	//ver como se compara se a cache jÃ¡ tinha sido inserida => trata-se com uma excepção
-	public void addCache(Cache c){
+	public void addCache(Cache c) throws CacheException{
+		if(this.cachesInseridas.contains(c.getN_registo())){ //caso o utilizador esteja a adicionar uma cache criada que já exista
+			throw new CacheException(c.getN_registo());
+		}
 		if(!this.cachesInseridas.contains(c.getN_registo())){
 			this.cachesInseridas.add(c.getN_registo());
 		}
@@ -192,7 +195,10 @@ public class Utilizadores extends Cache{
 	
 	//MÃ©todo que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache nÃ£o foi criada pelo utilizador este nï¿½Ã£o a poderÃ¡ eliminar!
 	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a variÃ¡vel isActiva para falso. 
-	public void desativaCache(Cache c){
+	public void desativaCache(Cache c) throws CacheException{
+		if(!this.cachesInseridas.contains(c.getN_registo())){// caso o utilizador queira desativar uma cache que não exista
+			throw new CacheException();
+		}
 		if(this.cachesInseridas.contains(c.getN_registo())){ 
 			c.setIsActiva(false);
 		}
@@ -211,7 +217,10 @@ public class Utilizadores extends Cache{
 	
 	//MÃ©todo que vai inserir na lista de caches descobertas mais uma referência de uma cache
 	//ver como se compara se a cache jÃ¡ tinha sido inserida=> Trata-se com excepções
-	public void addCacheDescoberta(Cache c){
+	public void addCacheDescoberta(Cache c) throws CacheException{
+		if(this.cachesInseridas.contains(c.getN_registo())){// caso o utilizador queira adicionar às caches descobertas uma cache que já tenha encontrado
+			throw new CacheException(c.getN_registo());
+		}
 		if(!this.actividades.contains(c.getN_registo())){
 			this.actividades.add(c.getN_registo());
 		}
