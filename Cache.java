@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 
-public class Cache implements Serializable{
+public abstract class Cache implements Serializable{
 	
 	
 	// Variï¿½veis de instï¿½ncia -----------------------------------------------------------
@@ -21,7 +21,7 @@ public class Cache implements Serializable{
 	private String n_registo;
 	private int latitude, longitude;
 	private char pontocardeal;
-	private ArrayList<String> registos;
+	private ArrayList<String> registos;// nome dos utilizadores que visitaram a cache
 	private int scoreCache;
 	private String criador;
 	private boolean isActiva;
@@ -124,7 +124,7 @@ public class Cache implements Serializable{
 	//---------------------------------------------------------------------Mï¿½todos de instï¿½ncia---------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	
+	/** Este método faz mais sentido estar no geocachingAdmin
 	//Mï¿½todo que vai buscar uma cache passando-lhe o nï¿½mero de registo
 	//Fazer a excepï¿½ï¿½o para quando a cache nï¿½o existe
 	public Cache getCacheReferencia(String n_registo) throws CacheException{
@@ -146,14 +146,21 @@ public class Cache implements Serializable{
 		return cache;
 	}
 	
-
+*/
+	//Método que, dado um utilizador, verifica se visitou a cache
+	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
+		if(this.registos.contains(user.getNome())) return true;
+		else return false;
+	}
+	
+	//acrescentar métodos que mostrem como as caches são visitadas
 	
 	//Clone e toString e compareTo -----------------------------------------------------------------
 	
-	public Cache clone(){
+	/**public Cache clone(){
 		return new Cache(this);
 	}
-	
+	*/
 	
 	public String toString() {
 		StringBuilder s=new StringBuilder();

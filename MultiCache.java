@@ -91,8 +91,8 @@ public class MultiCache extends Cache {
 	//---------------------------------------------------------------------------Métodos de Instância----------------------------------------------------------------------------------
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//Método que verifica se o utilizador passou por todas as caches que constituem a multicaches
-	public boolean verificaMulti(Utilizadores user){
+	//Método que verifica se o utilizador passou por todas as caches que constituem a multicaches,apenas se passou por todas é ue visitou a multicache
+	public boolean foiVisitada(Utilizadores user){
 		ArrayList<String> cachesEncontradas= new ArrayList<String>();
 		cachesEncontradas=user.getActividades();
 		for(String cache: this.getListaCaches()){

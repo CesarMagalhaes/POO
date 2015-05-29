@@ -11,8 +11,9 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Variàveis de Instância--------------------------------------------------------------------
 	
-	private HashMap<String, Utilizadores> listaDeUtilizadores;
+	private HashMap<String, Utilizadores> listaDeUtilizadores; //lista dos utilizadores, que tem como chave o email
 	private TreeSet<Evento> listaDeEventos;
+	private HashMap<String, Cache> listaDeCaches; //lista das caches, que tem como chave a referência da cache
 	
 	
 	//Construtores-------------------------------------------------------------------------------
@@ -20,6 +21,7 @@ public class GeocachingAdmin implements Serializable{
 	public GeocachingAdmin(){
 		this.listaDeUtilizadores= new HashMap<String, Utilizadores>();
 		this.listaDeEventos= new TreeSet<Evento>();
+		this.listaDeCaches=new HashMap<String, Cache>();
 	}
 	
 	public GeocachingAdmin(HashMap<String, Utilizadores> listaUtilizadores, TreeSet<Evento> listaEventos){
@@ -35,13 +37,16 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 
-	//Geteres e Seteres-----------------------------------------------------------------------------------
+	//Geteres e Seteres----------------------------------------------------------------------------------- é preciso mudar
 	
 	public HashMap<String, Utilizadores> getListaDeUtilizadores() { return listaDeUtilizadores;	}
 	public TreeSet<Evento> getListaDeEvento() { return listaDeEventos; }
+	public HashMap<String, Cache> getListaDeCaches(){ return listaDeCaches; }
 
 	public void setListaDeUtilizadores(	HashMap<String, Utilizadores> listaDeUtilizadores) { this.listaDeUtilizadores = listaDeUtilizadores; }
 	public void setListaDeEventos(TreeSet<Evento> listaDeEventos) {	this.listaDeEventos = listaDeEventos; }
+	public void setListaDeCaches(HashMap<String, Cache> listaDeCaches){ this.listaDeCaches=listaDeCaches; }
+	
 	
 
 	//------------------------------------------------------------------------Métodos de Instância-------------------------------------------------------------------------------------
@@ -87,7 +92,7 @@ public class GeocachingAdmin implements Serializable{
 	//Método que adiciona utilizador
 	public void addUtilizador(Utilizadores user) throws UtilizadorException{
 		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
-			this.listaDeUtilizadores.put(user.getEmail(), user.clone()); //para adicionar a um HasMap é com put
+			this.listaDeUtilizadores.put(user.getEmail(), user.clone()); //para adicionar a um HasMap é com put. adiciona a key e o value => HashMap<k, v>
 		}
 	}
 	
@@ -122,34 +127,52 @@ public class GeocachingAdmin implements Serializable{
 	}
 
 	
+	public Cache getCacheReferencia(String n_registo) throws CacheException{
+		if(!listaDeCaches.containsKey(n_registo)){
+			throw new CacheException();
+		}
+		if(listaDeCaches.containsKey(n_registo)){
+			return listaDeCaches.get(n_registo);		
+		}
+		else return null;
+	}
+	
 	//Método que devolve a lista de caches descobertas pelo utilizador
 	public ArrayList<Cache> getListaCaches(String email) throws UtilizadorException{
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getActividades()){
+			if(this.listaDeCaches.containsKey(cache)){
+				listaCaches.add(getCacheReferencia(cache));//é preciso deveolver o clone do objecto
+			}			
+		}
+		return listaCaches;
+	}
+			
+/**		for(String cache: user.getActividades()){
 			Cache c = new Cache();
 			listaCaches.add(c.getCacheReferencia(cache));
 		}		
 		return listaCaches;
 		//return user.getActividades();
 	}
-	
+	*/
 
 	//Método que devolve a lista de caches inseridas por um utilizador
 	public ArrayList<Cache> getListaCachesInseridas(String email) throws UtilizadorException{
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getCachesInseridas()){
-			Cache c = new Cache();
-			listaCaches.add(c.getCacheReferencia(cache));
-		}		
+			if(this.listaDeCaches.containsKey(cache)){
+				listaCaches.add(getCacheReferencia(cache));//é preciso deveolver o clone do objecto
+			}			
+		}
 		return listaCaches;
-			
 	}
 	
 	
 	//Método que permite ao administrador desativaruma cache
-	public void desativaCache(Cache c){
+	public void desativaCache(Cache c) throws CacheException{
 		c.setIsActiva(false);
 	}
 	

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class Utilizadores extends Cache{
+public class Utilizadores{
    
 	// Vari�veis de instância -----------------------------------------------------------
 	
