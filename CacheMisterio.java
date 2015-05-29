@@ -29,7 +29,7 @@ public class CacheMisterio extends Cache {
 	}
 	
 	public CacheMisterio(){
-		this.misterio=new Cache();
+		this.misterio=new CacheMisterio();
 		this.puzzle=new String();
 		this.conteudo=new String();
 	}

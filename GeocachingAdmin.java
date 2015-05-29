@@ -138,7 +138,7 @@ public class GeocachingAdmin implements Serializable{
 	}
 	
 	//Método que devolve a lista de caches descobertas pelo utilizador
-	public ArrayList<Cache> getListaCaches(String email) throws UtilizadorException{
+	public ArrayList<Cache> getListaCaches(String email) throws UtilizadorException, CacheException{
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getActividades()){
@@ -159,7 +159,7 @@ public class GeocachingAdmin implements Serializable{
 	*/
 
 	//Método que devolve a lista de caches inseridas por um utilizador
-	public ArrayList<Cache> getListaCachesInseridas(String email) throws UtilizadorException{
+	public ArrayList<Cache> getListaCachesInseridas(String email) throws UtilizadorException, CacheException{
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getCachesInseridas()){

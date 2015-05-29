@@ -29,7 +29,8 @@ public abstract class Cache implements Serializable{
 	private GregorianCalendar dataCriacao;
 	
 	
-	//Construtores----------------------------------------------------------------------
+	/**
+	//Construtores---------------------------------------------------------------------- como é abstrata não tem
 	
 	public Cache(Cache c){
 		String numregisto=c.getN_registo();
@@ -75,6 +76,7 @@ public abstract class Cache implements Serializable{
 		this.dificuldade=new String();
 		this.dataCriacao=new GregorianCalendar();
 	}
+	*/
 	
 	// Geters e Seteres ----------------------------------------------------------------
 	

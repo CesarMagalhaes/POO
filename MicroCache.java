@@ -28,7 +28,7 @@ public class MicroCache extends Cache{
 	
 	
 	public MicroCache(){
-		this.micro=new Cache();
+		this.micro=new MicroCache();
 	}
 
 
@@ -40,6 +40,14 @@ public class MicroCache extends Cache{
 	public void setMicro(Cache micro) {	this.micro = micro;	}
 	
 
+	//-------------------------------------------------------------------------------Métodos de INstância-------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//Método que, dado um utilizador, verifica se visitou a cache
+		public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
+			if(micro.getRegistos().contains(user.getNome())) return true;
+			else return false;
+		}
 
 	//Clone e toString-------------------------------------------------------------
 	

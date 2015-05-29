@@ -51,7 +51,7 @@ public class MultiCache extends Cache {
 	
 	
 	public MultiCache(){
-		this.multi= new Cache();
+		this.multi= new MultiCache();
 		this.totalCaches= 0;
 		this.listaCaches= new ArrayList<String>();
 		this.conteudo= new String();
