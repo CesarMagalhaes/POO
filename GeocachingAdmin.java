@@ -70,28 +70,41 @@ public class GeocachingAdmin implements Serializable{
 
 	//Método que verifica se existe utilizador
 	public boolean existeUtilizadorNome(String username) throws UtilizadorException {
-			if (this.listaDeUtilizadores.containsKey(username)){
+		if (!this.listaDeUtilizadores.containsValue(username)){//não sei se é assim que se faz!!!!!!!!!!!!!!!!!!!!!!!
+			throw new UtilizadorException("Utilizador não existe!!");
+		}
+		if (this.listaDeUtilizadores.containsKey(username)){
 			return true;
 		}else return false;
 	}
 
 	public boolean existeUtilizadorEmail(String email) throws UtilizadorException{
+		if (!this.listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("Utilizador não existe!!");
+		}
 		if (this.listaDeUtilizadores.containsKey(email)){
 			return true;
 		}else return false;
 	}
 	
 	//Método em que se existir o utilizador valida ou não o login
-	public boolean loginUtilizador(String username, String pass) throws UtilizadorException{	
+	public boolean loginUtilizador(String username, String pass) throws UtilizadorException{
 		Utilizadores aux=this.listaDeUtilizadores.get(username);
 		if((existeUtilizadorNome(username)) && (aux.getPassword()==pass)) return true;
-		else return false;
+		else {
+			if((existeUtilizadorNome(username))==false){throw new UtilizadorException("Login inválido. Username não existe!");}
+			if(aux.getPassword()!=pass){throw new UtilizadorException("Login inválido. Password incorreta!");}
+			return false; //!!!!!ver isto!!!!!!
+		}
 
 	}
 	
 	//Método que adiciona utilizador
 	public void addUtilizador(Utilizadores user) throws UtilizadorException{
 		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
+			throw new UtilizadorException("Utilizador já exite!");
+		}
+		if(!this.listaDeUtilizadores.containsKey(user.getEmail())){
 			this.listaDeUtilizadores.put(user.getEmail(), user.clone()); //para adicionar a um HasMap é com put. adiciona a key e o value => HashMap<k, v>
 		}
 	}
@@ -114,6 +127,9 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que remove um utilizador
 	public void removeUtilizador(String email) throws UtilizadorException{
+		if(!this.listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador qu equer remover não existe!");
+		}
 		if(this.listaDeUtilizadores.containsKey(email)){
 			Utilizadores user= this.listaDeUtilizadores.get(email);
 			//vai remover da rede de amigos o utilizador
@@ -127,9 +143,10 @@ public class GeocachingAdmin implements Serializable{
 	}
 
 	
+	////Mï¿½todo que vai buscar uma cache passando-lhe o nï¿½mero de registo
 	public Cache getCacheReferencia(String n_registo) throws CacheException{
 		if(!listaDeCaches.containsKey(n_registo)){
-			throw new CacheException();
+			throw new CacheException("A cache não existe!");
 		}
 		if(listaDeCaches.containsKey(n_registo)){
 			return listaDeCaches.get(n_registo);		
@@ -139,19 +156,30 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que devolve a lista de caches descobertas pelo utilizador
 	public ArrayList<Cache> getListaCaches(String email) throws UtilizadorException, CacheException{
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!");
+		}
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getActividades()){
 			if(this.listaDeCaches.containsKey(cache)){
 				listaCaches.add(getCacheReferencia(cache));//é preciso deveolver o clone do objecto
-			}			
+			}
+			else{ throw new CacheException("A cache não existe");}  // não sei se faz sentido estar aqui!!!!!!!!!!!!!!!
+		
 		}
 		return listaCaches;
 	}
 			
 	
 	//Método que verifica se um utilizador visitou determinada cahe
-	public boolean visitouCache(Utilizadores user, Cache c) throws UtilizadorException{ //adicionar tb a excepão da cache
+	public boolean visitouCache(Utilizadores user, Cache c) throws UtilizadorException, CacheException{ 
+		if(!listaDeUtilizadores.containsKey(user.getEmail())){
+			throw new UtilizadorException("O utilizador não existe!");
+		}
+		if(!listaDeCaches.containsKey(c.getN_registo())){
+			throw new CacheException("A cache não existe!");
+		}
 		if(c.foiVisitada(user)) return true;
 		else return false;
 	}
@@ -168,6 +196,9 @@ public class GeocachingAdmin implements Serializable{
 
 	//Método que devolve a lista de caches inseridas por um utilizador
 	public ArrayList<Cache> getListaCachesInseridas(String email) throws UtilizadorException, CacheException{
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!");
+		}
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		ArrayList<Cache> listaCaches=new ArrayList<Cache>();
 		for(String cache: user.getCachesInseridas()){
@@ -187,7 +218,9 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que devolve a lista de amigos de um utilizador
 	public ArrayList<Utilizadores> getRedeAmigos(String email) throws UtilizadorException{
-		
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!");
+		}
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Utilizadores> redeAmigos=new ArrayList<Utilizadores>();
 		for(String amigo: user.getRedeAmigos()){
@@ -200,6 +233,9 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que remove um amigo da lista de amigos do utilizador
 	public void removeAmigo(String email, String nome) throws UtilizadorException{ //vai receber o email de utilizador e o nome do amigo que vai remover
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!");
+		}
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		for(String amigo: user.getRedeAmigos()){
 			if(amigo==nome) user.removeAmigo(amigo);
@@ -209,6 +245,9 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que devolve a lista de amigos pendentes
 	public ArrayList<Utilizadores> getListaAmigosPendentes(String email) throws UtilizadorException{
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!");
+		}
 		Utilizadores user=this.listaDeUtilizadores.get(email);
 		ArrayList<Utilizadores> listaAmigosPendentes= new ArrayList<Utilizadores>();
 		for(String amigoPendente: user.getAmigosPendentes()){
@@ -220,7 +259,13 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que vai remover um utilizador da lista de amigos pendentes
 	public void removeAmigoPendente(String email, String nome) throws UtilizadorException{ //vai receber o email de utilizador e o nome do amigo que vai remover
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!"); 
+		}
 		Utilizadores user=this.listaDeUtilizadores.get(email);
+		if(!listaDeUtilizadores.containsValue(user.getAmigoPendenteNome(nome))){
+			throw new UtilizadorException("O utilizador que quer remover não existe!");//caso queira remover um amigo que não exista
+		}
 		for(String amigo: user.getAmigosPendentes()){
 			if(amigo==nome) user.removeAmigo(amigo);
 		}
@@ -228,6 +273,9 @@ public class GeocachingAdmin implements Serializable{
 	
 	//Método que vai aceitar amigo pendente, respectivamente adicioná-lo à rede de amigos e removêlo d alista de amigos pendentes
 	public void adicionaAmigo(String email, String nome) throws UtilizadorException{
+		if(!listaDeUtilizadores.containsKey(email)){
+			throw new UtilizadorException("O utilizador não existe!"); 
+		}
 		Utilizadores user= this.listaDeUtilizadores.get(email);
 		Utilizadores amigo=new Utilizadores();
 		for(String amigoPendente: user.getAmigosPendentes()){

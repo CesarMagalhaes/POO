@@ -185,7 +185,7 @@ public class Utilizadores{
 	//ver como se compara se a cache jÃ¡ tinha sido inserida => trata-se com uma excepção
 	public void addCache(Cache c) throws CacheException{
 		if(this.cachesInseridas.contains(c.getN_registo())){ //caso o utilizador esteja a adicionar uma cache criada que já exista
-			throw new CacheException(c.getN_registo());
+			throw new CacheException("A cache que quer inserir já existe!");
 		}
 		if(!this.cachesInseridas.contains(c.getN_registo())){
 			this.cachesInseridas.add(c.getN_registo());
@@ -197,7 +197,7 @@ public class Utilizadores{
 	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a variÃ¡vel isActiva para falso. 
 	public void desativaCache(Cache c) throws CacheException{
 		if(!this.cachesInseridas.contains(c.getN_registo())){// caso o utilizador queira desativar uma cache que não exista
-			throw new CacheException();
+			throw new CacheException("A cache que quer desativar não existe!");
 		}
 		if(this.cachesInseridas.contains(c.getN_registo())){ 
 			c.setIsActiva(false);
@@ -207,7 +207,7 @@ public class Utilizadores{
 	//MÃ¡todo que vai adicionar um amigo (Nome deste) Ã  rede de amigos
 	public void addAmigo(Utilizadores amigo) throws UtilizadorException{
 		if (this.redeAmigos.contains(amigo.getEmail())) { //caso o utilizador queira adicionar um amigo que já exista
-			throw new UtilizadorException(amigo.getEmail());
+			throw new UtilizadorException("O utilizador que quer adicionar já existe!");
 		}
 		if(!this.redeAmigos.contains(amigo.getNome())){
 			this.redeAmigos.add(amigo.getNome());
@@ -219,7 +219,7 @@ public class Utilizadores{
 	//ver como se compara se a cache jÃ¡ tinha sido inserida=> Trata-se com excepções
 	public void addCacheDescoberta(Cache c) throws CacheException{
 		if(this.cachesInseridas.contains(c.getN_registo())){// caso o utilizador queira adicionar às caches descobertas uma cache que já tenha encontrado
-			throw new CacheException(c.getN_registo());
+			throw new CacheException("A cache que pretende adicionar já foi descoberta!");
 		}
 		if(!this.actividades.contains(c.getN_registo())){
 			this.actividades.add(c.getN_registo());
@@ -249,7 +249,7 @@ public class Utilizadores{
 	//MÃ©todo que vai remover um amigo da rede de amigos, dado o nome do amigo que se quer remover
 	public void removeAmigo(String amigo) throws UtilizadorException{
 		if (!this.redeAmigos.contains(amigo)){ //caso o utilizador queira remover um amigo que não exista na sua rede
-			throw new UtilizadorException();
+			throw new UtilizadorException("O utilizador que quer remover não existe!");
 		}
 		if(this.redeAmigos.contains(amigo)){
 			this.redeAmigos.remove(amigo);
@@ -272,7 +272,7 @@ public class Utilizadores{
 	//Método que vai buscar um amigo pelo nome
 	public Utilizadores getAmigoNome(String nome) throws UtilizadorException{
 		if (!this.redeAmigos.contains(nome)) { //caso o utilizador queira consultar um amigo que não existe
-			throw new UtilizadorException();
+			throw new UtilizadorException("O utilizador que quer não existe!");
 		}
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getRedeAmigos()){
@@ -289,7 +289,7 @@ public class Utilizadores{
 	//Método que vai buscar um amigo pendente pelo nome
 	public Utilizadores getAmigoPendenteNome(String nome) throws UtilizadorException{
 		if(!this.amigosPendentes.contains(nome)){//caso o utilizador queira consultar um amigo pendende que não exista
-			throw new UtilizadorException();
+			throw new UtilizadorException("O utilizador que quer não existe!");
 		}
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getAmigosPendentes()){
@@ -308,14 +308,14 @@ public class Utilizadores{
 			if(this.amigosPendentes.contains(amigo)){
 				this.amigosPendentes.remove(amigo);
 			}else{
-				throw new UtilizadorException();//caso o utilizador queira remover um amigo pendente que não exista
+				throw new UtilizadorException("O utilizador que quer remover não existe!");//caso o utilizador queira remover um amigo pendente que não exista
 			}
 		}
 
 	//Método que vai adicionar um amigo à lista de amigos pendentes
 		public void addAmigoPendente(String nome) throws UtilizadorException{
 			if(this.amigosPendentes.contains(nome)){
-				throw new UtilizadorException(nome);//caso queira adicionar um amigo à lista de amigos pendentes que já exista
+				throw new UtilizadorException("O utilizador que quer adicionar já existe!");//caso queira adicionar um amigo à lista de amigos pendentes que já exista
 			}else{
 				this.amigosPendentes.add(nome);
 			}
