@@ -45,7 +45,17 @@ public class CacheMisterio extends Cache {
 	public void setMisterio(Cache misterio) { this.misterio = misterio;	}
 	public void setPuzzle(String puzzle) { this.puzzle = puzzle; }	
 	public void setConteudo(String conteudo) { this.conteudo = conteudo; }
+
 	
+	
+	//----------------------------------------------------------------------------Métodos de INstância---------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//Método que, dado um utilizador, verifica se visitou a cache
+		public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
+			if(misterio.getRegistos().contains(user.getNome())) return true;
+			else return false;
+		}
 	
 	//Clone, toString e compareTo ---------------------------------------------------
 	

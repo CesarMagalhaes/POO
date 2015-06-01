@@ -149,6 +149,14 @@ public class GeocachingAdmin implements Serializable{
 		return listaCaches;
 	}
 			
+	
+	//Método que verifica se um utilizador visitou determinada cahe
+	public boolean visitouCache(Utilizadores user, Cache c) throws UtilizadorException{ //adicionar tb a excepão da cache
+		if(c.foiVisitada(user)) return true;
+		else return false;
+	}
+	
+	
 /**		for(String cache: user.getActividades()){
 			Cache c = new Cache();
 			listaCaches.add(c.getCacheReferencia(cache));

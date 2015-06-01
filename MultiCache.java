@@ -55,7 +55,7 @@ public class MultiCache extends Cache {
 		this.totalCaches= 0;
 		this.listaCaches= new ArrayList<String>();
 		this.conteudo= new String();
-		//this.micro= new MicroCache();
+
 	}
 	
 	//Geteres e Seteres---------------------------------------------------------------
@@ -71,8 +71,7 @@ public class MultiCache extends Cache {
 		return copia;
 	}
 	public String getConteudo() { return conteudo; }
-	//ver este get!!!!!!!!!!!!!
-	//public MicroCache getMicro() { return micro; }
+
 	
 	
 	public void setMulti(Cache multi) { this.multi = multi; }
@@ -86,13 +85,13 @@ public class MultiCache extends Cache {
 		}
 	}
 	public void setConteudo(String conteudo) { this.conteudo=conteudo; }
-	//public void setMicro(MicroCache micro) { this.micro = micro; }	
+	
 
 	//---------------------------------------------------------------------------Métodos de Instância----------------------------------------------------------------------------------
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	//Método que verifica se o utilizador passou por todas as caches que constituem a multicaches,apenas se passou por todas é ue visitou a multicache
-	public boolean foiVisitada(Utilizadores user){
+	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 		ArrayList<String> cachesEncontradas= new ArrayList<String>();
 		cachesEncontradas=user.getActividades();
 		for(String cache: this.getListaCaches()){
@@ -146,5 +145,7 @@ public class MultiCache extends Cache {
 					&& this.conteudo.equals(other.getConteudo()));
 		}
 	}
+	
+	
 	
 }
