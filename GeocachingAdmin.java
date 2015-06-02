@@ -111,10 +111,10 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	//Método que actualiza a informação de um utilizador
-	public void actualizaUtilizador(Utilizadores user, char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc) throws UtilizadorException{
+	public void actualizaUtilizador(Utilizadores user, char genero, String nome, String pass, String morada, GregorianCalendar dataNasc) throws UtilizadorException{
 		Utilizadores uti= this.listaDeUtilizadores.get(user.getEmail());
 		if(this.listaDeUtilizadores.containsKey(user.getEmail())){
-			uti.modificaUtilizador(genero, nome, email, pass, morada, dataNasc);
+			uti.modificaUtilizador(genero, nome, pass, morada, dataNasc);
 		}
 		//actualizar lista de amigos
 		//for(Utilizadores amigo: uti.getRedeAmigos()){

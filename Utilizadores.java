@@ -185,7 +185,7 @@ public class Utilizadores{
 	//ver como se compara se a cache jÃ¡ tinha sido inserida => trata-se com uma excepção
 	public void addCache(Cache c) throws CacheException{
 		if(this.cachesInseridas.contains(c.getN_registo())){ //caso o utilizador esteja a adicionar uma cache criada que já exista
-			throw new CacheException("A cache que quer inserir já existe!");
+			throw new CacheException("A cache que quer inserir não existe! ");
 		}
 		if(!this.cachesInseridas.contains(c.getN_registo())){
 			this.cachesInseridas.add(c.getN_registo());
@@ -258,10 +258,9 @@ public class Utilizadores{
 	
 	
 	//Método que actualiza a informação do utilizador
-	public void modificaUtilizador(char genero, String nome, String email, String pass, String morada, GregorianCalendar dataNasc){
+	public void modificaUtilizador(char genero, String nome, String pass, String morada, GregorianCalendar dataNasc){
 		this.genero=genero;
 		this.nome=nome;
-		this.email=email;
 		this.password=pass;
 		this.morada=morada;
 		this.dataNascimento=dataNasc;
