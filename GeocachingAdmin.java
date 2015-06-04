@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 
 
@@ -12,7 +13,7 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	private HashMap<String, Utilizadores> listaDeUtilizadores; 
-	private TreeSet<Evento> listaDeEventos;
+	private HashMap<String, Evento> listaDeEventos;
 	private HashMap<String, Cache> listaDeCaches; 
 	
 	
@@ -20,11 +21,11 @@ public class GeocachingAdmin implements Serializable{
 	
 	public GeocachingAdmin(){
 		this.listaDeUtilizadores= new HashMap<String, Utilizadores>();
-		this.listaDeEventos= new TreeSet<Evento>();
+		this.listaDeEventos= new HashMap<String, Evento>();
 		this.listaDeCaches=new HashMap<String, Cache>();
 	}
 	
-	public GeocachingAdmin(HashMap<String, Utilizadores> listaUtilizadores, TreeSet<Evento> listaEventos){
+	public GeocachingAdmin(HashMap<String, Utilizadores> listaUtilizadores, HashMap<String, Evento> listaEventos){
 		this.listaDeUtilizadores= listaUtilizadores;
 		this.listaDeEventos= listaEventos;
 		addAdminLista(); 
@@ -32,20 +33,77 @@ public class GeocachingAdmin implements Serializable{
 	
 	public GeocachingAdmin(GeocachingAdmin ga){
 		HashMap<String, Utilizadores> lu= ga.getListaDeUtilizadores();
-		TreeSet<Evento> le= ga.getListaDeEvento();
+		HashMap<String,Evento> le= ga.getListaDeEvento();
 		addAdminLista();
 	}
 	
 
 	
 	
-	public HashMap<String, Utilizadores> getListaDeUtilizadores() { return listaDeUtilizadores;	}
-	public TreeSet<Evento> getListaDeEvento() { return listaDeEventos; }
-	public HashMap<String, Cache> getListaDeCaches(){ return listaDeCaches; }
+	public HashMap<String, Utilizadores> getListaDeUtilizadores() {
+		HashMap<String, Utilizadores> copia=new HashMap<String, Utilizadores>();
+		Iterator<Map.Entry<String,Utilizadores>> i=listaDeUtilizadores.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String,Utilizadores> obj=i.next();
+			copia.put(obj.getKey(),obj.getValue());
+		}
+		return copia;
+	}
+	
+	
+	
+	
+	public HashMap<String,Evento> getListaDeEvento() {
+		HashMap<String, Evento> copia=new HashMap<String, Evento>();
+		Iterator<Map.Entry<String,Evento>> i=listaDeEventos.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String,Evento> obj=i.next();
+			copia.put(obj.getKey(),obj.getValue());
+		}
+		return copia;
+	}
 
-	public void setListaDeUtilizadores(	HashMap<String, Utilizadores> listaDeUtilizadores) { this.listaDeUtilizadores = listaDeUtilizadores; }
-	public void setListaDeEventos(TreeSet<Evento> listaDeEventos) {	this.listaDeEventos = listaDeEventos; }
-	public void setListaDeCaches(HashMap<String, Cache> listaDeCaches){ this.listaDeCaches=listaDeCaches; }
+	
+	
+	public HashMap<String, Cache> getListaDeCaches(){
+		HashMap<String, Cache> copia=new HashMap<String, Cache>();
+		Iterator<Map.Entry<String,Cache>> i=listaDeCaches.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String,Cache> obj=i.next();
+			copia.put(obj.getKey(),obj.getValue());
+		}
+		return copia;
+	}
+
+
+	public void setListaDeUtilizadores(	HashMap<String, Utilizadores> listaDeUtilizadores) { 
+			this.listaDeUtilizadores=new HashMap<String,Utilizadores>();
+			Iterator<Map.Entry<String,Utilizadores>> i= listaDeUtilizadores.entrySet().iterator();
+			while(i.hasNext()){
+				Map.Entry<String,Utilizadores> obj=i.next();
+				this.listaDeUtilizadores.put(obj.getKey(), obj.getValue());
+			}
+	}
+
+	public void setListaDeEventos(HashMap<String,Evento> listaDeEventos) {		 
+		this.listaDeEventos=new HashMap<String,Evento>();
+		Iterator<Map.Entry<String,Evento>> i= listaDeEventos.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String,Evento> obj=i.next();
+			this.listaDeEventos.put(obj.getKey(), obj.getValue());
+		}
+}
+
+
+	
+	public void setListaDeCaches(HashMap<String, Cache> listaDeCaches){ 		 
+		this.listaDeCaches=new HashMap<String,Cache>();
+		Iterator<Map.Entry<String,Cache>> i= listaDeCaches.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String,Cache> obj=i.next();
+			this.listaDeCaches.put(obj.getKey(), obj.getValue());
+		}
+	}
 	
 	
 
