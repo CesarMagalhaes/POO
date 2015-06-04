@@ -1,10 +1,16 @@
+/**
+ * Classe MicroCache contém toda a informação relativa a uma micro-cache.
+ * 
+ * @author César Magalhães, Susana Mendes e Tiago Pereira  
+ * @version Maio 2015
+ */
 
 import java.util.ArrayList;
 
 
 public class MicroCache extends Cache{
 	
-	
+	// Variáveis de instância -----------------------------------------------------
 	
 	private Cache micro;
 
@@ -34,6 +40,10 @@ public class MicroCache extends Cache{
 	public void setMicro(Cache micro) {	this.micro = micro;	}
 	
 
+	//-------------------------------------------------------------------------------Métodos de INstância-------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	//Método que, dado um utilizador, verifica se visitou a cache
 		public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 			if(micro.getRegistos().contains(user.getNome())) return true;
 			else return false;
@@ -49,7 +59,7 @@ public class MicroCache extends Cache{
 	public String toString() {
 		StringBuilder s=new StringBuilder();
 		s.append("---------------Micro Cache--------------------");
-		s.append("Nï¿½ero de registo: "+this.micro.getN_registo()+"\n");
+		s.append("Núero de registo: "+this.micro.getN_registo()+"\n");
 		s.append("Latitude: "+this.micro.getLatitude()+"\n");
 		s.append("Longitude: "+this.micro.getLongitude()+"\n");
 		s.append("Ponto Cardeal: "+this.micro.getPontocardeal()+"\n");

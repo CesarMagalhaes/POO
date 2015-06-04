@@ -30,7 +30,7 @@ public abstract class Cache implements Serializable{
 	
 	
 	/**
-	//Construtores---------------------------------------------------------------------- como ï¿½ abstrata nï¿½o tem
+	//Construtores---------------------------------------------------------------------- como é abstrata não tem
 	
 	public Cache(Cache c){
 		String numregisto=c.getN_registo();
@@ -126,7 +126,7 @@ public abstract class Cache implements Serializable{
 	//---------------------------------------------------------------------Mï¿½todos de instï¿½ncia---------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	/** Este mï¿½todo faz mais sentido estar no geocachingAdmin
+	/** Este método faz mais sentido estar no geocachingAdmin
 	//Mï¿½todo que vai buscar uma cache passando-lhe o nï¿½mero de registo
 	//Fazer a excepï¿½ï¿½o para quando a cache nï¿½o existe
 	public Cache getCacheReferencia(String n_registo) throws CacheException{
@@ -149,13 +149,13 @@ public abstract class Cache implements Serializable{
 	}
 	
 */
-	//Mï¿½todo que, dado um utilizador, verifica se visitou a cache
+	//Método que, dado um utilizador, verifica se visitou a cache
 	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 		if(this.registos.contains(user.getNome())) return true;
 		else return false;
 	}
 	
-	//acrescentar mï¿½todos que mostrem como as caches sï¿½o visitadas
+	//acrescentar métodos que mostrem como as caches são visitadas
 	
 	//Clone e toString e compareTo -----------------------------------------------------------------
 	
@@ -167,7 +167,7 @@ public abstract class Cache implements Serializable{
 	public String toString() {
 		StringBuilder s=new StringBuilder();
 		s.append("----------------Cache--------------------");
-		s.append("Nï¿½mero de registo: " +this.n_registo+ "\n");
+		s.append("Número de registo: " +this.n_registo+ "\n");
 		s.append("Latitude: "+this.latitude+ "\n");
 		s.append("Longitude: "+this.longitude+ "\n");
 		s.append("Ponto Cardeal: " +this.pontocardeal+"\n");

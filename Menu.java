@@ -2,20 +2,21 @@ import java.util.Scanner;
 import java.lang.String;
 import java.lang.System;
 import java.lang.Character;
-import java.util.Random;
-import java.util.GregorianCalendar;
-import java.text.DateFormat;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.ArrayList;
 
+/**
+ * Escreva a descrição da classe Interface aqui.
+ * 
+ * @author (seu nome) 
+ * @version (número de versão ou data)
+ */
 public class Menu {
-    Utilizadores user = new Utilizadores();
-    Cache cache;
-    GeocachingAdmin geoadmin = new GeocachingAdmin();
 
+    private Utilizadores user;
+    private Cache cache;
+    private GeocachingAdmin geoadmin;
+    private String email; 
+    private String password;
+    
     public static void menu(){
         System.out.println("\tGEOCACHING");
         System.out.println("1. LOGIN");
@@ -24,10 +25,9 @@ public class Menu {
         System.out.println("Opcao:");
     }
 
-    public void login()throws UtilizadorException,CacheException{
+    public static void login(){
         System.out.println("INTRODUZA E-MAIL:");
         Scanner mail = new Scanner(System.in);
-        String email, password;
         email = mail.nextLine();
         System.out.println("PASSWORD:");
         Scanner pass = new Scanner(System.in);
@@ -40,67 +40,56 @@ public class Menu {
                 System.out.println("EXISTE USER");
                 usermenu();
             }
-            else{
-                System.out.println("DADOS ERRADOS.");
+            else{System.out.println("DADOS ERRADOS.");
                 dadoserrados();
-
             }
         }
     }
 
-    public void registo()throws UtilizadorException{
-        Utilizadores temp = new Utilizadores();
+    public static void registo(){
+        Utilizadores temp;
         String emailreg, passwordreg, nome, morada;
         char genero;
         GregorianCalendar dataNascimento;
-        DateFormat formato = new SimpleDateFormat("dd-mm-yyyy");
-        Date data = null;
         Scanner entrada = new Scanner(System.in);
 
         System.out.println("REGISTO");
         System.out.println("E-MAIL: ( servirá como username )");
-        emailreg = entrada.nextLine();    
+        emailreg = entrada.nextInt();    
         temp.setEmail(emailreg);    
 
         System.out.println("PASSWORD:");
-        passwordreg = entrada.nextLine();
+        passwordreg = entrada.nextInt();
         temp.setPassword(passwordreg);
 
         System.out.println("NOME:");
-        nome = entrada.nextLine();
+        nome = entrada.nextInt();
         temp.setNome(nome);
 
         System.out.println("GENERO: (M ou F)");
-        genero = entrada.next("[a-zA-Z]").charAt(0);
+        genero = entrada.nextInt();
         temp.setGenero(genero);
 
         System.out.println("MORADA:");
-        morada = entrada.nextLine();
+        morada = entrada.nextInt();
         temp.setMorada(morada);
 
-        System.out.println("DATA DE NASCIMENTO:");
-        System.out.println("Ano(AAAA): ");int AAAA = entrada.nextInt();
-        System.out.println("Mes(MM): ");int MM = entrada.nextInt();
-        System.out.println("Dia(DD): ");int DD = entrada.nextInt();
-        dataNascimento = new GregorianCalendar(DD,MM,AAAA);
+        System.out.println("DATA DE NASCIMENTO: (DD/MM/AAAA)");
+        dataNascimento = entrada.nextInt();
         temp.setDataNascimento(dataNascimento);
 
-        ArrayList<String> actividades = new ArrayList<String>();
-        temp.setActividades(actividades);
-        ArrayList<String> cachesinseridas = new ArrayList<String>();
-        temp.setCachesInseridas(cachesinseridas);
-        ArrayList<String> redeamigos = new ArrayList<String>();
-        temp.setRedeAmigos(redeamigos);
-        ArrayList<String> amigospendentes = new ArrayList<String>();
-        temp.setAmigosPendentes(amigospendentes);
+        temp.setActividades();
+        temp.setCachesInseridas();
+        temp.setRedeAmigos();
+        temp.setAmigosPendentes();
         geoadmin.addUtilizador(temp);
     }
 
-    public void dadoserrados()throws UtilizadorException,CacheException{
+    public static void dadoserrados(){
         int opcao;
         Scanner nextopcao = new Scanner(System.in);
 
-        do{        
+        do{
             menu();
             opcao = nextopcao.nextInt();
 
@@ -122,16 +111,15 @@ public class Menu {
     }
 
     public static void user(){
-
-        System.out.println("USER MENU");
+                
+       System.out.println("USER MENU");
         System.out.println("1. Cache");
         System.out.println("2. Amigos");
         System.out.println("3. Eventos");
         System.out.println("4. Estatisticas");
         System.out.println("0. Sair");
         System.out.println("Opcao:");}
-
-    public void usermenu()throws UtilizadorException,CacheException{
+    public static void usermenu(){
         int opcao;
         Scanner nextopcao = new Scanner(System.in);
 
@@ -165,7 +153,7 @@ public class Menu {
         } while(opcao != 0);
     }
 
-    public static void admin(){
+     public static void admin(){
         System.out.println("ADMIN MENU");
         System.out.println("1. Actualizar User");
         System.out.println("2. Remover User");
@@ -173,8 +161,7 @@ public class Menu {
         System.out.println("4. Criar Evento:");
         System.out.println("0. Sair");
     }
-
-    public void adminmenu()throws UtilizadorException, CacheException{
+    public static void adminmenu(){
         int opcao;
         Scanner nextopcao = new Scanner(System.in);
 
@@ -214,8 +201,7 @@ public class Menu {
         System.out.println("2. Desactivar cache");
         System.out.println("3. Descobrir cache");
         System.out.println("0. Sair");}
-
-    public void cachemenu()throws UtilizadorException, CacheException{
+    public static void cachemenu(){
         int opcao;
         Scanner nextopcao = new Scanner(System.in);
 
@@ -245,49 +231,46 @@ public class Menu {
         } while(opcao != 0);
     }    
 
-    public void criarcache()throws UtilizadorException, CacheException{
-
-        MicroCache cachetemp = new MicroCache();
-        int dificuldade,n, latitude,longitude;
-        char pontocardeal;
-        Random rand = new Random();
-        Scanner entrada = new Scanner(System.in);
+    public static void criarcache(){
+        Date date = new Date();
+        Cache cachetemp;
+        int dificuldade;
+        Scanner dif = new Scanner(System.in);
         System.out.println("CRIAR CACHE");
-        System.out.println("Introduza as coordenadas GPS:(latitude)");
-        latitude = entrada.nextInt();
-        cachetemp.setLatitude(latitude);
-        System.out.println("Introduza as coordenadas GPS:(longitude)");
-        longitude = entrada.nextInt();
-        cachetemp.setLongitude(longitude);
-        System.out.println("Introduza o ponto cardeal");
-        pontocardeal = entrada.next("[a-zA-Z]").charAt(0);
-        cachetemp.setPontocardeal(pontocardeal);
-
-        GregorianCalendar data = new GregorianCalendar();
-        n = rand.nextInt(1000) + 1;
-        cachetemp.setN_registo(Integer.toString(n));
-        cachetemp.setRegistos(null);
+        System.out.println("Introduza as coordenadas GPS:(latitude,longitude)");
+        cachetemp.setLatitude();
+        cachetemp.setLongitude();
+        cachetemp.setPontoCardeal();
+        System.out.println("Introduza a dificuldade da cache:");
+        dificuldade = dif.nextInt();
+        cachetemp.setDificuldade(dificuldade);
+        
+        cachetemp.setN_registo("");
+        cachetemp.setRegistos("");
         cachetemp.setCriador(user.getNome());
         cachetemp.setIsActiva(true);
-        cachetemp.setDataCriacao(data);
-        cachetemp.setDificuldade("Sol");
-
-        user.addCache(cachetemp);
-    }
-
-    public void desactivacacheuser()throws CacheException{
+        cachetemp.setDataCriacao(date);
+        
+        user.addCache();
+        System.out.println("FUNCIONALIDADE NAO IMPLEMENTADA.");
+        menu();}
+    
+    public static void desactivacacheuser(){
         System.out.println("Introduza a cache a desactivar:");
-        String nregistocache;
+        int cache;
         Scanner entrada = new Scanner(System.in);
-        nregistocache = entrada.nextLine();
-        user.desativaCache(geoadmin.getCacheReferencia(nregistocache));
+        cache = entrada.nextInt();
+        user.desativaCache(cache);
     }
 
     public static void descobrecache(){
         System.out.println("DESCOBRIR CACHE");
         System.out.println("FUNCIONALIDADE NAO IMPLEMENTADA.");
         menu();}    
-
+        
+        
+        
+        
     public static void amigos(){
         System.out.println("AMIGOS");
         System.out.println("FUNCIONALIDADE NAO IMPLEMENTADA.");
@@ -303,67 +286,62 @@ public class Menu {
         System.out.println("FUNCIONALIDADE NAO IMPLEMENTADA.");
         menu();}
 
-    public void actualizauser()throws UtilizadorException, CacheException{
+    public static void actualizauser(){
         System.out.println("Introduza e-mail do utilizador a actualizar:");
-        String usermail;
+        int usermail;
         Scanner entrada = new Scanner(System.in);
-        usermail = entrada.nextLine();
+        usermail = entrada.nextInt();
 
         if(geoadmin.existeUtilizadorEmail(usermail)==false) {System.out.println("Utilizador não existe. \n Tente novamente");
             actualizauser();}
 
         System.out.println("Introduza os dados a actualizar do user"+usermail);                                            
         System.out.println("GENERO: (M ou F)");
-        char generoup = entrada.next("[a-zA-Z]").charAt(0);
+        generoup = entrada.nextInt();
 
         System.out.println("NOME:");
-        String nomeup = entrada.nextLine();
+        nomeup = entrada.nextInt();
 
         System.out.println("PASSWORD:");
-        String passwordup = entrada.nextLine();
+        passwordup = entrada.nextInt();
 
         System.out.println("MORADA:");
-        String moradaup = entrada.nextLine();
+        moradaup = entrada.nextInt();
 
-        System.out.println("DATA DE NASCIMENTO:");
-        System.out.println("Ano(AAAA): ");int AAAA = entrada.nextInt();
-        System.out.println("Mes(MM): ");int MM = entrada.nextInt();
-        System.out.println("Dia(DD): ");int DD = entrada.nextInt();
-        GregorianCalendar dataNascup = new GregorianCalendar(DD,MM,AAAA);
+        System.out.println("DATA DE NASCIMENTO: (DD/MM/AAAA)");
+        dataNascup = entrada.nextInt();
 
-        //(Utilizadores user, char genero, String nome, String pass, String morada, GregorianCalendar dataNasc) 
-        geoadmin.actualizaUtilizador(user,generoup,nomeup,passwordup,moradaup,dataNascup);
+        geoadmin.actualizaUtilizador(generoup,nomeup,usermail,passup,moradaup,dataNascup);
         System.out.println("User actualizado.");
         adminmenu();
     }
 
-    public void removeuser()throws UtilizadorException, CacheException{
+    public static void removeuser(){
         System.out.println("Introduza e-mail do utilizador a remover:");
-        String usermail;
+        int usermail;
         Scanner entrada = new Scanner(System.in);
-        usermail = entrada.nextLine();
+        usermail = entrada.nextInt();
         geoadmin.removeUtilizador(usermail);
         System.out.println("Removido o utilizador com o mail: "+usermail);
         adminmenu();
     }
 
-    public void desactivacacheadmin()throws UtilizadorException, CacheException{
+    public static void desactivacacheadmin(){
         System.out.println("Introduza a cache a desactivar:");
-        String nregistocache;
+        int cache;
         Scanner entrada = new Scanner(System.in);
-        nregistocache = entrada.nextLine();
-        geoadmin.desativaCache(geoadmin.getCacheReferencia(nregistocache));
+        cache = entrada.nextInt();
+        geoadmin.desactivaCache(cache);
 
     }
 
-    public void criaevento()throws UtilizadorException, CacheException{
+    public static void criaevento(){
         System.out.println("FUNCIONALIDADE NAO IMPLEMENTADA.");
         adminmenu();
 
     }
 
-    public static void main(String[] args)throws UtilizadorException, CacheException {
-        Menu m = new Menu();
+    public static void main(String[] args) {
         int opcao;
         Scanner entrada = new Scanner(System.in);
 
@@ -373,11 +351,11 @@ public class Menu {
 
             switch(opcao){
                 case 1:
-                m.login();
+                login();
                 break;
 
                 case 2:
-                m.registo();
+                registo();
                 break;
 
                 case 0:
