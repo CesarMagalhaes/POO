@@ -1,8 +1,9 @@
 /**
- * Classe Cache, que para al�m de conter a informa��o que a MicroCache tem, vai conte informa��o adicional.
+ * 
+ * Classe abstrata Cache,tem a informação básica que uma cache vai ter, bem como o método que vê se uma cache foi visitada.
  * Esta classe vai servir para descrever as caches no geral.
  * 
- * @author C�sar Magalh�es, Susana Mendes e Tiago Pereira  
+ * @author César Magalhães, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
  */
 
@@ -16,8 +17,8 @@ import java.util.Iterator;
 public abstract class Cache implements Serializable{
 	
 	
-	// Vari�veis de inst�ncia -----------------------------------------------------------
-	
+	// Variáveis de instância -----------------------------------------------------------
+
 	private String n_registo;
 	private int latitude, longitude;
 	private char pontocardeal;
@@ -30,7 +31,11 @@ public abstract class Cache implements Serializable{
 	
 	
 	/**
-	//Construtores---------------------------------------------------------------------- como � abstrata n�o tem
+<<<<<<< HEAD
+	//Construtores---------------------------------------------------------------------- como é abstrata não tem
+=======
+	//Construtores---------------------------------------------------------------------- como � abstrata n�o tem
+>>>>>>> origin/master
 	
 	public Cache(Cache c){
 		String numregisto=c.getN_registo();
@@ -123,12 +128,18 @@ public abstract class Cache implements Serializable{
 	
 	
 	
-	//---------------------------------------------------------------------M�todos de inst�ncia---------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------Métodos de instância---------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	/** Este m�todo faz mais sentido estar no geocachingAdmin
+<<<<<<< HEAD
+	/** Este método faz mais sentido estar no geocachingAdmin
+	//Método que vai buscar uma cache passando-lhe o número de registo
+	//Fazer a excepção para quando a cache não existe
+=======
+	/** Este m�todo faz mais sentido estar no geocachingAdmin
 	//M�todo que vai buscar uma cache passando-lhe o n�mero de registo
 	//Fazer a excep��o para quando a cache n�o existe
+>>>>>>> origin/master
 	public Cache getCacheReferencia(String n_registo) throws CacheException{
 		if(!this.getRegistos().contains(n_registo)){
 			throw new CacheException();
@@ -149,13 +160,20 @@ public abstract class Cache implements Serializable{
 	}
 	
 */
-	//M�todo que, dado um utilizador, verifica se visitou a cache
+<<<<<<< HEAD
+	//Método que, dado um utilizador, verifica se visitou a cache
+=======
+	//M�todo que, dado um utilizador, verifica se visitou a cache
+>>>>>>> origin/master
 	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 		if(this.registos.contains(user.getNome())) return true;
 		else return false;
 	}
 	
-	//acrescentar m�todos que mostrem como as caches s�o visitadas
+<<<<<<< HEAD
+=======
+	//acrescentar m�todos que mostrem como as caches s�o visitadas
+>>>>>>> origin/master
 	
 	//Clone e toString e compareTo -----------------------------------------------------------------
 	
@@ -167,7 +185,7 @@ public abstract class Cache implements Serializable{
 	public String toString() {
 		StringBuilder s=new StringBuilder();
 		s.append("----------------Cache--------------------");
-		s.append("N�mero de registo: " +this.n_registo+ "\n");
+		s.append("N�mero de registo: " +this.n_registo+ "\n");
 		s.append("Latitude: "+this.latitude+ "\n");
 		s.append("Longitude: "+this.longitude+ "\n");
 		s.append("Ponto Cardeal: " +this.pontocardeal+"\n");

@@ -1,22 +1,18 @@
-/*
- * Esta classe vai ter todas as estatíticasdo utilizador por mês! 
- * Estatísticas nos registos de nos diversos tipos de cache, participação em eventos..
- * */
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-public class Estatisticas extends Evento{
+public class Estatisticas{
 	
-	//Variàveis de instância------------------------------------------------
+	
 	
 	private GregorianCalendar mes;
-	private int totalCaches, totalEventos, totalPontos; //totalCaches-> nº total de caches encontradas; totalEventos-> nº total de eventos participados; totalPontos-> nº total pontos acumulados
-	private ArrayList<Evento> eventos; //quais os eventos qu eparticipou
-	private ArrayList<Cache> caches; //quais as caches que encontrou (tipos)
+	private int totalCaches, totalEventos, totalPontos; 
+	private ArrayList<Evento> eventos; 
+	private ArrayList<Cache> caches; 
 	
-	//Construtores-----------------------------------------------------------
+	
 	
 	public Estatisticas(){
 		this.mes=new GregorianCalendar();
@@ -37,7 +33,7 @@ public class Estatisticas extends Evento{
 		
 	}
 	
-	//Geteres e Seters-------------------------------------------------------
+	
 	
 	public GregorianCalendar getMes() { return mes;	}
 	public int getTotalCaches() { return totalCaches; }
@@ -53,7 +49,7 @@ public class Estatisticas extends Evento{
 		}
 		return copia;
 	}
-	//public ArrayList<Evento> getEventos() { return eventos;	}
+	
 	
 	
 	public ArrayList<Cache> getCaches(){
@@ -65,7 +61,7 @@ public class Estatisticas extends Evento{
 		}
 		return copia;
 	}
-	//public ArrayList<Cache> getCaches() { return caches; }
+	
 	
 	
 	public void setMes(GregorianCalendar mes) { this.mes = mes;	}
@@ -76,7 +72,7 @@ public class Estatisticas extends Evento{
 	public void setCaches(ArrayList<Cache> caches) { this.caches = caches; }
 
 	
-	//Clone e toString------------------------------------------------------------
+	
 	
 	public Estatisticas clone(){
 		return new Estatisticas(this);

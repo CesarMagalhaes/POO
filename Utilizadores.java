@@ -1,31 +1,39 @@
+
 /**
  * Classe Utilizadores vai conter toda a informaÃ§Ã£oo sobre os utilizadores. Assim como os mÃ©todos que permitem ao utilizador adicionar, remover e actualizar amigos da rede de amigos,
- * criar caches ou desativar caches (as caches sÃ³ podem ser desativadas pelo criador), bem como descobrir caches, adicionando estas Ã  sua lista de caches descobertas.
+ * criar caches ou desativar caches (as caches sÃ³ podem ser desativadas pelo criador), bem como descobrir caches, adicionando estas Ã  sua lista de caches descobertas, entre outros.
  * 
  * @author CÃ©sar MagalhÃ£es, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
  */
 
+
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 
 public class Utilizadores{
    
-	// Variï¿½veis de instÃ¢ncia -----------------------------------------------------------
+
+	// VariÃ¡veis de instÃ¢ncia -----------------------------------------------------------
 	
-	//notas: se as cache tem score, o utilizador havia de totar tipo uma pontuaï¿½ï¿½o total!!!
+	//notas: se as cache tem score, o utilizador havia de totar tipo uma pontuao total!!!
+
+	
+	
+	
+
 	private char genero;
-    private String nome, email, password, morada; //email ï¿½ a chave do utilizador
+    private String nome, email, password, morada; 
     private GregorianCalendar dataNascimento;
-    private ArrayList<String> actividades; // a lista de com a referênciacaches das caches que o utilizador descobriu
-    private ArrayList<String> cachesInseridas; // a lista com a referência das caches que o utilizador inseriu
+    private HashMap<String, GregorianCalendar> actividades; // a lista de com a referÃªnciacaches das caches que o utilizador descobriu e a data em que foram descobertas
+    private HashMap<String, GregorianCalendar> cachesInseridas; // a lista com a referï¿½ncia das caches que o utilizador criou e a data em foram criadas
 	private ArrayList<String> redeAmigos; //a lista com o nome dos amigos
-	private ArrayList<String> amigosPendentes; //lista com o nome dos amigos que o utilizador ainda não aceitou na sua rede de amigos
+	private ArrayList<String> amigosPendentes; //lista com o nome dos amigos que o utilizador ainda nï¿½o aceitou na sua rede de amigos
+
 	
-	
-	//Construtores-----------------------------------------------------------------------
 	
 	public Utilizadores(Utilizadores u){
 		char genero=u.getGenero();
@@ -34,8 +42,8 @@ public class Utilizadores{
 		String pass=u.getPassword();
 		String morada=u.getMorada();
 		GregorianCalendar dataNasc=u.getDataNascimento();
-		ArrayList<String> actividades=u.getActividades();
-		ArrayList<String> cachesInseridas=u.getCachesInseridas();
+		HashMap<String, GregorianCalendar> actividades=u.getActividades();
+		HashMap<String, GregorianCalendar> cachesInseridas=u.getCachesInseridas();
 		ArrayList<String> redeAmigos=u.getRedeAmigos();
 		ArrayList<String> amigosPendentes=u.getAmigosPendentes();
 	}
@@ -58,7 +66,7 @@ public class Utilizadores{
 		this.password= pass;
 	}
 	
-	public Utilizadores(char genero, String nome, ArrayList<String> actividades){;
+	public Utilizadores(char genero, String nome, HashMap<String, GregorianCalendar> actividades){;
 		this.genero=genero;
 		this.nome= nome;
 		this.actividades=actividades;
@@ -71,13 +79,13 @@ public class Utilizadores{
 		this.password= new String();
 		this.morada= new String();
 		this.dataNascimento= new GregorianCalendar();
-		this.actividades= new ArrayList<String>();
-		this.cachesInseridas= new ArrayList<String>();
+		this.actividades= new HashMap<String, GregorianCalendar>();
+		this.cachesInseridas= new HashMap<String, GregorianCalendar>();
 		this.redeAmigos= new ArrayList<String>();
 		this.amigosPendentes= new ArrayList<String>();
 	}
 	
-	// Geters e Seters ------------------------------------------------------------------
+	
 	
 	public char getGenero() { return genero; }
 	public String getNome() { return nome; }
@@ -86,9 +94,16 @@ public class Utilizadores{
 	public String getMorada() { return morada; }
 	public GregorianCalendar getDataNascimento() { return dataNascimento; }
 	
-	//Devolva todas as referências das caches descobertas pelo utilizador
+
+	//Devolva todas as referï¿½ncias das caches descobertas pelo utilizador
+	public HashMap<String, GregorianCalendar> getActividades(){ return actividades; }
+		
+		/**HashMap<String, GregorianCalendar> copia= new HashMap<String, GregorianCalendar>();
+=======
+	
 	public ArrayList<String> getActividades(){
 		ArrayList<String> copia= new ArrayList<String>();
+>>>>>>> origin/master
 		Iterator<String> i=this.actividades.iterator();
 		while(i.hasNext()){
 			String aux=i.next();
@@ -96,10 +111,18 @@ public class Utilizadores{
 		}
 		return copia;
 	}
-	
+<<<<<<< HEAD
+	*/
 	//Devolve todas as caches inseridas pelo utilizador
+	public HashMap<String, GregorianCalendar> getCachesInseridas(){ return cachesInseridas; }
+		
+		/**ArrayList<String> copia= new ArrayList<String>();
+=======
+	
+	
 	public ArrayList<String> getCachesInseridas(){
 		ArrayList<String> copia= new ArrayList<String>();
+>>>>>>> origin/master
 		Iterator<String> i=this.cachesInseridas.iterator();
 		while(i.hasNext()){
 			String aux=i.next();
@@ -107,9 +130,9 @@ public class Utilizadores{
 		}
 		return copia;
 	}
-
+*/
 	
-	//Devolve todos os amigos do utilizador -rede de amigos
+	
 	public ArrayList<String> getRedeAmigos(){
 		ArrayList<String> copia=new ArrayList<String>();
 		Iterator<String> i= this.redeAmigos.iterator();
@@ -120,7 +143,8 @@ public class Utilizadores{
 		return copia;
 	}
 	
-	//Devolve todos os amigos que ainda não foram adicionados à rede de amigos
+
+	//Devolve todos os amigos que ainda nï¿½o foram adicionados ï¿½ rede de amigos
 	public ArrayList<String> getAmigosPendentes(){
 		ArrayList<String> copia=new ArrayList<String>();
 		Iterator<String> i=this.amigosPendentes.iterator();
@@ -139,24 +163,26 @@ public class Utilizadores{
 	public void setMorada(String morada) { this.morada = morada; }	
 	public void setDataNascimento(GregorianCalendar dataNascimento) { this.dataNascimento = dataNascimento; }	
 	
-	public void setActividades(ArrayList<String> actividades){
-		this.actividades= new ArrayList<String>();
+	public void setActividades(HashMap<String, GregorianCalendar> actividades){ this.actividades=actividades; }
+		
+		/**this.actividades= new ArrayList<String>();
 		Iterator<String> i= actividades.iterator();
 		while(i.hasNext()){
 			String copia= i.next();
 			this.actividades.add(copia);
 		}
-	}
+	}*/
 	
-	public void setCachesInseridas(ArrayList<String> cachesInseridas){
-		this.cachesInseridas=new ArrayList<String>();
+	public void setCachesInseridas(HashMap<String, GregorianCalendar> cachesInseridas){ this.cachesInseridas=cachesInseridas; }
+		
+		/**this.cachesInseridas=new ArrayList<String>();
 		Iterator<String> i= cachesInseridas.iterator();
 		while(i.hasNext()){
 			String copia= i.next();
 			this.cachesInseridas.add(copia);
 		}
 	}
-	
+	*/
 	public void setRedeAmigos(ArrayList<String> redeAmigos){
 		this.redeAmigos= new ArrayList<String>();
 		Iterator<String> i= redeAmigos.iterator();
@@ -176,80 +202,66 @@ public class Utilizadores{
 	}
 	
 	
-	//---------------------------------------------------------------------MÃ©todos de intÃ¢ncia----------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	
+
 	//Notas:
-	//MÃ©todo que vai inserir Ã  lista de caches criadas pelo utilizador a referência da nova cache criada 
-	//ver como se compara se a cache jÃ¡ tinha sido inserida => trata-se com uma excepção
-	public void addCache(Cache c) throws CacheException{
-		if(this.cachesInseridas.contains(c.getN_registo())){ //caso o utilizador esteja a adicionar uma cache criada que já exista
-			throw new CacheException("A cache que quer inserir não existe! ");
+	//MÃ©todo que vai inserir Ã  lista de caches criadas pelo utilizador a referï¿½ncia da nova cache criada 
+	//ver como se compara se a cache jÃ¡ tinha sido inserida => trata-se com uma excepï¿½ï¿½o
+	public void addCache(Cache c, GregorianCalendar data) throws CacheException{
+		if(this.cachesInseridas.containsKey(c.getN_registo())){ //caso o utilizador esteja a adicionar uma cache criada que jï¿½ exista
+			throw new CacheException("A cache que quer inserir jï¿½ existe! ");
 		}
-		if(!this.cachesInseridas.contains(c.getN_registo())){
-			this.cachesInseridas.add(c.getN_registo());
+		if(!this.cachesInseridas.containsKey(c.getN_registo())){
+			this.cachesInseridas.put(c.getN_registo(), data);
 		}
 	}
 	
 	
-	//MÃ©todo que permite ao utilizador desativar uma cache criada por ele. Nota: se a cache nÃ£o foi criada pelo utilizador este nï¿½Ã£o a poderÃ¡ eliminar!
-	//Assim, se a cache estiver na lista de caches inseridas pelo utilizador, basta passar a variÃ¡vel isActiva para falso. 
+	
+	
 	public void desativaCache(Cache c) throws CacheException{
-		if(!this.cachesInseridas.contains(c.getN_registo())){// caso o utilizador queira desativar uma cache que não exista
-			throw new CacheException("A cache que quer desativar não existe!");
+		if(!this.cachesInseridas.containsKey(c.getN_registo())){// caso o utilizador queira desativar uma cache que nï¿½o exista
+			throw new CacheException("A cache que quer desativar nï¿½o existe!");
 		}
-		if(this.cachesInseridas.contains(c.getN_registo())){ 
+		if(this.cachesInseridas.containsKey(c.getN_registo())){ 
 			c.setIsActiva(false);
 		}
 	}
 	
-	//MÃ¡todo que vai adicionar um amigo (Nome deste) Ã  rede de amigos
+
+	
+	
 	public void addAmigo(Utilizadores amigo) throws UtilizadorException{
-		if (this.redeAmigos.contains(amigo.getEmail())) { //caso o utilizador queira adicionar um amigo que já exista
-			throw new UtilizadorException("O utilizador que quer adicionar já existe!");
+		if (this.redeAmigos.contains(amigo.getEmail())) { //caso o utilizador queira adicionar um amigo que jï¿½ exista
+			throw new UtilizadorException("O utilizador que quer adicionar jï¿½ existe!");
 		}
 		if(!this.redeAmigos.contains(amigo.getNome())){
 			this.redeAmigos.add(amigo.getNome());
-			amigo.addAmigo(this); //o utilizdor adicionou um amigo Ã  sua rede, logo este Ã© adicionado Ã  rede desse amigo
+			amigo.addAmigo(this); 
 		}
 	}
 	
-	//MÃ©todo que vai inserir na lista de caches descobertas mais uma referência de uma cache
-	//ver como se compara se a cache jÃ¡ tinha sido inserida=> Trata-se com excepções
-	public void addCacheDescoberta(Cache c) throws CacheException{
-		if(this.cachesInseridas.contains(c.getN_registo())){// caso o utilizador queira adicionar às caches descobertas uma cache que já tenha encontrado
-			throw new CacheException("A cache que pretende adicionar já foi descoberta!");
+
+	//MÃ©todo que vai inserir na lista de caches descobertas mais uma referï¿½ncia de uma cache
+	//ver como se compara se a cache jÃ¡ tinha sido inserida=> Trata-se com excepï¿½ï¿½es
+	public void addCacheDescoberta(Cache c, GregorianCalendar data) throws CacheException{
+		if(this.cachesInseridas.containsKey(c.getN_registo())){// caso o utilizador queira adicionar ï¿½s caches descobertas uma cache que jï¿½ tenha encontrado
+			throw new CacheException("A cache que pretende adicionar jï¿½ foi descoberta!");
 		}
-		if(!this.actividades.contains(c.getN_registo())){
-			this.actividades.add(c.getN_registo());
+		if(!this.actividades.containsKey(c.getN_registo())){
+			this.actividades.put(c.getN_registo(), data);
 		}
 		
 	}
 	
 	
-	/*
-	//MÃ©todo que vai actualizar a rede e amigos, isto Ã©, se ouver alguma alteraÃ§Ã£o na informaÃ§Ã£o de um amigo, na rede (ArrayList), a info deste serÃ¡ substituida pela nova
-		public void actualizaRedeAmigos(Utilizadores user){
-			Utilizadores uti=new Utilizadores();
-			boolean found=false;
-			for(Utilizadores utilizador: this.redeAmigos){
-				if(utilizador.getEmail().equals(user.getEmail())){
-					uti=utilizador;
-					found=true;
-				}
-			}
-			if(found){
-				this.redeAmigos.remove(uti);
-				this.redeAmigos.add(user);
-			}
-		}
-	*/
 	
-	//MÃ©todo que vai remover um amigo da rede de amigos, dado o nome do amigo que se quer remover
+	
+	
 	public void removeAmigo(String amigo) throws UtilizadorException{
-		if (!this.redeAmigos.contains(amigo)){ //caso o utilizador queira remover um amigo que não exista na sua rede
-			throw new UtilizadorException("O utilizador que quer remover não existe!");
+		if (!this.redeAmigos.contains(amigo)){ //caso o utilizador queira remover um amigo que nï¿½o exista na sua rede
+			throw new UtilizadorException("O utilizador que quer remover nï¿½o existe!");
 		}
 		if(this.redeAmigos.contains(amigo)){
 			this.redeAmigos.remove(amigo);
@@ -257,7 +269,7 @@ public class Utilizadores{
 	}
 	
 	
-	//Método que actualiza a informação do utilizador
+	//Mï¿½todo que actualiza a informaï¿½ï¿½o do utilizador
 	public void modificaUtilizador(char genero, String nome, String pass, String morada, GregorianCalendar dataNasc){
 		this.genero=genero;
 		this.nome=nome;
@@ -267,11 +279,11 @@ public class Utilizadores{
 	}
 	
 	
-	
-	//Método que vai buscar um amigo pelo nome
+
+	//Mï¿½todo que vai buscar um amigo pelo nome
 	public Utilizadores getAmigoNome(String nome) throws UtilizadorException{
-		if (!this.redeAmigos.contains(nome)) { //caso o utilizador queira consultar um amigo que não existe
-			throw new UtilizadorException("O utilizador que quer não existe!");
+		if (!this.redeAmigos.contains(nome)) { //caso o utilizador queira consultar um amigo que nï¿½o existe
+			throw new UtilizadorException("O utilizador que quer nï¿½o existe!");
 		}
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getRedeAmigos()){
@@ -285,10 +297,11 @@ public class Utilizadores{
 		return amigo;
 	}
 	
-	//Método que vai buscar um amigo pendente pelo nome
+
+	//Mï¿½todo que vai buscar um amigo pendente pelo nome
 	public Utilizadores getAmigoPendenteNome(String nome) throws UtilizadorException{
-		if(!this.amigosPendentes.contains(nome)){//caso o utilizador queira consultar um amigo pendende que não exista
-			throw new UtilizadorException("O utilizador que quer não existe!");
+		if(!this.amigosPendentes.contains(nome)){//caso o utilizador queira consultar um amigo pendende que nï¿½o exista
+			throw new UtilizadorException("O utilizador que quer nï¿½o existe!");
 		}
 		Utilizadores amigo=new Utilizadores();
 		for(String friend: this.getAmigosPendentes()){
@@ -302,19 +315,20 @@ public class Utilizadores{
 		return amigo;
 	}
 
-	//MÃ©todo que vai remover um amigo da lista de amigos pendentes, dado o nome do amigo que se quer remover
+	
 		public void removeAmigoPendente(String amigo) throws UtilizadorException{
 			if(this.amigosPendentes.contains(amigo)){
 				this.amigosPendentes.remove(amigo);
 			}else{
-				throw new UtilizadorException("O utilizador que quer remover não existe!");//caso o utilizador queira remover um amigo pendente que não exista
+				throw new UtilizadorException("O utilizador que quer remover nï¿½o existe!");//caso o utilizador queira remover um amigo pendente que nï¿½o exista
 			}
 		}
 
-	//Método que vai adicionar um amigo à lista de amigos pendentes
+		
+	//Mï¿½todo que vai adicionar um amigo ï¿½ lista de amigos pendentes
 		public void addAmigoPendente(String nome) throws UtilizadorException{
 			if(this.amigosPendentes.contains(nome)){
-				throw new UtilizadorException("O utilizador que quer adicionar já existe!");//caso queira adicionar um amigo à lista de amigos pendentes que já exista
+				throw new UtilizadorException("O utilizador que quer adicionar jÂ· existe!");
 			}else{
 				this.amigosPendentes.add(nome);
 			}
@@ -323,16 +337,16 @@ public class Utilizadores{
 
 		
 		
-	//MÃ©todo que vai permitir ao utilizador consultar o histÃ³rico (EstatÃ­sticas)
-	//public String consultaHistorico(){
+	
+	
 		
-	//}
 	
 	
-	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//Clone e toString e compareTo------------------------------------------------------------------------
+	
+	
+	
+	
 	
 	public Utilizadores clone(){
 		return new Utilizadores(this);
@@ -351,14 +365,14 @@ public class Utilizadores{
 	}	
 		
 	
-	//Como comparaÃ§Ã£o estamos a considererar o email
+	
 	public int compareTo(Utilizadores u) {
 		return u.getEmail().compareTo(this.getEmail());
 	}
 	
 	
-	//Equals e hascode--------------------------------------------------------------------------------
-	//Este Ã© o gerado automÃ¡ticamente!!! alterer!!!!
+	
+	
 	
 	public int hashCode() {
 		final int prime = 31;

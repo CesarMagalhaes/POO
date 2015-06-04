@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=mc
+comment0.target=MicroCache(MicroCache)
+comment1.params=micro
+comment1.target=MicroCache(Cache)
+comment2.params=
+comment2.target=MicroCache()
+comment3.params=
+comment3.target=Cache\ getMicro()
+comment4.params=micro
+comment4.target=void\ setMicro(Cache)
+comment5.params=user
+comment5.target=boolean\ foiVisitada(Utilizadores)
+comment6.params=
+comment6.target=MicroCache\ clone()
+comment7.params=
+comment7.target=java.lang.String\ toString()
+comment8.params=mc
+comment8.target=int\ compareTo(MicroCache)
+comment9.params=obj
+comment9.target=boolean\ equals(java.lang.Object)
+numComments=10
