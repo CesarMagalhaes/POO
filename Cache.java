@@ -160,6 +160,8 @@ public abstract class Cache implements Serializable{
 		}
 	}
 	
-	
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 
 }

@@ -102,5 +102,9 @@ public class CacheMisterio extends Cache {
 					&& this.conteudo.equals(other.getConteudo()));			
 		}
 	}
+
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 	
 }

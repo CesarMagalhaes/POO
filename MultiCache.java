@@ -10,8 +10,9 @@
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
-
+import java.util.GregorianCalendar;
 
 public class MultiCache extends Cache {
 	
@@ -92,10 +93,10 @@ public class MultiCache extends Cache {
 	
 	//Método que verifica se o utilizador passou por todas as caches que constituem a multicaches,apenas se passou por todas é ue visitou a multicache
 	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
-		ArrayList<String> cachesEncontradas= new ArrayList<String>();
+		HashMap<String, GregorianCalendar> cachesEncontradas= new HashMap<String, GregorianCalendar>();
 		cachesEncontradas=user.getActividades();
 		for(String cache: this.getListaCaches()){
-			if(!cachesEncontradas.contains(cache)) return false;
+			if(!cachesEncontradas.containsKey(cache)) return false;
 		}
 		return true;
 	}
@@ -147,5 +148,7 @@ public class MultiCache extends Cache {
 	}
 	
 	
-	
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 }

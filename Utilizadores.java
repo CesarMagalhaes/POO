@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 
 public class Utilizadores{
@@ -96,41 +97,29 @@ public class Utilizadores{
 	
 
 	//Devolva todas as refer�ncias das caches descobertas pelo utilizador
-	public HashMap<String, GregorianCalendar> getActividades(){ return actividades; }
-		
-		/**HashMap<String, GregorianCalendar> copia= new HashMap<String, GregorianCalendar>();
-=======
-	
-	public ArrayList<String> getActividades(){
-		ArrayList<String> copia= new ArrayList<String>();
->>>>>>> origin/master
-		Iterator<String> i=this.actividades.iterator();
+	public HashMap<String, GregorianCalendar> getActividades(){
+		HashMap<String, GregorianCalendar> copia=new HashMap<String, GregorianCalendar>();
+		Iterator<Map.Entry<String, GregorianCalendar>> i =actividades.entrySet().iterator();
 		while(i.hasNext()){
-			String aux=i.next();
-			copia.add(aux);
+			Map.Entry<String, GregorianCalendar> obj=i.next();
+			
+			copia.put(obj.getKey(),obj.getValue());
 		}
 		return copia;
 	}
-<<<<<<< HEAD
-	*/
+		
+	
 	//Devolve todas as caches inseridas pelo utilizador
-	public HashMap<String, GregorianCalendar> getCachesInseridas(){ return cachesInseridas; }
-		
-		/**ArrayList<String> copia= new ArrayList<String>();
-=======
-	
-	
-	public ArrayList<String> getCachesInseridas(){
-		ArrayList<String> copia= new ArrayList<String>();
->>>>>>> origin/master
-		Iterator<String> i=this.cachesInseridas.iterator();
+	public HashMap<String, GregorianCalendar> getCachesInseridas(){
+		HashMap<String, GregorianCalendar> copia=new HashMap<String, GregorianCalendar>();
+		Iterator<Map.Entry<String, GregorianCalendar>> i =cachesInseridas.entrySet().iterator();
 		while(i.hasNext()){
-			String aux=i.next();
-			copia.add(aux);
+			Map.Entry<String, GregorianCalendar> obj=i.next();
+			
+			copia.put(obj.getKey(),obj.getValue());
 		}
 		return copia;
 	}
-*/
 	
 	
 	public ArrayList<String> getRedeAmigos(){
@@ -163,26 +152,25 @@ public class Utilizadores{
 	public void setMorada(String morada) { this.morada = morada; }	
 	public void setDataNascimento(GregorianCalendar dataNascimento) { this.dataNascimento = dataNascimento; }	
 	
-	public void setActividades(HashMap<String, GregorianCalendar> actividades){ this.actividades=actividades; }
-		
-		/**this.actividades= new ArrayList<String>();
-		Iterator<String> i= actividades.iterator();
+	public void setActividades(HashMap<String, GregorianCalendar> actividades){ 
+		this.actividades=new HashMap<String,GregorianCalendar>();
+		Iterator<Map.Entry<String,GregorianCalendar>> i= actividades.entrySet().iterator();
 		while(i.hasNext()){
-			String copia= i.next();
-			this.actividades.add(copia);
-		}
-	}*/
-	
-	public void setCachesInseridas(HashMap<String, GregorianCalendar> cachesInseridas){ this.cachesInseridas=cachesInseridas; }
-		
-		/**this.cachesInseridas=new ArrayList<String>();
-		Iterator<String> i= cachesInseridas.iterator();
-		while(i.hasNext()){
-			String copia= i.next();
-			this.cachesInseridas.add(copia);
+			Map.Entry<String,GregorianCalendar> obj=i.next();
+			this.actividades.put(obj.getKey(), obj.getValue());
 		}
 	}
-	*/
+	
+		
+	public void setCachesInseridas(HashMap<String, GregorianCalendar> cachesInseridas){ 
+		this.cachesInseridas=new HashMap<String,GregorianCalendar>();
+		Iterator<Map.Entry<String,GregorianCalendar>> i= cachesInseridas.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String,GregorianCalendar> obj=i.next();
+			this.actividades.put(obj.getKey(), obj.getValue());
+		}
+	}
+		
 	public void setRedeAmigos(ArrayList<String> redeAmigos){
 		this.redeAmigos= new ArrayList<String>();
 		Iterator<String> i= redeAmigos.iterator();
@@ -372,26 +360,10 @@ public class Utilizadores{
 	
 	
 	
-	
+
 	
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((actividades == null) ? 0 : actividades.hashCode());
-		result = prime * result
-				+ ((cachesInseridas == null) ? 0 : cachesInseridas.hashCode());
-		result = prime * result
-				+ ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + genero;
-		result = prime * result + ((morada == null) ? 0 : morada.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((redeAmigos == null) ? 0 : redeAmigos.hashCode());
-		return result;
+		return this.toString().hashCode();
 	}
 
 

@@ -81,6 +81,8 @@ public class MicroCache extends Cache{
 		}
 	}
 	
-	
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
 	
 }
