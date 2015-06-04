@@ -56,6 +56,7 @@ public class Menu {
         DateFormat formato = new SimpleDateFormat("dd-mm-yyyy");
         Date data = null;
         Scanner entrada = new Scanner(System.in);
+        Scanner entrada2 = new Scanner(System.in);
 
         System.out.println("REGISTO");
         System.out.println("E-MAIL: ( servirá como username )");
@@ -71,7 +72,7 @@ public class Menu {
         temp.setNome(nome);
 
         System.out.println("GENERO: (M ou F)");
-        genero = entrada.next("[a-zA-Z]").charAt(0);
+        genero = entrada2.next(".").charAt(0);
         temp.setGenero(genero);
 
         System.out.println("MORADA:");
@@ -283,18 +284,85 @@ public class Menu {
         user.desativaCache(geoadmin.getCacheReferencia(nregistocache));
     }
 
-    public static void descobrecache(){
+    public void descobrecache()throws CacheException{
         System.out.println("DESCOBRIR CACHE");
         System.out.println("INTRODUZIR A CACHE A SER DESCOBERTA:");
+        String cachedescob;
         Scanner entrada = new Scanner(System.in);
         cachedescob = entrada.nextLine();
-        user.addCacheDescoberta(cachedescob);
-        menu();}    
+        user.addCacheDescoberta(geoadmin.getCacheReferencia(cachedescob));
+        /*System.out.println("QUAIS ERAM AS CONDIÇOES CLIMATERICAS NO MOMENTO?");
+        System.out.println("1. Sol");
+        System.out.println("2. Chuva");
+        System.out.println("3. Neve");
+        System.out.println("4. Normal");}
+        do{
+        opcao = entrada.nextInt();
 
-    public static void amigos(){
+        switch(opcao){
+        case 1:
+        ();
+
+        case 2:
+        desactivacacheuser();
+
+        case 3:
+        descobrecache();
+
+        default:
+        System.out.println("Invalido.");
+        }
+        } while(opcao != 0);*/
+
+    }    
+
+    public void amigos()throws UtilizadorException{
         System.out.println("AMIGOS");
-        System.out.println("FUNCIONALIDADE NAO IMPLEMENTADA.");
-        menu();}
+        Scanner entrada = new Scanner(System.in);
+        int opcao;
+        Utilizadores amigoadd = new Utilizadores();
+        String nomependente;
+        String nomeamigorem;
+        String nomeamigoadd;
+        System.out.println("1. ADICIONAR AMIGO");
+        System.out.println("2. REMOVER AMIGO");
+        System.out.println("3. ACEITAR PEDIDOS DE AMIZADE");
+        System.out.println("4. REJEITAR PEDIDOS DE AMIZADE");
+        System.out.println("0. SAIR");
+        do{
+            opcao = entrada.nextInt();
+
+            switch(opcao){
+                case 1:
+                System.out.println("Introduza o nome do amigo a adicionar:");
+                nomeamigoadd = entrada.nextLine();
+                amigoadd.setNome(nomeamigoadd);
+                user.addAmigo(user.getAmigoNome(nomeamigoadd));
+
+                case 2:
+                System.out.println("Introduza o nome do amigo a remover:");
+                nomeamigorem = entrada.nextLine();
+                user.removeAmigo(nomeamigorem);
+
+                case 3:
+                user.getAmigosPendentes();
+                System.out.println("Introduza o nome do amigo a aceitar:");
+                nomependente = entrada.nextLine();
+                user.addAmigoPendente(nomependente);
+
+                case 4:
+                user.getAmigosPendentes();
+                System.out.println("Introduza o nome do amigo a rejeitar:");
+                nomependente = entrada.nextLine();
+                user.removeAmigoPendente(nomependente);
+
+                case 0:
+                System.exit(0);
+
+                default:
+                System.out.println("Opção inválida. Tente novamente.");
+            }
+        } while(opcao != 0);}
 
     public static void eventos(){
         System.out.println("EVENTOS");
@@ -391,3 +459,4 @@ public class Menu {
         } while(opcao != 0);
     }
 }
+

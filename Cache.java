@@ -30,58 +30,7 @@ public abstract class Cache implements Serializable{
 	private GregorianCalendar dataCriacao;
 	
 	
-	/**
-<<<<<<< HEAD
-	//Construtores---------------------------------------------------------------------- como é abstrata não tem
-=======
-	//Construtores---------------------------------------------------------------------- como � abstrata n�o tem
->>>>>>> origin/master
 	
-	public Cache(Cache c){
-		String numregisto=c.getN_registo();
-		int lat=c.getLatitude();
-		int longi=c.getLongitude();
-		char pcard=c.getPontocardeal();
-		ArrayList<String> reg=c.getRegistos();
-		int score=c.getScoreCache();
-		String criad=c.getCriador();
-		boolean isActiva=c.getIsActiva();
-		String dificuldade=c.getDificuldade();
-		GregorianCalendar data=c.getDataCriacao();
-	}
-	
-	
-	public Cache(String numregisto, int lat, int longi, char pcard, ArrayList<String> reg, int score, String criad, boolean isActiva, String dificuldade, GregorianCalendar data){
-		this.n_registo=numregisto;
-		this.latitude=lat;
-		this.longitude=longi;
-		this.pontocardeal=pcard;
-		this.registos=reg;
-		this.scoreCache=score;
-		this.criador=criad;
-		this.isActiva=isActiva;
-		this.dificuldade=dificuldade;
-		this.dataCriacao=data;
-	}
-	
-	public Cache(String numregisto, String criad){
-		this.n_registo=numregisto;
-		this.criador=criad;
-	}
-	
-	public Cache(){
-		this.n_registo=" ";
-		this.latitude=0;
-		this.longitude=0;
-		this.pontocardeal=' ';
-		this.registos=new ArrayList<String>();
-		this.scoreCache=0;
-		this.criador=new String();
-		this.isActiva=true;
-		this.dificuldade=new String();
-		this.dataCriacao=new GregorianCalendar();
-	}
-	*/
 	
 	// Geters e Seteres ----------------------------------------------------------------
 	
@@ -131,7 +80,7 @@ public abstract class Cache implements Serializable{
 	//---------------------------------------------------------------------Métodos de instância---------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-<<<<<<< HEAD
+
 	/** Este método faz mais sentido estar no geocachingAdmin
 	//Método que vai buscar uma cache passando-lhe o número de registo
 	//Fazer a excepção para quando a cache não existe
@@ -160,20 +109,14 @@ public abstract class Cache implements Serializable{
 	}
 	
 */
-<<<<<<< HEAD
-	//Método que, dado um utilizador, verifica se visitou a cache
-=======
+
+
 	//M�todo que, dado um utilizador, verifica se visitou a cache
->>>>>>> origin/master
 	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 		if(this.registos.contains(user.getNome())) return true;
 		else return false;
 	}
-	
-<<<<<<< HEAD
-=======
-	//acrescentar m�todos que mostrem como as caches s�o visitadas
->>>>>>> origin/master
+
 	
 	//Clone e toString e compareTo -----------------------------------------------------------------
 	
