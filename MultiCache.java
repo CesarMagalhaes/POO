@@ -1,11 +1,11 @@
 /**
- *Classe MultiCache vai ter toda a informação relativa a uma multi-cache. É definida à custa de uma cache (uma vez que possui toda a informação de uma cache),
- *de uma lista de caches (ArrayList<Caches> - caches necessárias para determinar a cache final, podem ser caches de todos os tipos) e de uma micro-cache (a última
- *cache tem de ser necessáriamente uma micro-cache).
+ *Classe MultiCache vai ter toda a informaï¿½ï¿½o relativa a uma multi-cache. ï¿½ definida ï¿½ custa de uma cache (uma vez que possui toda a informaï¿½ï¿½o de uma cache),
+ *de uma lista de caches (ArrayList<Caches> - caches necessï¿½rias para determinar a cache final, podem ser caches de todos os tipos) e de uma micro-cache (a ï¿½ltima
+ *cache tem de ser necessï¿½riamente uma micro-cache).
  *
- *Uma multicache só foi vista, quando todas as caches da sua lista tiverem sido visitadas.
+ *Uma multicache sï¿½ foi vista, quando todas as caches da sua lista tiverem sido visitadas.
  * 
- * @author César Magalhães, Susana Mendes e Tiago Pereira  
+ * @author Cï¿½sar Magalhï¿½es, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
  */
 
@@ -17,13 +17,13 @@ import java.util.GregorianCalendar;
 public class MultiCache extends Cache {
 	
 	
-	// Variàveis de instância -----------------------------------------------------
+	// Variï¿½veis de instï¿½ncia -----------------------------------------------------
 	
 	private Cache multi;
 	private int totalCaches;
-	private ArrayList<String> listaCaches; //a lista com a referência das caches que constituem a multicache
+	private ArrayList<String> listaCaches; //a lista com a referï¿½ncia das caches que constituem a multicache
 	private String conteudo;
-	//private MicroCache micro; ->temos que pensar como aceder à micro (problemas de herança)
+	
 	
 	
 	//Construtores-------------------------------------------------------------------
@@ -33,7 +33,7 @@ public class MultiCache extends Cache {
 		int totalCaches=mc.getTotalCaches();
 		ArrayList<String> listaCaches=mc.getListaCaches();
 		String conteudo=mc.getConteudo();
-		//MicroCache micro=mc.getMicro();
+		
 	}
 	
 	
@@ -88,10 +88,10 @@ public class MultiCache extends Cache {
 	public void setConteudo(String conteudo) { this.conteudo=conteudo; }
 	
 
-	//---------------------------------------------------------------------------Métodos de Instância----------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------Mï¿½todos de Instï¿½ncia----------------------------------------------------------------------------------
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//Método que verifica se o utilizador passou por todas as caches que constituem a multicaches,apenas se passou por todas é ue visitou a multicache
+	//Mï¿½todo que verifica se o utilizador passou por todas as caches que constituem a multicaches,apenas se passou por todas ï¿½ ue visitou a multicache
 	public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 		HashMap<String, GregorianCalendar> cachesEncontradas= new HashMap<String, GregorianCalendar>();
 		cachesEncontradas=user.getActividades();
@@ -111,14 +111,14 @@ public class MultiCache extends Cache {
 	public String toString() {
 		StringBuilder s=new StringBuilder();
 		s.append("------------------Multi-Cache--------------------");
-		s.append("Número de registo: " +this.multi.getN_registo()+ "\n");
+		s.append("Nï¿½mero de registo: " +this.multi.getN_registo()+ "\n");
 		s.append("Latitude: "+this.multi.getLatitude()+ "\n");
 		s.append("Longitude: "+this.multi.getLongitude()+ "\n");
 		s.append("Ponto Cardeal: " +this.multi.getPontocardeal()+"\n");
 		s.append("Criador: " +this.multi.getCriador()+ "\n");
 		s.append("Dificuldade: "+this.multi.getDificuldade()+"\n");
-		s.append("Número total de caches que fazem parte da multi-cache: "+this.totalCaches+"\n");
-		s.append("Conteúdo: "+this.conteudo+"\n");
+		s.append("Nï¿½mero total de caches que fazem parte da multi-cache: "+this.totalCaches+"\n");
+		s.append("Conteï¿½do: "+this.conteudo+"\n");
 		return s.toString();
 	}
 

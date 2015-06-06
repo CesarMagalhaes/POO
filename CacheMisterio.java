@@ -3,12 +3,12 @@ import java.util.ArrayList;
 /**
  * Classe 
  * 
- * @author César Magalhães, Susana Mendes e Tiago Pereira  
+ * @author Cï¿½sar Magalhï¿½es, Susana Mendes e Tiago Pereira  
  * @version Maio 2015
  */
 public class CacheMisterio extends Cache {
 	
-	// Variáveis de instância ----------------------------------------------------
+	// VariÃ¡veis de instÃ¢ncia ----------------------------------------------------
 	private Cache misterio;
 	private String puzzle;
 	private String conteudo;
@@ -48,10 +48,10 @@ public class CacheMisterio extends Cache {
 
 	
 	
-	//----------------------------------------------------------------------------Métodos de INstância---------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------Mï¿½todos de INstï¿½ncia---------------------------------------------------------------------------------
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	//Método que, dado um utilizador, verifica se visitou a cache
+	//Mï¿½todo que, dado um utilizador, verifica se visitou a cache
 		public boolean foiVisitada(Utilizadores user) throws UtilizadorException{
 			if(misterio.getRegistos().contains(user.getNome())) return true;
 			else return false;
@@ -66,8 +66,8 @@ public class CacheMisterio extends Cache {
 
 	public String toString() {
 		StringBuilder s= new StringBuilder();
-		s.append("------------------Cache Mistério--------------------");
-		s.append("Número de registo: "+this.misterio.getN_registo()+"\n");
+		s.append("------------------Cache Mistï¿½rio--------------------");
+		s.append("Nï¿½mero de registo: "+this.misterio.getN_registo()+"\n");
 		s.append("Latitude: "+this.misterio.getLatitude()+"\n");
 		s.append("Longitude: "+this.misterio.getLongitude()+"\n");
 		s.append("PontoCardeal: "+this.misterio.getPontocardeal()+"\n");

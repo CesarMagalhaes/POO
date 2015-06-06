@@ -18,19 +18,12 @@ import java.util.Map;
 public class Utilizadores{
    
 
-	// Variáveis de instância -----------------------------------------------------------
-	
-	//notas: se as cache tem score, o utilizador havia de totar tipo uma pontuao total!!!
-
-	
-	
-	
-
+	// Variáveis de instância -----------------------------------------------------------	
 	private char genero;
     private String nome, email, password, morada; 
     private GregorianCalendar dataNascimento;
     private HashMap<String, GregorianCalendar> actividades; // a lista de com a referênciacaches das caches que o utilizador descobriu e a data em que foram descobertas
-    private HashMap<String, GregorianCalendar> cachesInseridas; // a lista com a refer�ncia das caches que o utilizador criou e a data em foram criadas
+    private HashMap<String, GregorianCalendar> cachesInseridas; // a lista com a referência das caches que o utilizador criou e a data em foram criadas
 	private ArrayList<String> redeAmigos; //a lista com o nome dos amigos
 	private ArrayList<String> amigosPendentes; //lista com o nome dos amigos que o utilizador ainda n�o aceitou na sua rede de amigos
 
@@ -285,6 +278,25 @@ public class Utilizadores{
 		return amigo;
 	}
 	
+	public HashMap<String, GregorianCalendar> getAtividadesAmigo(String user) throws UtilizadorException{
+		if (!this.redeAmigos.contains(user)) { //caso o utilizador queira consultar um amigo que n�o existe
+			throw new UtilizadorException("O utilizador que quer n�o existe!");
+		}
+		HashMap<String, GregorianCalendar> atividadesAmigo= new HashMap<String, GregorianCalendar>();
+		Utilizadores amigo=new Utilizadores(); 
+		amigo=this.getAmigoNome(user);
+		Iterator<Map.Entry<String, GregorianCalendar>> i=amigo.actividades.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<String, GregorianCalendar> obj=i.next();
+			atividadesAmigo.put(obj.getKey(), obj.getValue());
+		}
+		Iterator<Map.Entry<String, GregorianCalendar>> it=amigo.cachesInseridas.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry<String, GregorianCalendar> o=it.next();
+			atividadesAmigo.put(o.getKey(), o.getValue());
+		}
+		return atividadesAmigo;
+	}
 
 	//M�todo que vai buscar um amigo pendente pelo nome
 	public Utilizadores getAmigoPendenteNome(String nome) throws UtilizadorException{

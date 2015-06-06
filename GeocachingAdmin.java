@@ -283,6 +283,7 @@ public class GeocachingAdmin implements Serializable{
 	
 	
 	
+	
 	public void removeAmigo(String email, String nome) throws UtilizadorException{ 
 		if(!listaDeUtilizadores.containsKey(email)){
 			throw new UtilizadorException("O utilizador n„o existe!");
